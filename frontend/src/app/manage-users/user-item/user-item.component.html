@@ -1,3 +1,7 @@
-<p>
-  user-item works!
-</p>
+<th scope="row">{{ index + 1}}</th>
+<td>{{ item.email }}</td>
+<td>{{ item.userLevel }}</td>
+<td>
+  <i class="far fa-trash-alt"
+     (click)="deleteUser()"></i>
+</td>

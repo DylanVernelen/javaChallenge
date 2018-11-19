@@ -9,6 +9,12 @@ import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 
+import { StoreModule } from './store/store.module';
+
+import { UserItemComponent } from './manage-users/user-item/user-item.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +23,6 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
     NavbarComponent,
     ManageUsersComponent,
 
-
   ],
   imports: [
     BrowserModule,
@@ -25,8 +30,14 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
     NgBootstrapModule,
 
 
+
   ],
   providers: [
+
+
+    StoreModule,
+    FormsModule,
+    HttpClientModule
 
   ],
   bootstrap: [AppComponent]
