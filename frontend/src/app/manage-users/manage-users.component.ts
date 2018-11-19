@@ -14,7 +14,17 @@ export class ManageUsersComponent implements OnInit {
   constructor(private manageUsersService: ManageUsersService) { }
 
   ngOnInit() {
-    this.userList = this.manageUsersService.userList;
+    this.manageUsersService.getUsers()
+      .subscribe(
+        (result: Array<Users>) => {
+          console.log('success', result);
+          this.userList = result
+        },
+        (error: any) => {
+          console.log('error', error);
+        }
+      )
+    //this.userList = this.manageUsersService.userList;
   }
 
   addUser(user: string){
