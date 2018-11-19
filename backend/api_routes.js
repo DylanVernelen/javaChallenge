@@ -121,7 +121,7 @@ module.exports =
 		// GET ALL USERS - GET
 		router.route('/user/all').get(function(req, res)
 		{
-			var model = models.modelReward;
+			var model = models.modelUser;
 			model.find({}, function(err, user)
 			{
 				res.json(user);
