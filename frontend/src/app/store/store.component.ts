@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Reward} from '../interfaces/reward';
 import {RewardService} from '../services/reward.service';
 import {Observable} from 'rxjs';
-import {Users} from '../interfaces/users';
+import {User} from '../interfaces/user';
 
 @Component({
   selector: 'app-store',

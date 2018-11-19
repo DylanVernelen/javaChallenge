@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageUsersService} from '../services/manage-users.service';
-import { Users} from '../interfaces/users';
+import { User} from '../interfaces/user';
 
 @Component({
   selector: 'app-manage-users',
@@ -9,14 +9,14 @@ import { Users} from '../interfaces/users';
 })
 export class ManageUsersComponent implements OnInit {
 
-  userList: Users[];
+  userList: User[];
 
   constructor(private manageUsersService: ManageUsersService) { }
 
   ngOnInit() {
     this.manageUsersService.getUsers()
       .subscribe(
-        (result: Array<Users>) => {
+        (result: Array<User>) => {
           console.log('success', result);
           this.userList = result;
         },
@@ -30,7 +30,7 @@ export class ManageUsersComponent implements OnInit {
 
   addUser(user: string){
     if(user.trim() != ""){
-      const newUser = { email: user.trim(), password: "", userLevel: "gebruiker", pointCount: 0}
+      const newUser = { email: user.trim(), password: "", userLevel: "gebruiker", pointCount: 0, token: ""}
       //this.manageUsersService.createUser(newUser);
     }
   }
