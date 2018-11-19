@@ -9,6 +9,21 @@ module.exports =
 	init: function(router, models)
 	{
 
+		// AUTHENTICATION: GET TOKEN BY EMAIL & PASS - GET
+		router.route('/gettoken/').post(function(req, res)
+		{
+			var modelUser = new models.modelUser();
+
+			modelUser.findById(req.params.reward_id, function(err, reward)
+			{
+				if(err)
+					res.send(err)
+
+				res.json(reward);
+			})	
+		})
+
+
 		// REWARD CREATE - POST
 		router.route('/reward/create').post(function(req, res)
 		{

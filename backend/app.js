@@ -26,11 +26,34 @@ var port = process.env.PORT || 8080;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
+var authentication = require('./authentication');
+
+
+
+
 
 router.use(function(req, res, next) {
-    // do logging
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
     console.log('API: routing new query');
-    next(); // make sure we go to the next routes and don't stop here
+
+    var token = req.query.token;
+    
+
+	if(!token)
+	{
+		res.json({error: "no-token"});
+		return;
+	}
+
+
+	console.log(token);
+
+
+
+//	authentication.isValidToken(res, token, function(user){next();});   
+next();
 });
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
