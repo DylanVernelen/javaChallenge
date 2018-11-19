@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Users} from '../../interfaces/users';
+import {User} from '../../interfaces/user';
 import {ManageUsersService} from '../../services/manage-users.service';
 
 @Component({
@@ -9,7 +9,7 @@ import {ManageUsersService} from '../../services/manage-users.service';
 })
 export class UserItemComponent implements OnInit {
 
-  @Input() item: Users;
+  @Input() item: User;
   @Input() index: number;
   hideInputField = true;
 
