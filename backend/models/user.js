@@ -10,7 +10,10 @@ var UserSchema = new Schema(
 	email: String,
 	password: String,
     userLevel: String,
-    pointCount: Number
+    pointCount: Number,
+    token: String,
+
+    history: Array
 });
 
 

@@ -5,6 +5,7 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
+var bcrypt     = require('bcrypt');
 
 // Database
 var mongoose = require('mongoose');
@@ -31,29 +32,41 @@ var authentication = require('./authentication');
 
 
 
+var models = 
+{
+    modelReward,
+    modelChallenge,
+    modelUser
+}
+
+
+var apiRoutes = require('./api_routes.js');
+
 
 router.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
   	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
-    console.log('API: routing new query');
+    console.log('API: routing new query: ' + req.url);
 
     var token = req.query.token;
-    
+ 
+    res.locals.token = token;
 
-	if(!token)
+    console.log("Token: " , token);
+
+    if(req.url == "/token/validate" || req.url == "/token/validate/")
+    {
+    	next();
+    } else if(!token)
 	{
 		res.json({error: "no-token"});
 		return;
+	} else 
+	{
+		authentication.isValidToken(res, token, function(user){next();});   
 	}
 
-
-	console.log(token);
-
-
-
-//	authentication.isValidToken(res, token, function(user){next();});   
-next();
 });
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
@@ -64,15 +77,6 @@ router.get('/', function(req, res) {
 
 
 
-var models = 
-{
-    modelReward,
-    modelChallenge,
-    modelUser
-}
-
-
-var apiRoutes = require('./api_routes.js');
 apiRoutes.init(router, models);
 
 

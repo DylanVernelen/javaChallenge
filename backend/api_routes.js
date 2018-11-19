@@ -2,28 +2,162 @@
 // ^ Nodig voor LINUX 
 
 // more routes for our API will happen here
+var authentication = require('./authentication');
 
 
 module.exports = 
 {
 	init: function(router, models)
 	{
-
 		// AUTHENTICATION: GET TOKEN BY EMAIL & PASS - GET
-		router.route('/gettoken/').post(function(req, res)
+		router.route('/token/validate').post(function(req, res)
 		{
-			var modelUser = new models.modelUser();
+			var modelUser = models.modelUser;
 
-			modelUser.findById(req.params.reward_id, function(err, reward)
+			var email = req.body.email;
+			var password = req.body.password;
+
+			var bcrypt     = require('bcrypt');
+
+
+
+			modelUser.findOne({email: email}).exec().then(user => 
+			{
+				if(user && user.token)
+				{
+					if(bcrypt.compareSync(password, user.password))
+						res.json({token: user.token});
+				} else 
+				{
+					res.json({error: "invalid-login"});
+				}
+				
+			})
+
+
+		});
+
+
+		// REWARD BUY 
+		router.route('/reward/buy/').post(function(req, res)
+		{
+
+
+			var userId = req.body.id;
+			var rewardId = req.body.rewardid;
+
+
+			console.log(res.locals.token);
+			authentication.getUserInfo(res.locals.token, function(user)
+			{
+				models.modelReward.findById(rewardId, function(err, reward)
+				{
+					if(err)
+						res.send(err);
+
+					console.log(user.pointCount, reward.rewardWorth);
+
+
+					if(user.pointCount < reward.rewardWorth)
+					{
+						res.json({error: "not-enough-points"});
+						return;
+					}
+
+
+					user.pointCount -= reward.rewardWorth;
+					user.history.push(
+					{
+						rewardId: rewardId,
+						pointsSpent: reward.rewardWorth,
+						timestamp: Math.floor(new Date() / 1000)
+					});
+
+					user.save(function(err) {
+		                if (err)
+		                    res.send(err);
+
+						res.json({succes: true});
+		            });
+
+				})
+
+
+
+			});
+
+
+
+/*
+			models.modelReward.findById(rewardId, function(err, reward)
 			{
 				if(err)
-					res.send(err)
-
-				res.json(reward);
-			})	
-		})
+					res.send(err);
 
 
+
+			});
+
+			/*models.modelUser.findById(userId, function(err, user)
+			{
+				if(err)
+					res.send(err);
+
+
+
+			})*/
+
+
+		});
+
+
+		// REWARD UPDATE - PATCH
+		router.route('/reward/update').put(function(req, res)
+		{
+			var id = req.body.id;
+
+			if(!id) 
+			{
+				res.json({error: "no-id"});
+			}
+
+			var name = req.body.name || undefined;
+			var worth = parseInt(req.body.worth) || undefined;
+			var owner = req.body.owner || undefined;
+			var enabled = req.body.enabled || undefined;
+			var description = req.body.description || undefined;
+
+			
+	        models.modelReward.findById(id, function(err, reward) {
+
+	            if (err)
+	                res.send(err);
+
+	            if(name)
+					reward.rewardName = name;
+
+				if(owner)
+					reward.rewardOwner = owner;
+
+				if(worth)
+					reward.rewardWorth = worth;
+
+				if(enabled)
+					reward.enabled = enabled;
+
+				if(description)
+					reward.description = description;
+
+	            reward.save(function(err) {
+	                if (err)
+	                    res.send(err);
+
+	                console.log(name);
+					res.json({succes: true});
+	            });
+	        });
+		});
+		
 		// REWARD CREATE - POST
 		router.route('/reward/create').post(function(req, res)
 		{
@@ -89,15 +223,22 @@ module.exports =
 		// USER CREATE - POST
 		router.route('/user/create').post(function(req, res)
 		{
-			var user = new models.modelUser();
+			var user = models.modelUser;
+			var bcrypt     = require('bcrypt');
+			var timestamp = Math.floor(new Date() / 1000);
 
 			user.email = req.body.email;
-			user.password = req.body.password;
+			user.password = bcrypt.hashSync(req.body.password, 10);
 			user.userLevel = req.body.userLevel;
 			user.pointCount = req.body.pointCount;
 
 
-			reward.save(function(err)
+			user.token = bcrypt.hashSync(timestamp.toString(), 10);
+			user.token = user.token.replace(/[^0-9a-z]/gi, '');
+
+
+
+			models.modelUser.save(function(err)
 			{
 				if(err)
 					res.send(err);
