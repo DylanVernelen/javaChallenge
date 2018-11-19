@@ -27,10 +27,11 @@ export class ManageUsersComponent implements OnInit {
     // this.userList = this.manageUsersService.userList;
   }
 
-  addUser(user: string) {
-    if (user.trim() != '') {
-      const newUser = { email: user.trim(), password: '', userLevel: 'gebruiker'};
-      this.manageUsersService.createUser(newUser);
+
+  addUser(user: string){
+    if(user.trim() != ""){
+      const newUser = { email: user.trim(), password: "", userLevel: "gebruiker", pointCount: 0}
+      //this.manageUsersService.createUser(newUser);
     }
   }
 

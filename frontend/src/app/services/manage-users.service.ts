@@ -11,8 +11,8 @@ export class ManageUsersService {
 
   // userList voorlopig dummy items
   userList: Users[] = [
-    {email: 'test@gmail.com', userLevel: 'admin', password: ''},
-    {email: 'voorbeeld2@hotmail.com',  userLevel: 'gebruiker', password: ''}
+    {email: "test@gmail.com", userLevel: "admin", password: "", pointCount: 1},
+    {email: "voorbeeld2@hotmail.com",  userLevel: "gebruiker", password: "", pointCount: 2}
   ];
 
   constructor(private http: HttpClient) {
@@ -24,7 +24,8 @@ export class ManageUsersService {
 
   // CRUD operaties
   createUser(user: Users) {
-    this.userList.unshift(user);
+    //this.userList.unshift(user);
+    return this.http.post('https://nodejs.tomvdr.com/node/api/user/create?token=ABCDEF', user);
   }
 
   updateUser(user: Users, i: number) {
