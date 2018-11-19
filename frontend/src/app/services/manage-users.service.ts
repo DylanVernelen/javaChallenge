@@ -8,8 +8,8 @@ export class ManageUsersService {
 
   //userList voorlopig dummy items
   userList: Users[] = [
-    {email: "test@gmail.com"},
-    {email: "voorbeeld2@hotmail.com"}
+    {email: "test@gmail.com", userLevel: "admin", password: ""},
+    {email: "voorbeeld2@hotmail.com",  userLevel: "gebruiker", password: ""}
   ];
 
   constructor() {

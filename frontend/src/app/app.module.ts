@@ -7,20 +7,27 @@ import { NgBootstrapModule } from './sharedModules/ng-bootstrap.module';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
+
 import { StoreModule } from './store/store.module';
+
+import {UserItemComponent} from "./manage-users/user-item/user-item.component";
+import {FormsModule} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    ManageUsersComponent
+    ManageUsersComponent,
+    UserItemComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgBootstrapModule,
     StoreModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,4 +16,4 @@ import {ManageUsersComponent} from "./manage-users.component";
   declarations: [ManageUsersComponent, UserItemComponent],
   providers: [ManageUsersService]
 })
-export class AppModule { }
+export class ManageUsersModule { }
