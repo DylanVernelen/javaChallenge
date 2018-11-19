@@ -7,6 +7,7 @@ import {ManageUsersComponent} from "./manage-users/manage-users.component";
 const routes: Routes = [
 
   {path: 'store', component: StoreComponent},
+  {path: 'admin', component: ManageUsersComponent}
   // {path: '', redirectTo: 'login', pathMatch: 'full'}
   // {path: '**', redirectTo: 'todo'}
 
