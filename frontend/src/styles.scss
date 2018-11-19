@@ -1,3 +1,7 @@
-// Link naar BS en FA
+// Link to BS en FA
 @import "~bootstrap/scss/bootstrap";
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+// Override variables
+$brand-primary:     #f49900;
+$brand-warning:     #ff8c00;
