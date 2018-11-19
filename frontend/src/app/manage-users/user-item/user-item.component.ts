@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Users} from "../../interfaces/users";
-import {ManageUsersService} from "../../services/manage-users.service";
+import {Users} from '../../interfaces/users';
+import {ManageUsersService} from '../../services/manage-users.service';
 
 @Component({
   selector: '[app-user-item]',
