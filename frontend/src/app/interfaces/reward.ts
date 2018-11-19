@@ -10,4 +10,7 @@ export class Reward {
   id: Oid;
   rewardName: string;
   rewardWorth: number;
+  rewardCategory: string;
+  rewardDescription: string;
+  rewardImageURL: string;
 }

@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Reward} from '../interfaces/reward';
 import {RewardService} from '../services/reward.service';
-import {Observable} from 'rxjs';
+
 import {User} from '../interfaces/user';
+
+import {Observable, Subscription} from 'rxjs';
+import {RewardCategory} from '../interfaces/reward-category';
+
 
 @Component({
   selector: 'app-store',
@@ -12,11 +16,13 @@ import {User} from '../interfaces/user';
 export class StoreComponent implements OnInit {
 
   rewardList: Reward[];
+  rewardCategoryList: RewardCategory[];
+  rewardSubscription: Subscription;
 
   constructor(private rewardService: RewardService) { }
 
   ngOnInit() {
-    this.rewardService.getAllRewards()
+    this.rewardSubscription = this.rewardService.getAllRewards()
       .subscribe(
         (result: Reward[]) => {
           this.rewardList = result;
@@ -25,6 +31,30 @@ export class StoreComponent implements OnInit {
           console.log('error', error);
         }
       );
+
+    this.rewardService.getAllRewardCategories()
+      .subscribe(
+        (result: RewardCategory[]) => {
+          this.rewardCategoryList = result;
+        },
+        (error: any) => {
+          console.log('error', error);
+        }
+      );
+  }
+
+  OnDestroy() {
+    this.rewardSubscription.unsubscribe();
+  }
+
+  filter(category) {
+    console.log('Het werkt!');
+    for (const reward of this.rewardList) {
+      if (reward.rewardCategory !== category) {
+        const index = this.rewardList.indexOf(reward, 0);
+        this.rewardList.splice(index, 1);
+      }
+    }
   }
 
 }

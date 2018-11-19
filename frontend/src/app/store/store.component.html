@@ -3,7 +3,16 @@
 </p>
 
 <div class="row">
-  <app-reward class="col-md-4"
+  <div class="col-md-3">
+    <h4>Filter</h4>
+    <form>
+      <label *ngFor="let category of rewardCategoryList">
+        {{category.categoryName}}
+        <input type="checkbox" (change)="filter(category.categoryName)"/>
+      </label>
+    </form>
+  </div>
+  <app-reward class="col-md-3"
               *ngFor="let reward of rewardList; let i = index"
               [item]="reward"
               [index]="i">
