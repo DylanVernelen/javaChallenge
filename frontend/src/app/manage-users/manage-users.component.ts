@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ManageUsersService} from "../services/manage-users.service";
-import { Users} from "../interfaces/users";
+import { ManageUsersService} from '../services/manage-users.service';
+import { Users} from '../interfaces/users';
 
 @Component({
   selector: 'app-manage-users',
@@ -18,18 +18,18 @@ export class ManageUsersComponent implements OnInit {
       .subscribe(
         (result: Array<Users>) => {
           console.log('success', result);
-          this.userList = result
+          this.userList = result;
         },
         (error: any) => {
           console.log('error', error);
         }
-      )
-    //this.userList = this.manageUsersService.userList;
+      );
+    // this.userList = this.manageUsersService.userList;
   }
 
-  addUser(user: string){
-    if(user.trim() != ""){
-      const newUser = { email: user.trim(), password: "", userLevel: "gebruiker"}
+  addUser(user: string) {
+    if (user.trim() != '') {
+      const newUser = { email: user.trim(), password: '', userLevel: 'gebruiker'};
       this.manageUsersService.createUser(newUser);
     }
   }
