@@ -25,7 +25,8 @@ export class ManageUsersService {
   // CRUD operaties
   createUser(user: User) {
     //this.userList.unshift(user);
-    return this.http.post('https://nodejs.tomvdr.com/node/api/user/create?token=ABCDEF', user);
+    return this.http.post('https://nodejs.tomvdr.com/node/api/user/create?token=ABCDEF', user)
+      .toPromise();
   }
 
   updateUser(user: User, i: number) {

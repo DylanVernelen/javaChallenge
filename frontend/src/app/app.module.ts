@@ -17,22 +17,17 @@ import {HttpModule} from "@angular/http";
     LoginComponent,
     NavbarComponent,
     ManageUsersComponent,
-      UserItemComponent,
+    UserItemComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgBootstrapModule,
-      StoreModule,
-     HttpClientModule,
-      FormsModule
-
+    StoreModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [
-
-
-
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
