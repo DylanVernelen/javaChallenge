@@ -5,7 +5,7 @@ import {RewardService} from '../services/reward.service';
 import {User} from '../interfaces/user';
 
 import {Observable, Subscription} from 'rxjs';
-import {RewardCategory} from '../interfaces/reward-category';
+import {Oid, RewardCategory} from '../interfaces/reward-category';
 
 
 @Component({
@@ -16,7 +16,11 @@ import {RewardCategory} from '../interfaces/reward-category';
 export class StoreComponent implements OnInit {
 
   rewardList: Reward[];
-  rewardCategoryList: RewardCategory[];
+  rewardCategoryList: RewardCategory[] = [
+    {id: new Oid('0'), categoryName: 'Consumables'},
+    {id: new Oid('0'), categoryName: 'Coupons'},
+    {id: new Oid('0'), categoryName: 'Gadgets'}
+    ];
   rewardSubscription: Subscription;
 
   constructor(private rewardService: RewardService) { }
@@ -32,15 +36,15 @@ export class StoreComponent implements OnInit {
         }
       );
 
-    this.rewardService.getAllRewardCategories()
-      .subscribe(
-        (result: RewardCategory[]) => {
-          this.rewardCategoryList = result;
-        },
-        (error: any) => {
-          console.log('error', error);
-        }
-      );
+    // this.rewardService.getAllRewardCategories()
+    //   .subscribe(
+    //     (result: RewardCategory[]) => {
+    //       this.rewardCategoryList = result;
+    //     },
+    //     (error: any) => {
+    //       console.log('error', error);
+    //     }
+    //   );
   }
 
   OnDestroy() {
