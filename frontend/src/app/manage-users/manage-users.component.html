@@ -1,0 +1,11 @@
+<h4>Todo</h4>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <div class="input-group-text"><span class="fas fa-list"></span></div>
+  </div>
+  <input type="text" class="form-control" placeholder="Add new user"
+         #i
+         (keyup.enter)="addUser(i.value); i.value=''">
+</div>
+<hr>
+<pre>{{ userList | json }}</pre>

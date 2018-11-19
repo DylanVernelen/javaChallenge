@@ -10,8 +10,8 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
 var modelReward = require('./models/reward.js');
-
-
+var modelChallenge = require('./models/challenge.js');
+var modelUser = require('./models/user.js');
 
 mongoose.connect('mongodb://root:ThomasMore1@ds055762.mlab.com:55762/rewardsystem', {useNewUrlParser: true}); // connect to our database
 
@@ -43,7 +43,9 @@ router.get('/', function(req, res) {
 
 var models = 
 {
-	modelReward
+    modelReward,
+    modelChallenge,
+    modelUser
 }
 
 
