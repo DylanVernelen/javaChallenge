@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Reward} from '../interfaces/reward';
 import {RewardService} from '../services/reward.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-store',
@@ -9,12 +10,8 @@ import {RewardService} from '../services/reward.service';
 })
 export class StoreComponent implements OnInit {
 
-  rewardList: Reward[];
+  constructor(public rewardService: RewardService) { }
 
-  constructor(private rewardService: RewardService) { }
-
-  ngOnInit() {
-    this.rewardList = this.rewardService.rewardList;
-  }
+  ngOnInit() {}
 
 }

@@ -10,9 +10,10 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
 
 import { StoreModule } from './store/store.module';
 
-import {UserItemComponent} from "./manage-users/user-item/user-item.component";
-import {FormsModule} from "@angular/forms";
+import { UserItemComponent } from './manage-users/user-item/user-item.component';
+import { FormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {FormsModule} from "@angular/forms";
     AppRoutingModule,
     NgBootstrapModule,
     StoreModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

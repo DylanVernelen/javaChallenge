@@ -2,5 +2,11 @@
   store works!
 </p>
 
-<app-reward *ngFor="let reward of rewardList; let i = index" [item] ="reward" [index]="i">
-</app-reward>
+<div class="row">
+  <app-reward class="col-md-4"
+              *ngFor="let reward of (rewardService.rewardList | async); let i = index"
+              [item] ="reward"
+              [index]="i">
+  </app-reward>
+</div>
+

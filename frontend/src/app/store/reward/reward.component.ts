@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-
-class Todo {
-}
+import {Reward} from '../../interfaces/reward';
 
 @Component({
   selector: 'app-reward',
@@ -10,7 +8,7 @@ class Todo {
 })
 export class RewardComponent implements OnInit {
 
-  @Input() item: Todo;
+  @Input() item: Reward;
   @Input() index: number;
 
   constructor() { }
