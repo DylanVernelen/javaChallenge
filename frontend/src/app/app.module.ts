@@ -7,15 +7,13 @@ import { NgBootstrapModule } from './sharedModules/ng-bootstrap.module';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
-import { UserTemComponent } from './manage-users/user-tem/user-tem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    ManageUsersComponent,
-    UserTemComponent
+    ManageUsersComponent
   ],
   imports: [
     BrowserModule,
