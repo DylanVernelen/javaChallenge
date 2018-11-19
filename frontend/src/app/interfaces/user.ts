@@ -6,4 +6,4 @@ export class User {
   token: string;
 }
 
-export * from './Users';
+export * from './User';
