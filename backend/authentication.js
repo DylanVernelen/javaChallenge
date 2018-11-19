@@ -6,16 +6,6 @@
 
 module.exports = 
 {
-	findToken: async function(token)
-	{
-		var modelUser = require('./models/user.js');
-
-		try
-		{
-			return await modelUser.findOne({token: token});
-		} catch(err){ console.log("error") };
-	},
-
 
 	isValidToken: function(res, token, callback)
 	{	
