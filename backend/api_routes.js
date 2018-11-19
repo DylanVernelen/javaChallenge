@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+// ^ Nodig voor LINUX 
+
 // more routes for our API will happen here
 
 
