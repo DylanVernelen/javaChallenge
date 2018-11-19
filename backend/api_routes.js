@@ -1,5 +1,3 @@
-import { read } from "fs";
-
 // more routes for our API will happen here
 
 
