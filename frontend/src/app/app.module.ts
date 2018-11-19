@@ -7,6 +7,7 @@ import { NgBootstrapModule } from './sharedModules/ng-bootstrap.module';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
+import { StoreModule } from './store/store.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgBootstrapModule
+    NgBootstrapModule,
+    StoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
