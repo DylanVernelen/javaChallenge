@@ -4,9 +4,8 @@
 
 <div class="row">
   <app-reward class="col-md-4"
-              *ngFor="let reward of (rewardService.rewardList | async); let i = index"
-              [item] ="reward"
-              [index]="i">
+              *ngFor="let reward of (rewardService.rewardList)"
+              [item] ="reward">
   </app-reward>
 </div>
 

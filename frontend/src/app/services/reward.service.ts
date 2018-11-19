@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Reward } from '../interfaces/reward';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,9 +8,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class RewardService {
 
-  rewardList: Observable<Reward[]> = this.getAllRewards();
+  rewardList: Reward[];
+  subscription: Subscription;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.subscription = this.getAllRewards()
+      .subscribe(rewardlist => { this.rewardList = rewardlist; });
+  }
 
   getAllRewards(): Observable<Reward[]> {
     return this.http.get<Reward[]>('https://nodejs.tomvdr.com/node/api/reward/all');

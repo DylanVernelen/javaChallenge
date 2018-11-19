@@ -9,7 +9,6 @@ import {Reward} from '../../interfaces/reward';
 export class RewardComponent implements OnInit {
 
   @Input() item: Reward;
-  @Input() index: number;
 
   constructor() { }
 
