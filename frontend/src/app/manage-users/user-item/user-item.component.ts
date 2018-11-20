@@ -25,7 +25,16 @@ export class UserItemComponent implements OnInit {
 
 
   deleteUser() {
-    this.manageUsersService.deleteUser(this.index);
+    //this.manageUsersService.deleteUser(this.index);
+    this.manageUsersService.deleteUser(this.item._id)
+      .subscribe(
+        (result) => {
+          console.log('success', result);
+        },
+        (error: any) => {
+          console.log('error', error);
+        }
+      );
   }
 
 }
