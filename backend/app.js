@@ -51,6 +51,7 @@ var models =
 
 var apiRoutes = require('./api_routes.js');
 
+router.all('*', cors());
 
 router.use(function(req, res, next) {
 /*
