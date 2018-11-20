@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Challenge} from '../interfaces/challenge';
+import {CompletedChallenge} from "../interfaces/completed-challenge";
 import {HttpClient} from '@angular/common/http';
 import {User} from "../interfaces/user";
 
@@ -37,6 +38,9 @@ export class ManageChallengesService {
     }
     getChallenges() {
       return this.http.get<Array<Challenge>>('https://nodejs.tomvdr.com/node/api/challenge/all?token=ABCDEF', {responseType: 'json'});
+    }
+    createCompletedChallenge(challenge : CompletedChallenge){
+        return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/complete?token=ABCDEF', challenge, {responseType: 'json'})
     }
 
 }
