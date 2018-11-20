@@ -4,6 +4,7 @@ import { StoreComponent } from './store/store.component';
 import {ManageUsersComponent} from './manage-users/manage-users.component';
 import {ManageChallengesComponent} from './manage-challenges/manage-challenges.component';
 import { LoginComponent } from 'src/app/login/login.component';
+import {ManageRewardsComponent} from './manage-rewards/manage-rewards.component';
 
 const routes: Routes = [
 
@@ -11,8 +12,9 @@ const routes: Routes = [
     {path: 'managechallenge', component: ManageChallengesComponent},
   {path: 'admin', component: ManageUsersComponent},
   {path: 'managechallenge', component: ManageChallengesComponent},
-  {path: 'admin', component: ManageUsersComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'manageusers', component: ManageUsersComponent},
+  {path: 'managerewards', component: ManageRewardsComponent}
   // {path: '', redirectTo: 'login', pathMatch: 'full'}
   // {path: '**', redirectTo: 'todo'}
 ];
