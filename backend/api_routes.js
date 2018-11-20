@@ -3,6 +3,9 @@
 
 // more routes for our API will happen here
 var authentication = require('./authentication');
+var formidable = require('formidable');
+var fs = require('fs');
+var path = require('path')
 
 
 module.exports = 
@@ -348,6 +351,35 @@ module.exports =
 
 				res.json(rewards);
 			})
+		});
+
+
+		router.route('/reward/fileupload/:reward_id').post(function(req, res)
+		{
+			console.log("File upload: post");
+			var form = new formidable.IncomingForm();
+			var filename = '';
+
+		    form.parse(req, function (err, fields, files) {
+		    	console.log('File uploaded!');
+
+		      	var oldpath = files.file.path;
+      			filename = req.params.reward_id + path.extname(files.file.name);
+      			var newpath = './' + filename;
+
+      			console.log('rewardid', req.params.reward_id);
+      			console.log('extension', path.extname(files.file.name));
+      			console.log(oldpath, newpath);
+
+  				fs.rename(oldpath, newpath, function (err) {
+			        if (err) throw err;
+			        
+					res.json({succes: true, imgurl: "https://nodejs.tomvdr.com/" + filename});
+					return;
+		      	});
+		    });
+
+		   // res.json({error: true});
 		});
 	}
 
