@@ -20,9 +20,7 @@ module.exports =
 			var email = req.body.email;
 			var password = req.body.password;
 
-			var bcrypt     = require('bcrypt');
-
-
+			var bcrypt  = require('bcrypt');
 
 			modelUser.findOne({email: email}).exec().then( user =>
 			{
@@ -37,14 +35,14 @@ module.exports =
 							history: (user.history || {})
 
 						});
-					else 
+					else
 						res.json({error: "invalid-login"});
 
 				} else
 				{
 					res.json({error: "invalid-login"});
 				}
-				
+
 			})
 
 
