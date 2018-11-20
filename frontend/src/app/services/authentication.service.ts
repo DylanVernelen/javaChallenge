@@ -20,7 +20,7 @@ export class AuthenticationService {
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.userData$.next({
                         email: user.email,
-                        id: user.id,
+                        _id: user.id,
                         password: user.password,
                         pointCount: user.pointCount,
                         token: user.token,
@@ -30,10 +30,6 @@ export class AuthenticationService {
                 }
                 return user;
             }));
-    }
-
-    fetchUser(): Observable<any> {
-        return of(JSON.parse(localStorage.getItem('currentUser')));   
     }
 
     logout() {

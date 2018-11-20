@@ -19,6 +19,9 @@
         </li>
       </ul>
       <ul class="navbar-nav">
+            <span class="navbar-text d-md-block d-sm-none" *ngIf="user">
+                        {{ user.email }}
+                  </span>
           <li class="nav-item" *ngIf="!user">
               <a class="nav-link" routerLink="/login">Login</a>
           </li>
