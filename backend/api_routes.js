@@ -422,6 +422,9 @@ module.exports =
 
 			        reward.imgUrl = "https://nodejs.tomvdr.com/" + filename;
 
+
+			        console.log("Reward img url", reward.imgUrl);
+
 			        reward.save(function(err) {
 		                if (err)
 		                {
