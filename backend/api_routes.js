@@ -26,8 +26,7 @@ module.exports =
 
 			modelUser.findOne({email: email}).exec().then(user => 
 			{
-				console.log(user);
-				if(user && user.token)
+				if(user && user.token && user.password && password)
 				{
 					if(bcrypt.compareSync(password, user.password))
 						res.json({
