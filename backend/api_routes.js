@@ -34,7 +34,6 @@ module.exports =
 							token: user.token,
 							pointCount: user.pointCount,
 							email: user.email,
-							password: user.password,
 							userLevel: user.userLevel,
 							history: (user.history || {})
 
@@ -417,7 +416,23 @@ module.exports =
   				fs.rename(oldpath, newpath, function (err) {
 			        if (err) throw err;
 			        
-					res.json({succes: true, imgurl: "https://nodejs.tomvdr.com/" + filename});
+
+
+			        reward = new models.modelReward();
+
+			        reward.imgUrl = "https://nodejs.tomvdr.com/" + filename;
+
+			        reward.save(function(err) {
+		                if (err)
+		                    res.send(err);
+
+    					console.log("Gebruiker ", user.email, " heeft reward ", reward.rewardName, " gekocht voor ", reward.rewardWorth, " punten (Resterend: ", user.pointCount, ")");
+
+						res.json({succes: true, newPoints: user.pointCount});
+
+						return;
+					});
+
 					return;
 		      	});
 		    });

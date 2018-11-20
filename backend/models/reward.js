@@ -1,7 +1,8 @@
 // app/models/reward.js
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema
- var RewardSchema = new Schema(
+
+var RewardSchema = new Schema(
 {
 	rewardName: String,
 	rewardOwner: String,
