@@ -11,6 +11,10 @@ import { HomeComponent } from 'src/app/home/home.component';
 
 const routes: Routes = [
 
+<<<<<<< HEAD
+=======
+  {path: 'store', component: StoreComponent},
+>>>>>>> fix redirect store
   {path: 'managechallenge', component: ManageChallengesComponent},
   {path: 'admin', component: ManageUsersComponent},
   {path: 'login', component: LoginComponent},
