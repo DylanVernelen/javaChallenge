@@ -12,18 +12,11 @@ export class NavbarComponent implements OnInit {
   isCollapsed = true;
 
   user: User;
-  
+
   constructor(public AuthenticationService: AuthenticationService) { }
 
   ngOnInit() {
-    this.AuthenticationService.fetchUser().subscribe((user: User) =>{
-      this.user = user;
-      if(user){
-        console.log(this.user.email + " <- User in navbar-component");
-      } else {
-        console.log('No logged in user');
-      }
-    })
+    this.AuthenticationService.userData$.subscribe(data => this.user = data);
   }
 
 }

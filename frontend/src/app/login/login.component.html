@@ -1,5 +1,7 @@
 <div class="container">
   <h2>Login</h2>
+  <div *ngIf="!loggedIn" class="alert alert-danger">You are not logged in</div>
+  <div *ngIf="loggedIn" class="alert alert-success">Logged in succesfully</div>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="username">Username</label>

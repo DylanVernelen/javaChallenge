@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl: string;
     error = '';
+    loggedIn = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
 
         // reset login status
         this.authenticationService.logout();
+        this.loggedIn = false;
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -54,5 +56,6 @@ export class LoginComponent implements OnInit {
                     this.error = error;
                     this.loading = false;
                 });
+        this.loggedIn = true;
     }
 }
