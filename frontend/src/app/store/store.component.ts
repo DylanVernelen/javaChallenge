@@ -5,7 +5,7 @@ import {RewardService} from '../services/reward.service';
 import {User} from '../interfaces/user';
 
 import {Observable, Subscription} from 'rxjs';
-import {Oid, RewardCategory} from '../interfaces/reward-category';
+import {RewardCategory} from '../interfaces/reward-category';
 
 
 @Component({
@@ -17,9 +17,9 @@ export class StoreComponent implements OnInit {
 
   rewardList: Reward[];
   rewardCategoryList: RewardCategory[] = [
-    {id: new Oid('0'), categoryName: 'Consumables'},
-    {id: new Oid('0'), categoryName: 'Coupons'},
-    {id: new Oid('0'), categoryName: 'Gadgets'}
+    {id: '0', categoryName: 'Consumables'},
+    {id: '0', categoryName: 'Coupons'},
+    {id: '0', categoryName: 'Gadgets'}
     ];
   rewardSubscription: Subscription;
 

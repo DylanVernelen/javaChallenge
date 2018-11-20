@@ -1,13 +1,5 @@
-export class Oid {
-  id: string;
-
-  constructor(id) {
-    this.id = id;
-  }
-}
-
 export class Reward {
-  id: Oid;
+  id: string;
   rewardName: string;
   rewardWorth: number;
   rewardCategory: string;

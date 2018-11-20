@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Reward} from '../../interfaces/reward';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-reward',
@@ -11,14 +11,19 @@ export class RewardComponent implements OnInit {
 
   @Input() item: Reward;
   @Input() index: number;
+  activeModal: NgbActiveModal;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modal: NgbModal) { }
 
   ngOnInit() {
   }
 
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.activeModal = this.modal.open(content);
+  }
+
+  close() {
+    this.activeModal.close();
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageUsersService} from '../services/manage-users.service';
-import {Oid, User} from '../interfaces/user';
+import {User} from '../interfaces/user';
 
 @Component({
   selector: 'app-manage-users',
@@ -28,9 +28,9 @@ export class ManageUsersComponent implements OnInit {
   }
 
 
-  addUser(user: string){
-    if(user.trim() != ""){
-      const newUser = { id: new Oid(2), email: user.trim(), password: user.trim()+"2018", userLevel: "gebruiker", pointCount: 0, token: ""}
+  addUser(user: string) {
+    if (user.trim() !== '') {
+      const newUser = { id: '2', email: user.trim(), password: user.trim() + '2018', userLevel: 'gebruiker', pointCount: 0, token: ''};
       this.manageUsersService.createUser(newUser)
         .catch(function (error) {
           console.log(error);
