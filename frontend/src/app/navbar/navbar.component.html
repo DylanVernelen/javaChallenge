@@ -9,7 +9,7 @@
   <div class="collapse navbar-collapse" id="navbarContent" [ngbCollapse]="isCollapsed" (click)="isCollapsed = !isCollapsed">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-              <a class="nav-link" href="#!">Home</a>
+              <a class="nav-link" routerLink="/home">Home</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" routerLink="/store" routerLinkActive="active">Store</a>
@@ -22,8 +22,8 @@
         </li>
       </ul>
       <ul class="navbar-nav">
-            <span class="navbar-text d-md-block d-sm-none" *ngIf="user">
-              <a routerLink="/account">{{ user.email }}</a>
+            <span class="navbar-text d-lg-block d-md-block d-sm-none" *ngIf="user">
+                        Point count: {{ user.pointCount }} | {{ user.email }}
             </span>
           <li class="nav-item" *ngIf="!user">
               <a class="nav-link" routerLink="/login">Login</a>
