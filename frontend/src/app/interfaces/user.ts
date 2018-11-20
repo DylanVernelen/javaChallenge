@@ -6,5 +6,3 @@ export class User {
   pointCount: number;
   token: string;
 }
-
-export * from './user';

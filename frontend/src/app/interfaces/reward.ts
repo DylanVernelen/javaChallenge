@@ -1,7 +1,7 @@
 export class Reward {
-  id: string;
-  name: string;
-  worth: number;
-  category: string;
-  description: string;
+  _id: string;
+  rewardName: string;
+  rewardWorth: number;
+  rewardCategory: string;
+  rewardDescription: string;
 }

@@ -12,8 +12,9 @@ export class ManageChallengesService {
         {challengeName: 'Beer', challengeOwner: 'Louis', challengeWorth: 5}
     ];
     createChallenge(challenge: Challenge) {
+        console.log(challenge);
+        return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/create?token=ABCDEF', challenge, {responseType: 'json'} );
 
-        return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/create/all?token=ABCDEF', challenge );
     }
 
     updateChallenge(challenge: Challenge, i: number) {
@@ -24,8 +25,7 @@ export class ManageChallengesService {
         this.List.splice(i, 1);
     }
     getChallenges() {
-        return this.List;
-       // return this.http.get<Array<Challenge>>('https://nodejs.tomvdr.com/node/api/challenges/all?token=ABCDEF', {responseType: 'json'});
+      return this.http.get<Array<Challenge>>('https://nodejs.tomvdr.com/node/api/challenge/all?token=ABCDEF', {responseType: 'json'});
     }
 
 }

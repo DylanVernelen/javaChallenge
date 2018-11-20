@@ -329,7 +329,7 @@ module.exports =
 			challenge.challengeOwner = req.body.challengeOwner;
 			challenge.challengeWorth = req.body.challengeWorth;
 
-			reward.save(function(err)
+			challenge.save(function(err)
 			{
 				if(err)
 					res.send(err);
