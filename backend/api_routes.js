@@ -30,11 +30,14 @@ module.exports =
 						res.json({
 							token: user.token,
 							pointCount: user.pointCount,
-							history: (user.history || {}),
 							email: user.email,
-							userLevel: user.userLevel
+							userLevel: user.userLevel,
+							history: (user.history || {})
 
 						});
+					else 
+						res.json({error: "invalid-login"});
+
 				} else 
 				{
 					res.json({error: "invalid-login"});
@@ -63,7 +66,6 @@ module.exports =
 					if(err)
 						res.send(err);
 
-					console.log(user.pointCount, reward.rewardWorth);
 
 
 					if(user.pointCount < reward.rewardWorth)
@@ -78,44 +80,20 @@ module.exports =
 					{
 						rewardId: rewardId,
 						pointsSpent: reward.rewardWorth,
-						timestamp: Math.floor(new Date() / 1000)
+						timestamp: Math.floor(new Date() / 1000),
+						opgehaald: false
 					});
 
 					user.save(function(err) {
 		                if (err)
 		                    res.send(err);
 
+    					console.log("Gebruiker ", user.email, " heeft reward ", reward.rewardName, " gekocht voor ", reward.rewardWorth, " punten (Resterend: ", user.pointCount, ")");
+
 						res.json({succes: true, newPoints: user.pointCount});
 		            });
-
 				})
-
-
-
 			});
-
-
-
-/*
-			models.modelReward.findById(rewardId, function(err, reward)
-			{
-				if(err)
-					res.send(err);
-
-
-
-			});
-
-			/*models.modelUser.findById(userId, function(err, user)
-			{
-				if(err)
-					res.send(err);
-
-
-
-			})*/
-
-
 		});
 
 
@@ -134,7 +112,7 @@ module.exports =
 			var owner = req.body.owner || undefined;
 			var enabled = req.body.enabled || undefined;
 			var description = req.body.description || undefined;
-
+			var imgurl = req.body.imgurl || undefined;
 			
 	        models.modelReward.findById(id, function(err, reward) {
 
@@ -156,11 +134,13 @@ module.exports =
 				if(description)
 					reward.description = description;
 
+				if(imgurl)
+					reward.imgUrl = imgurl;
+
 	            reward.save(function(err) {
 	                if (err)
 	                    res.send(err);
 
-	                console.log(name);
 					res.json({succes: true});
 	            });
 	        });
@@ -176,6 +156,7 @@ module.exports =
 			reward.rewardWorth = req.body.worth;
 			reward.enabled = req.body.enabled;
 			reward.description = req.body.description;
+			reward.imgUrl = req.body.imgurl || undefined;
 
 
 			reward.save(function(err)
@@ -353,6 +334,21 @@ module.exports =
 			})
 		});
 
+
+		// GET ALL CATEGORIES - GET 
+		router.route('/category/all').get(function(req, res)
+		{
+			models.modelRewardCategory.find({}, function(err, rewards)
+			{
+				if(err)
+				{
+					res.json(err);
+					console.log(err);
+				}	
+
+				res.json(rewards);
+			})
+		});
 	}
 
 

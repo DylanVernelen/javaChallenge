@@ -21,7 +21,15 @@ AUTHENTICATIE:
 
 
 REWARDS:
+	
 	/reward/buy
+	- POST
+	- Vereist een reward id
+		- rewardId: id
+	- Gaat via token de gebruiker ophalen
+	- Punten worden automatisch afgetrokken
+	- Gebruiker historiek wordt toegevoegd
+
 	
 	/reward/get/{id} 
 	- GET
@@ -48,5 +56,10 @@ REWARDS:
 		- name: string
 		- worth: number
 		- owner: id
+		
 
-
+CATEGORIES:
+	
+	/category/all
+	- GET
+	- Alle categorieën

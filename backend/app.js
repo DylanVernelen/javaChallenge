@@ -13,6 +13,8 @@ var mongoose = require('mongoose');
 var modelReward = require('./models/reward.js');
 var modelChallenge = require('./models/challenge.js');
 var modelUser = require('./models/user.js');
+var modelRewardCategory = require('./models/rewardcategory.js');
+
 
 mongoose.connect('mongodb://root:ThomasMore1@ds055762.mlab.com:55762/rewardsystem', {useNewUrlParser: true}); // connect to our database
 
@@ -28,6 +30,7 @@ var port = process.env.PORT || 8080;        // set our port
 var router = express.Router();              // get an instance of the express Router
 
 var authentication = require('./authentication');
+	
 
 
 
@@ -36,7 +39,8 @@ var models =
 {
     modelReward,
     modelChallenge,
-    modelUser
+    modelUser,
+    modelRewardCategory
 }
 
 

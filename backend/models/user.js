@@ -12,7 +12,6 @@ var UserSchema = new Schema(
     userLevel: String,
     pointCount: Number,
     token: String,
-
     history: Array
 });
 
