@@ -78,6 +78,7 @@ CHALLENGES:
 	- Vereist:
 		- userid: id
 		- challengeid: id
+		- Optioneel: description: string
 	- Retourneert: 
 		- unieke identifier
 
@@ -98,4 +99,4 @@ CHALLENGES:
 			- waarschijnlijk al gecomplete 
 	- Vult het user document verder aan met historiek
 	- Geeft de punten automatisch
-	
+

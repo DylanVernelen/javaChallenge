@@ -266,6 +266,56 @@ module.exports =
 			
 		});
 
+		// USER UPDATE - PUT 
+		router.route('/user/update').put(function(req, res)
+		{
+			var userid = req.body.userid;
+			var bcrypt  = require('bcrypt');
+
+			if(!userid) 
+			{
+				res.json({error: "no-userid"});
+				return;
+			}
+
+			var email = req.body.email || undefined;
+			var password = undefined;
+			var userLevel = req.body.userLevel || undefined;
+			var pointCount = req.body.pointCount || undefined;
+
+			if(req.body.password)
+				password = bcrypt.hashSync(req.body.password, 10);
+
+
+	        models.modelUser.findById(userid, function(err, user) {
+
+	            if (err)
+	                res.send(err);
+
+	            if(email)
+					user.email = email;
+
+				if(password)
+					user.password = password;
+
+				if(userLevel)
+					user.userLevel = userLevel;
+
+				if(pointCount)
+					user.pointCount = parseInt(pointCount);
+
+
+	            user.save(function(err) {
+	                if (err)
+	                    console.log(err);
+
+					res.json({succes: true});
+	            });
+	        });
+		});
+
+	
+
 		// USER GET BY ID - GET 
 		router.route('/user/get/:user_id').get(function(req, res)
 		{	
