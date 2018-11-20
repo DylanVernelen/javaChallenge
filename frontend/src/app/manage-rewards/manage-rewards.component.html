@@ -7,6 +7,7 @@
         <th scope="col">Worth</th>
         <th scope="col">Category</th>
         <th scope="col">Description</th>
+        <th scope="col">Image</th>
       </tr>
       </thead>
       <tbody>
@@ -16,6 +17,7 @@
         <option *ngFor="let rewardCategory of rewardCategoryList">{{ rewardCategory.categoryName }}</option>
       </select></td>
       <td><input #description type="text" /></td>
+      <td><button><i class="fa fa-upload" aria-hidden="true"></i></button></td>
       <td>
         <button (click)="addReward(name.value, worth.value, category.value, description.value)">Add New</button>
       </td>
