@@ -253,6 +253,23 @@ module.exports =
 			})
 		});
 
+		// REWARD DELETE BY ID - DELETE
+		router.route('/reward/delete/:reward_id').delete(function(req, res)
+		{
+			var model = models.modelReward;
+
+			model.remove({
+				_id: req.params.reward_id
+			}, function(err, reward)
+			{
+				if(err)
+					res.send(err);
+
+				res.json({succes: true});
+			});
+		});
+		
+
 		// USER DELETE BY ID - DELETE
 		router.route('/user/delete/:user_id').delete(function(req, res)
 		{
