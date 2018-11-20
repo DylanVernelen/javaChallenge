@@ -9,12 +9,11 @@ export class ManageChallengesService {
 
   constructor(private http: HttpClient) { }
     List: Challenge[] = [
-        {challengeName: "Beer",challengeOwner: "Louis", challengeWorth: 5}
-
+        {challengeName: 'Beer', challengeOwner: 'Louis', challengeWorth: 5}
     ];
     createChallenge(challenge: Challenge) {
 
-        return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/create/all?token=ABCDEF',challenge );
+        return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/create/all?token=ABCDEF', challenge );
     }
 
     updateChallenge(challenge: Challenge, i: number) {

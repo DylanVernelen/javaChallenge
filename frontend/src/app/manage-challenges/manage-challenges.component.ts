@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Challenge} from '../interfaces/challenge';
+import {ManageChallengesService} from '../services/manage-challenges.service';
 
 @Component({
   selector: 'app-manage-challenges',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageChallengesComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private manageChallengeService: ManageChallengesService ) { }
+  challengeList: Challenge[];
   ngOnInit() {
+
   }
 
 }
