@@ -162,11 +162,15 @@ module.exports =
 			reward.imgUrl = req.body.imgurl || undefined;
 
 
+
+
+			console.log({})
+
 			reward.save(function(err)
 			{
 				if(err)
 					res.send(err);
-				
+					
 				res.json({succes: true});
 			})
 		});
@@ -215,7 +219,8 @@ module.exports =
 		// USER CREATE - POST
 		router.route('/user/create').post(function(req, res)
 		{
-			var user = models.modelUser;
+			var user = new models.modelUser();
+
 			var bcrypt     = require('bcrypt');
 			var timestamp = Math.floor(new Date() / 1000);
 
@@ -230,13 +235,32 @@ module.exports =
 
 
 
-			models.modelUser.save(function(err)
+
+			models.modelUser.find({email: req.body.email}, function(err, u)
 			{
-				if(err)
-					res.send(err);
-				
-				res.json({succes: true});
+
+
+				if(u.email == (req.body.email || ''))
+				{
+					res.json({error: "duplicate-email"});
+					return
+				}
+				user.save(function(err)
+				{
+					if(err)
+					{
+						res.send(err);
+						return;
+					}
+					
+
+					
+					res.json({succes: true});
+					return;
+				})
+
 			})
+			
 		});
 
 		// USER GET BY ID - GET 
@@ -268,7 +292,7 @@ module.exports =
 				res.json({succes: true});
 			});
 		});
-		
+
 
 		// USER DELETE BY ID - DELETE
 		router.route('/user/delete/:user_id').delete(function(req, res)
