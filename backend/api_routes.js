@@ -421,7 +421,6 @@ module.exports =
 			     
 
 
-			        console.log("Reward img url", reward.imgUrl);
 
 
 
