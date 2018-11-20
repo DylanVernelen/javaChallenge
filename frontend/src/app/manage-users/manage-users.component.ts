@@ -14,6 +14,31 @@ export class ManageUsersComponent implements OnInit {
   constructor(private manageUsersService: ManageUsersService) { }
 
   ngOnInit() {
+    this.getUsers();
+    // this.userList = this.manageUsersService.userList;
+  }
+
+
+
+  addUser(userEmail: string, userLevel: string) {
+    console.log("Email: " + userEmail);
+    console.log("Level: " + userLevel);
+    if(userEmail.trim() != "" && userLevel.trim() != ""){
+      const newUser = { _id:"3", email: userEmail.trim(), password: userEmail.trim()+"2018", userLevel: userLevel, pointCount: 0, token: ""}
+      this.manageUsersService.createUser(newUser)
+        .subscribe(
+          (result: User) => {
+            console.log('success', result);
+            this.getUsers();
+          },
+          (error: any) => {
+            console.log('error', error);
+          }
+        );
+    }
+  }
+
+  getUsers(){
     this.manageUsersService.getUsers()
       .subscribe(
         (result: Array<User>) => {
@@ -24,25 +49,6 @@ export class ManageUsersComponent implements OnInit {
           console.log('error', error);
         }
       );
-    // this.userList = this.manageUsersService.userList;
-  }
-
-
-
-  addUser(user: string) {
-    if(user.trim() != ""){
-      const newUser = { _id:"3", email: user.trim(), password: user.trim()+"2018", userLevel: "gebruiker", pointCount: 0, token: ""}
-      this.manageUsersService.createUser(newUser)
-        .subscribe(
-          (result: User) => {
-            console.log('success', result);
-            this.userList.push(result);
-          },
-          (error: any) => {
-            console.log('error', error);
-          }
-        );
-    }
   }
 
 }
