@@ -22,9 +22,15 @@ mongoose.connect('mongodb://root:ThomasMore1@ds055762.mlab.com:55762/rewardsyste
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-app.options('*', cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors({
+'allowedHeaders': ['sessionId', 'Content-Type'],
+'exposedHeaders': ['sessionId'],
+'origin': '*',
+'methods': 'GET,HEAD,POST,PUT,PATCH,DELETE',
+'preflightContinue': false
+}));
 
 var port = process.env.PORT || 8080;        // set our port
 
