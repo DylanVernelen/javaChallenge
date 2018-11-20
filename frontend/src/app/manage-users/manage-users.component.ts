@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageUsersService} from '../services/manage-users.service';
-<<<<<<< HEAD
-import {User} from '../interfaces/user';
-=======
 import { User} from '../interfaces/user';
->>>>>>> change users
 
 @Component({
   selector: 'app-manage-users',
