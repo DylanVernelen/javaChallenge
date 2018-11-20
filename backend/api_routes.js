@@ -102,6 +102,45 @@ module.exports =
 		});
 
 
+
+		// CHALLENGE UPDATE - PUT
+		router.route('/challenge/update').put(function(req, res)
+		{
+			var id = req.body.id || req.body._id;
+
+			if(!id) 
+			{
+				res.json({error: "no-id"});
+			}
+
+			var name = req.body.name || undefined;
+			var worth = parseInt(req.body.worth) || undefined;
+			var owner = req.body.owner || undefined;
+
+	        models.modelChallenge.findById(id, function(err, challenge) {
+
+	            if(err)
+	                res.send(err);
+
+	            if(name)
+					challenge.challengeName = name;
+
+				if(worth)
+					challenge.challengeWorth = worth;
+
+				if(owner)
+					challenge.challengeOwner = owner;
+
+	            challenge.save(function(err) {
+	                if (err)
+	                    res.send(err);
+
+					res.json({succes: true});
+	            });
+	        });
+		});
+
+
 		// REWARD UPDATE - PATCH
 		router.route('/reward/update').put(function(req, res)
 		{
@@ -329,6 +368,8 @@ module.exports =
 				res.json(user);
 			})
 		});
+
+
 
 		// REWARD DELETE BY ID - DELETE
 		router.route('/reward/delete/:reward_id').delete(function(req, res)
