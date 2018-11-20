@@ -12,13 +12,11 @@ export class ChallengesComponent implements OnInit {
 
   constructor(private manageChallengeService: ManageChallengesService ) { }
     challengeList: Challenge[];
-  points =5;
-  user = localStorage.getItem('currentUser');
-   /* userId=user._Id;*/
+    points =5;
+    user = JSON.parse(localStorage.getItem('currentUser'));
+    userid = this.user.id;
   ngOnInit() {
       this.getAllChallenges();
-      console.log(this.challengeList);
-      console.log(this.user);
   }
     getAllChallenges() {
         this.manageChallengeService.getChallenges()
@@ -35,9 +33,9 @@ export class ChallengesComponent implements OnInit {
     completeChallenge( challengeId: number, info: String){
       console.log(challengeId);
             if (challengeId != 0 && info !== '') {
-                const newCompletedChallenge = {userid: 1, challengeid: challengeId, info : info };
+                const newCompletedChallenge = {userid: this.userid, challengeid: challengeId, info : info };
                 console.log(newCompletedChallenge);
-               /* this.manageChallengeService.createCompletedChallenge(newCompletedChallenge);*/
+               this.manageChallengeService.createCompletedChallenge(newCompletedChallenge);
                 this.getAllChallenges();
         }
     }

@@ -325,8 +325,7 @@ module.exports =
 			})
 		});
 
-<<<<<<< HEAD
-=======
+
 		// CHALLENGE COMPLETED - POST 
 		router.route('/challenge/completed').post(function(req, res)
 		{	
@@ -402,7 +401,6 @@ module.exports =
 		});
 
 		// CHALLENGE CREATE - POST
->>>>>>> 62e862f637d555c19b15a92d32d43fc8c9847cc5
 		router.route('/challenge/create').post(function(req, res)
 		{
 			var challenge = new models.modelChallenge();
