@@ -32,7 +32,7 @@ export class ManageChallengesService {
     }
 
     deleteChallenge(i: number) {
-        return this.http.delete('https://nodejs.tomvdr.com/node/api/challenge/get/' + i + '?token=ABCDEF', {responseType: 'json'});
+        return this.http.delete('https://nodejs.tomvdr.com/node/api/challenge/delete/' + i + '?token=ABCDEF', {responseType: 'json'});
 
     }
     getChallenges() {
