@@ -70,9 +70,9 @@ router.use(function(req, res, next) {
     if ('OPTIONS' == req.method)
     {
 	    res.sendStatus(200);
+	    return;
     } 
 
-    return;
 
     console.log('API: routing new query: ' + req.url);
 
