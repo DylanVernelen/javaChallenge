@@ -16,7 +16,7 @@ export class RewardService {
   }
 
   getAllRewardCategories() {
-    return this.http.get<RewardCategory[]>('https://nodejs.tomvdr.com/node/api/rewardcategory/all?token=ABCDEF', {responseType: 'json', withCredentials: false});
+    return this.http.get<RewardCategory[]>('https://nodejs.tomvdr.com/node/api/category/all?token=ABCDEF', {responseType: 'json', withCredentials: false});
   }
 
   createReward(reward: {}) {

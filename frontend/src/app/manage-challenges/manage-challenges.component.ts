@@ -35,15 +35,7 @@ export class ManageChallengesComponent implements OnInit {
 
        const newChallenge = { challengeName: challengeName.trim(), challengeOwner :  challengeOwner.trim() , challengeWorth :parseInt(challengeWorth) };
        this.manageChallengeService.createChallenge(newChallenge)
-           .subscribe(
-               (result: User) => {
-                   console.log('success', result);
-                   this.getAllChallenges();
-               },
-               (error: any) => {
-                   console.log('error', error);
-               }
-           );
+
     }
   }
   deleteChallenge(id: number){

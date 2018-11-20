@@ -24,9 +24,8 @@ module.exports =
 
 
 
-			modelUser.findOne({email: email}).exec().then(user => 
+			modelUser.findOne({email: email}).exec().then( user =>
 			{
-				console.log(user);
 				if(user && user.token)
 				{
 					if(bcrypt.compareSync(password, user.password))
@@ -41,7 +40,7 @@ module.exports =
 					else 
 						res.json({error: "invalid-login"});
 
-				} else 
+				} else
 				{
 					res.json({error: "invalid-login"});
 				}
@@ -157,6 +156,7 @@ module.exports =
 			reward.rewardName = req.body.name;
 			reward.rewardOwner = req.body.owner;
 			reward.rewardWorth = req.body.worth;
+			reward.rewardCategory = req.body.category;
 			reward.enabled = req.body.enabled;
 			reward.description = req.body.description;
 			reward.imgUrl = req.body.imgurl || undefined;
@@ -320,7 +320,6 @@ module.exports =
 			})
 		});
 
-		// CHALLENGE CREATE - POST
 		router.route('/challenge/create').post(function(req, res)
 		{
 			var challenge = new models.modelChallenge();
@@ -328,6 +327,7 @@ module.exports =
 			challenge.challengeName = req.body.challengeName;
 			challenge.challengeOwner = req.body.challengeOwner;
 			challenge.challengeWorth = req.body.challengeWorth;
+
 			challenge.save(function(err)
 			{
 				if(err)
@@ -337,7 +337,6 @@ module.exports =
 			})
 		});
 
-		// CHALLENGE GET BY ID - GET 
 		router.route('/challenge/get/:challenge_id').get(function(req, res)
 		{	
 			var model = models.modelChallenge;
