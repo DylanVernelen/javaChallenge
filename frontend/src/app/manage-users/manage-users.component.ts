@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageUsersService} from '../services/manage-users.service';
 import { User} from '../interfaces/user';
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-manage-users',
