@@ -25,11 +25,7 @@ export class ManageRewardsComponent implements OnInit {
   }
 
   addReward(name: string, worth: number, category: string, description: string) {
-    const reward = new Reward();
-    reward.rewardName = name;
-    reward.rewardWorth = worth;
-    reward.rewardCategory = category;
-    reward.rewardDescription = description;
+    const reward = {name: name, worth: worth, category: category, description: description};
     console.log(reward);
     this.rewardService.createReward(reward)
       .subscribe(

@@ -21,6 +21,7 @@ export class RewardItemComponent implements OnInit {
   deleteReward() {
     console.log(this.item._id);
     this.rewardService.deleteReward(this.item._id);
+    this.rewardService.getAllRewards();
   }
 
 }

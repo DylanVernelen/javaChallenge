@@ -19,7 +19,7 @@ export class RewardService {
     return this.http.get<RewardCategory[]>('https://nodejs.tomvdr.com/node/api/rewardcategory/all?token=ABCDEF', {responseType: 'json'});
   }
 
-  createReward(reward: Reward) {
+  createReward(reward: {}) {
     return this.http.post('https://nodejs.tomvdr.com/node/api/reward/create?token=ABCDEF', reward, {responseType: 'json'});
   }
 

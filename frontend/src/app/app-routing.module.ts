@@ -9,9 +9,8 @@ import {ManageRewardsComponent} from './manage-rewards/manage-rewards.component'
 const routes: Routes = [
 
   {path: 'store', component: StoreComponent},
-    {path: 'managechallenge', component: ManageChallengesComponent},
-  {path: 'admin', component: ManageUsersComponent},
   {path: 'managechallenge', component: ManageChallengesComponent},
+  {path: 'admin', component: ManageUsersComponent},
   {path: 'login', component: LoginComponent},
   {path: 'manageusers', component: ManageUsersComponent},
   {path: 'managerewards', component: ManageRewardsComponent}
