@@ -420,7 +420,7 @@ module.exports =
 
 			        reward = new models.modelReward();
 
-			        reward._id = rewardid;
+			        reward._id = req.params.reward_id;
 			        reward.imgUrl = "https://nodejs.tomvdr.com/" + filename;
 
 
