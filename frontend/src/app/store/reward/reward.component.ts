@@ -1,6 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Reward} from '../../interfaces/reward';
 import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {User} from '../../interfaces/user';
+import {RewardService} from '../../services/reward.service';
+import {RewardCategory} from '../../interfaces/reward-category';
 
 @Component({
   selector: 'app-reward',
@@ -12,8 +15,11 @@ export class RewardComponent implements OnInit {
   @Input() item: Reward;
   @Input() index: number;
   activeModal: NgbActiveModal;
+  user: User;
 
-  constructor(private modal: NgbModal) { }
+  constructor(private modal: NgbModal, private rewardService: RewardService) {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   ngOnInit() {
   }
@@ -25,5 +31,20 @@ export class RewardComponent implements OnInit {
   close() {
     this.activeModal.close();
   }
+
+  request(reward: Reward, info) {
+    const data = {id: this.user._id, rewardid: reward._id};
+    this.rewardService.buyReward(data).subscribe(
+      (result: number) => {
+        console.log('succes', result);
+      },
+      (error: any) => {
+        console.log('error', error);
+      }
+    );
+    this.activeModal.close();
+    this.activeModal = this.modal.open(info);
+  }
+
 
 }

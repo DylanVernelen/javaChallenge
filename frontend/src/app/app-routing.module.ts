@@ -6,16 +6,18 @@ import {ManageChallengesComponent} from './manage-challenges/manage-challenges.c
 import { LoginComponent } from 'src/app/login/login.component';
 import {ManageRewardsComponent} from './manage-rewards/manage-rewards.component';
 import {ChallengesComponent} from "./challenges/challenges.component";
+import {AccountComponent} from './account/account.component';
 
 const routes: Routes = [
 
-  {path: 'store', component: StoreComponent},
+  // {path: 'store', component: StoreComponent},
   {path: 'managechallenge', component: ManageChallengesComponent},
   {path: 'admin', component: ManageUsersComponent},
   {path: 'login', component: LoginComponent},
   {path: 'manageusers', component: ManageUsersComponent},
   {path: 'managerewards', component: ManageRewardsComponent},
   {path: 'challenges', component: ChallengesComponent},
+  {path: 'account', component: AccountComponent},
   // {path: '', redirectTo: 'login', pathMatch: 'full'}
   // {path: '**', redirectTo: 'todo'}
 ];
