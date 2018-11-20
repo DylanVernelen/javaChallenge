@@ -13,7 +13,7 @@ export class ManageChallengesService {
     ];
     createChallenge(challenge: Challenge) {
         console.log(challenge);
-        return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/create?token=ABCDEF', challenge, {responseType: 'json'} );
+        this.http.post('https://nodejs.tomvdr.com/node/api/challenge/create?token=ABCDEF', challenge, {responseType: 'json'} );
 
     }
 
