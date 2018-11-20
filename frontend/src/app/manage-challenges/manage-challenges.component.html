@@ -1,4 +1,5 @@
 <div class="row">
+  <h2>Add challenge</h2>
   <div class="offset-lg-1 col-lg-3">
     <div class="form-group">
       <label for="challengeName">Challenge Name</label>
@@ -37,6 +38,8 @@
    <td>{{challenge.challengeName}}</td>
    <td>{{challenge.challengeOwner}}</td>
    <td>{{challenge.challengeWorth}}</td>
+   <td><i class="far fa-trash-alt"
+          (click)="deleteChallenge(challenge._id)"></i></td>
  </tr>
   </tbody>
 </table>

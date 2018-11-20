@@ -17,12 +17,6 @@ export class ManageChallengesComponent implements OnInit {
   challengeList: Challenge[];
   ngOnInit() {
     this.getAllChallenges();
-    console.log(this.challengeList);
-    this.form = new FormGroup({
-      ChallengeOwner : new FormControl(''),
-      ChallengeName : new FormControl(''),
-      ChallengeWorth : new FormControl(''),
-    });
   }
   getAllChallenges() {
     this.manageChallengeService.getChallenges()
@@ -36,7 +30,7 @@ export class ManageChallengesComponent implements OnInit {
         }
       );
   }
- addChallenge(challengeName: string, challengeOwner: string, challengeWorth: string) {
+ addChallenge(challengeName: string, challengeOwner: string, challengeWorth: string ) {
    if (challengeName.trim() !== '' && challengeOwner.trim() !== '' && challengeWorth.trim() !== '') {
 
        const newChallenge = { challengeName: challengeName.trim(), challengeOwner :  challengeOwner.trim() , challengeWorth :parseInt(challengeWorth) };
@@ -51,5 +45,16 @@ export class ManageChallengesComponent implements OnInit {
                }
            );
     }
+  }
+  deleteChallenge(id: number){
+      this.manageChallengeService.deleteChallenge(id)
+          .subscribe(
+              (result) => {
+                  console.log('success', result);
+              },
+              (error: any) => {
+                  console.log('error', error);
+              }
+          );
   }
 }

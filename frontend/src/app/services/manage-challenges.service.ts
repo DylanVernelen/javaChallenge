@@ -21,8 +21,9 @@ export class ManageChallengesService {
         this.List[i] = challenge;
     }
 
-    deleteChallenge(i: number) {
-        this.List.splice(i, 1);
+    deleteChallenge(id: number) {
+        return this.http.delete('https://nodejs.tomvdr.com/node/api/challenge/get/' + id + '?token=ABCDEF', {responseType: 'json'});
+
     }
     getChallenges() {
       return this.http.get<Array<Challenge>>('https://nodejs.tomvdr.com/node/api/challenge/all?token=ABCDEF', {responseType: 'json'});
