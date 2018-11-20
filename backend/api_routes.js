@@ -418,25 +418,38 @@ module.exports =
 			        
 
 
-			        reward = new models.modelReward();
-
-			        reward._id = req.params.reward_id;
-			        reward.imgUrl = "https://nodejs.tomvdr.com/" + filename;
+			     
 
 
 			        console.log("Reward img url", reward.imgUrl);
 
-			        reward.save(function(err) {
-		                if (err)
-		                {
-		                    res.send(err);
-		                    console.log(err);
-		                }
 
 
-    					console.log("Gebruiker ", user.email, " heeft reward ", reward.rewardName, " gekocht voor ", reward.rewardWorth, " punten (Resterend: ", user.pointCount, ")");
 
-						res.json({succes: true, newPoints: user.pointCount});
+
+			        models.modelReward.findById(req.params.reward_id, function(err, reward) {
+			        	if(err)
+			        	{
+			        		res.send(err);
+			        		console.log(err);
+			        		return;
+			        	}
+
+			        	reward.save(function(err) {
+			                if (err)
+	                		{
+			                    res.send(err);
+	                    		console.log(err);
+	                    		return;
+	                		}	
+
+	                		console.log("Gebruiker ", user.email, " heeft reward ", reward.rewardName, " gekocht voor ", reward.rewardWorth, " punten (Resterend: ", user.pointCount, ")");
+
+							res.json({succes: true, newPoints: user.pointCount});
+	                	});
+
+
+    					
 
 						return;
 					});
