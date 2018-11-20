@@ -3,7 +3,20 @@
 </p>
 
 <div class="row">
-  <app-reward class="col-md-4"
+  <div class="col-md-3">
+    <h5>Filter by category</h5>
+    <form>
+      <ul style="list-style-type: none;">
+        <li *ngFor="let category of rewardCategoryList">
+          <label>
+            <input type="checkbox" (change)="filter(category.categoryName)"/>
+            {{category.categoryName}}
+          </label>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <app-reward class="col-md-3"
               *ngFor="let reward of rewardList; let i = index"
               [item]="reward"
               [index]="i">

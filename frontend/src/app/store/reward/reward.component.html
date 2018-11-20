@@ -6,6 +6,19 @@
   </div>
   <div class="card-footer">
     <p>Cost: {{item.rewardWorth}}</p>
-    <button>Buy</button>
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Buy</button>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Purchase reward</h4>
+  </div>
+  <div class="modal-body">
+    <h5>Are you sure you want to purchase {{item.rewardName}} for {{item.rewardWorth}} points?</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Yes</button>
+  </div>
+</ng-template>

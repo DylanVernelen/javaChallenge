@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User} from '../interfaces/user';
+import { User } from '../interfaces/user';
 import {EMPTY, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {catchError, share, tap} from 'rxjs/operators';
@@ -11,8 +11,8 @@ export class ManageUsersService {
 
   // userList voorlopig dummy items
   userList: User[] = [
-    {email: "test@gmail.com", userLevel: "admin", password: "", pointCount: 1, token: ""},
-    {email: "voorbeeld2@hotmail.com",  userLevel: "gebruiker", password: "", pointCount: 2, token: ""}
+    {id: '0', email: 'test@gmail.com', userLevel: 'admin', password: '', pointCount: 1, token: ''},
+    {id: '1', email: 'voorbeeld2@hotmail.com',  userLevel: 'gebruiker', password: '', pointCount: 2, token: ''}
   ];
 
   constructor(private http: HttpClient) {
@@ -24,8 +24,9 @@ export class ManageUsersService {
 
   // CRUD operaties
   createUser(user: User) {
-    //this.userList.unshift(user);
-    return this.http.post('https://nodejs.tomvdr.com/node/api/user/create?token=ABCDEF', user);
+    // this.userList.unshift(user);
+    return this.http.post('https://nodejs.tomvdr.com/node/api/user/create?token=ABCDEF', user)
+      .toPromise();
   }
 
   updateUser(user: User, i: number) {
