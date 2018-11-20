@@ -54,6 +54,8 @@ var apiRoutes = require('./api_routes.js');
 router.all('*', cors());
 
 router.use(function(req, res, next) {
+	  		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+
 /*
 	if ('OPTIONS' == req.method) {
   		res.header('Access-Control-Allow-Origin', '*');
