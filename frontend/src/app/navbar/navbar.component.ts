@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../services/authentication.service';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-navbar',
@@ -8,10 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   isCollapsed = true;
-  
-  constructor() { }
+
+  user: User;
+
+  constructor(public AuthenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    this.AuthenticationService.userData$.subscribe(data => this.user = data);
   }
 
 }

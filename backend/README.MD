@@ -42,7 +42,7 @@ REWARDS:
 		- worth: number
 		- owner: id 
 	
-	/reward/delete/{id}
+	/reward/delete/{rewardid}
 	- DELETE 
 	- Verwijderen van reward 
 	
@@ -56,7 +56,11 @@ REWARDS:
 		- name: string
 		- worth: number
 		- owner: id
-		
+
+	/reward/delete/{rewardid}
+	- DELETE
+	- Verwijderen record
+		- rewardid in parameters
 
 CATEGORIES:
 	

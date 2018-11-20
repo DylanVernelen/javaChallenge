@@ -1,12 +1,21 @@
 <div class="container">
   <h4>Manage Users</h4>
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <div class="input-group-text"><span class="fas fa-list"></span></div>
+  <div class="row">
+    <div class="col-lg-5">
+      <div class="form-group">
+        <label for="emailUser">Email address</label>
+        <input type="email" class="form-control" id="emailUser" placeholder="name@example.com" #i>
+      </div>
     </div>
-    <input type="text" class="form-control" placeholder="Add new user"
-           #i
-           (keyup.enter)="addUser(i.value); i.value=''">
+    <div class="col-lg-5">
+      <div class="form-group">
+        <label for="levelUser">User level</label>
+        <input type="text" class="form-control" id="levelUser" placeholder="user" #j>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <button class="btn-primary btn" (click)="addUser(i.value, j.value); i.value=''; j.value=''">Add</button>
+    </div>
   </div>
   <div class="row">
     <table class="table table-striped">
@@ -28,4 +37,4 @@
   </div>
 </div>
 <hr>
-<pre>{{ userList | json }}</pre>
+<!--<pre>{{ userList | json }}</pre>-->
