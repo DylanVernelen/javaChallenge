@@ -4,4 +4,5 @@ export class Reward {
   rewardWorth: number;
   rewardCategory: string;
   description: string;
+  imgUrl: string;
 }

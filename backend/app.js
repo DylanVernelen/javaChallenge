@@ -90,7 +90,6 @@ router.use(function(req, res, next) {
  
     res.locals.token = token;
 
-    console.log("Token: " , token);
 
     if(req.url == "/token/validate" || req.url == "/token/validate/")
     {

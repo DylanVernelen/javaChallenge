@@ -22,9 +22,16 @@ module.exports =
 
 			var bcrypt  = require('bcrypt');
 
+
 			modelUser.findOne({email: email}).exec().then( user =>
 			{
 				if(user && user.token)
+
+
+			modelUser.findOne({email: email}).exec().then(user => 
+			{
+				if(user && user.token && user.password && password)
+
 				{
 					if(bcrypt.compareSync(password, user.password))
 						res.json({
@@ -411,7 +418,43 @@ module.exports =
   				fs.rename(oldpath, newpath, function (err) {
 			        if (err) throw err;
 			        
-					res.json({succes: true, imgurl: "https://nodejs.tomvdr.com/" + filename});
+
+
+			     
+
+
+
+
+
+
+
+			        models.modelReward.findById(req.params.reward_id, function(err, reward) {
+			        	if(err)
+			        	{
+			        		res.send(err);
+			        		console.log(err);
+			        		return;
+			        	}
+
+			        	reward.save(function(err) {
+			                if (err)
+	                		{
+			                    res.send(err);
+	                    		console.log(err);
+	                    		return;
+	                		}	
+
+	                		console.log("OKOKOK");
+
+							res.json({succes: true});
+	                	});
+
+
+    					
+
+						return;
+					});
+
 					return;
 		      	});
 		    });
