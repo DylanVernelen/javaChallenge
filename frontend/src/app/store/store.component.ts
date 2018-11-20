@@ -54,7 +54,7 @@ export class StoreComponent implements OnInit {
   filter(category) {
     console.log('Het werkt!');
     for (const reward of this.rewardList) {
-      if (reward.category !== category) {
+      if (reward.rewardCategory !== category) {
         const index = this.rewardList.indexOf(reward, 0);
         this.rewardList.splice(index, 1);
       }
