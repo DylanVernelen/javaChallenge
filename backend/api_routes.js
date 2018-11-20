@@ -23,10 +23,18 @@ module.exports =
 
 			modelUser.findOne({email: email}).exec().then(user => 
 			{
+				console.log(user);
 				if(user && user.token)
 				{
 					if(bcrypt.compareSync(password, user.password))
-						res.json({token: user.token});
+						res.json({
+							token: user.token,
+							pointCount: user.pointCount,
+							history: (user.history || {}),
+							email: user.email,
+							userLevel: user.userLevel
+
+						});
 				} else 
 				{
 					res.json({error: "invalid-login"});
@@ -77,7 +85,7 @@ module.exports =
 		                if (err)
 		                    res.send(err);
 
-						res.json({succes: true});
+						res.json({succes: true, newPoints: user.pointCount});
 		            });
 
 				})
