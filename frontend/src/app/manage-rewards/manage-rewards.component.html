@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <table class="table table-striped" style="text-align: center;">
+      <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Worth</th>
+        <th scope="col">Category</th>
+        <th scope="col">Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <th scope="row"><input #name type="text" /></th>
+      <td><input #worth type="text" /></td>
+      <td><select #category>
+        <option *ngFor="let rewardCategory of rewardCategoryList">{{ rewardCategory.categoryName }}</option>
+      </select></td>
+      <td><input #description type="text" /></td>
+      <td>
+        <button (click)="addReward(name.value, worth.value, category.value, description.value)">Add New</button>
+      </td>
+      <tr app-reward-item
+          *ngFor="let reward of rewardList; let i = index"
+          [item]="reward"
+          [index]="i"></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
