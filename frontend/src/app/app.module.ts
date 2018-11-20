@@ -18,8 +18,12 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import {HttpModule} from '@angular/http';
 
 import { ManageRewardsModule } from './manage-rewards/manage-rewards.module';
+<<<<<<< HEAD
 import {ChallengesModule} from "./challenges/challenges.module";
 import { AccountModule } from './account/account.module';
+=======
+import { HomeComponent } from './home/home.component';
+>>>>>>> Homepage
 
 @NgModule({
   declarations: [
@@ -29,6 +33,7 @@ import { AccountModule } from './account/account.module';
     ManageUsersComponent,
     ManageChallengesComponent,
     UserItemComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

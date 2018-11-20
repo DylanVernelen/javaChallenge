@@ -3,29 +3,27 @@ import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interfaces/user';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styles: ['./home.component.scss']
 })
-export class NavbarComponent implements OnInit {
-
-  isCollapsed = true;
+export class HomeComponent implements OnInit {
 
   user: User;
 
   constructor(public AuthenticationService: AuthenticationService) {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
-   }
+  }
 
   ngOnInit() {
-    if(this.user && this.user.email){
+    if (this.user && this.user.email) {
       this.AuthenticationService.login(this.user.email, this.user.password)
-      .subscribe(
-          data => {
-            this.user = data
-          },
-          error => {
-          });
+        .subscribe(
+        data => {
+          this.user = data
+        },
+        error => {
+        });
     }
     this.AuthenticationService.userData$.subscribe(data => this.user = data);
   }

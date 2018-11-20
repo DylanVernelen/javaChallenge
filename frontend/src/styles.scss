@@ -5,3 +5,20 @@
 // Override variables
 $brand-primary:     #f49900;
 $brand-warning:     #ff8c00;
+
+.pageHeader{
+    text-align: center;
+    padding: 300px 0 490px 0;
+}
+
+.header{
+    background-image: url('/present.png')
+}
+
+.headerText{
+    font-size: 36px;
+}
+.subtext{
+    font-size: 28px;
+    font-style: italic;
+}
