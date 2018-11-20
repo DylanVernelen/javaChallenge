@@ -269,7 +269,7 @@ module.exports =
 		// USER UPDATE - PUT 
 		router.route('/user/update').put(function(req, res)
 		{
-			var userid = req.body.userid;
+			var userid = req.body.userid || req.body._id;
 			var bcrypt  = require('bcrypt');
 
 			if(!userid) 
