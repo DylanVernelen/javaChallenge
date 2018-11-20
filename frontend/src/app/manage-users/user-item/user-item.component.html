@@ -16,31 +16,31 @@
   <div class="modal-body">
     <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
     <div class="form-group">
-      <label for="emailUser">Email address</label>
-      <input type="email" class="form-control" id="emailUser" placeholder="name@example.com" value="{{ item.email }}" #i>
+      <label for="emailUserEdit">Email address</label>
+      <input type="email" class="form-control" id="emailUserEdit" placeholder="name@example.com" value="{{ item.email }}" #i>
     </div>
     <div class="form-group">
-      <label for="creditsUser">Credits</label>
-      <input type="number" class="form-control" id="creditsUser" placeholder="0" value="{{ item.pointCount }}" #c>
+      <label for="creditsUserEdit">Credits</label>
+      <input type="number" class="form-control" id="creditsUserEdit" placeholder="0" value="{{ item.pointCount }}" #c>
     </div>
     <div class="form-group">
-      <label for="levelUser">User level</label>
-      <input type="text" class="form-control" id="levelUser" placeholder="user" value="{{ item.userLevel }}" #j>
+      <label for="levelUserEdit">User level</label>
+      <input type="text" class="form-control" id="levelUserEdit" placeholder="user" value="{{ item.userLevel }}" #j>
     </div>
     <div class="form-group">
       <label for="password1">New Password</label>
-      <input type="text" class="form-control" id="password1" placeholder="password" aria-describedby="passwordHelp" #p1>
+      <input type="password" class="form-control" id="password1" placeholder="password" aria-describedby="passwordHelp" #p1>
       <small id="passwordHelp" class="form-text text-muted">Only fill in if password needs to be changed.</small>
     </div>
     <div class="form-group">
       <label for="password2">Repeat Password</label>
-      <input type="text" class="form-control" id="password2" placeholder="password" aria-describedby="password2Help" #p2>
+      <input type="password" class="form-control" id="password2" placeholder="password" aria-describedby="password2Help" #p2>
       <small id="password2Help" class="form-text text-muted">Only fill in if password needs to be changed.</small>
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="close()">Cancel</button>
-    <button type="button" class="btn btn-outline-dark" (click)="updateUser(i.value, j.value, p1.value, p2.value)">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="updateUser(i.value, j.value, c.value, p1.value, p2.value)">Save</button>
   </div>
 </ng-template>
 

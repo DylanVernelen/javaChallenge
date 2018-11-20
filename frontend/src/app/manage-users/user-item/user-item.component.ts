@@ -23,7 +23,6 @@ export class UserItemComponent implements OnInit {
   }
 
   updateUser(userEmail: string, userLevel: string, pointCoint: number, password1: string, password2: string) {
-    console.log("updat")
     if(!pointCoint){
       pointCoint = 0;
     }
