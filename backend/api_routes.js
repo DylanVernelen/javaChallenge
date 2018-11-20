@@ -23,9 +23,6 @@ module.exports =
 			var bcrypt  = require('bcrypt');
 
 
-			modelUser.findOne({email: email}).exec().then( user =>
-			{
-				if(user && user.token)
 
 
 			modelUser.findOne({email: email}).exec().then(user => 
@@ -35,6 +32,7 @@ module.exports =
 				{
 					if(bcrypt.compareSync(password, user.password))
 						res.json({
+							id: user._id,
 							token: user.token,
 							pointCount: user.pointCount,
 							email: user.email,
@@ -325,13 +323,70 @@ module.exports =
 			})
 		});
 
-<<<<<<< HEAD
-=======
+		// CHALLENGE REQUESTED - POST 
+		
+		router.route('/challenge/request').post(function(req, res)
+		{
+			var userid = req.body.userid;
+			var challengeid = req.body.challengeid;
+			var uniqueindex = Math.random().toString(36).substr(2, 20);
+			var description = req.body.description || "";
+
+
+			if(!challengeid || !userid)
+			{
+				console.log("ongeldig");
+				res.json({error: "ongeldig id"});
+				return;
+			}
+
+			models.modelUser.findById(userid, function(err, user)
+			{
+				if(err)
+					console.log(err);
+				else 
+					if(user && user._id)
+					{
+
+						models.modelChallenge.findById(challengeid, function(err, challenge)
+						{
+						
+							if(!user.challenges)
+								user.challenges = {};
+							
+
+							user.challenges.push(
+							{
+								challengeid: challengeid,
+								timestampAdded: Math.floor(new Date() / 1000),
+								timestampCompleted: undefined,
+								challengeCompleted: false,
+								pointsAwarded: undefined,
+								description: description,
+								uniqueindex: uniqueindex,
+							});
+
+							user.save(function(err)
+							{
+								if(err)
+									console.log(err);
+								else 
+									res.json({succes: true, uniqueindex: uniqueindex});
+							});
+						});
+					}	
+			});
+		});
+		
 		// CHALLENGE COMPLETED - POST 
 		router.route('/challenge/completed').post(function(req, res)
 		{	
 			var userid = req.body.userid;
 			var challengeid = req.body.challengeid;
+			var uniqueindex = req.body.uniqueindex;
+
+
+
 
 
 			models.modelUser.findById(userid, function(err, user)
@@ -358,51 +413,64 @@ module.exports =
 						if(challenge && challenge._id)
 						{
 
+							user.challenges = (user.challenges || {});
 
-							user.pointCount += challenge.challengeWorth;
+							var found = false;
+							var alreadyFound = false;
 
-							user.challenges = (user.challenges || {})
-
-
-							user.challenges.push(
+							for(var i = 0; i < user.challenges.length; i++)
 							{
-								challengeid: challengeid,
-								timestamp: Math.floor(new Date() / 1000),
-								pointsAwarded: challenge.challengeWorth
-							});
 
-							user.save(function(err)
-							{
-								if(err)
-								{
-									console.log(err);
-									return;
+								if(user.challenges[i].uniqueindex == uniqueindex)
+								{	
+									console.log("completed: ", user.challenges[i]);
+									found = true;
+
+
+									if(user.challenges[i].challengeCompleted)
+									{
+
+										console.log("challenge already competed");
+										alreadyFound = true;
+										break;
+									}
+									user.challenges[i].pointsAwarded = challenge.challengeWorth;
+									user.challenges[i].challengeCompleted = true;		
+									user.pointCount += challenge.challengeWorth;
+									console.log("challenge completed");
+									break;
 								}
-								
-								res.json({succes: true, pointCount: user.pointCount, pointsAwarded: challenge.challengeWorth});
-								return;
-							})
+							}
+
+
+							if(!found)
+							{
+								console.log("challenge " + uniqueindex + " not found");
+							}
+
+							if(alreadyFound)
+								res.json({error: "already-completed"});
+							else 
+
+								user.save(function(err)
+								{
+									if(err)
+									{
+										console.log(err);
+										return;
+									}
+									
+									res.json({succes: true, pointCount: user.pointCount, pointsAwarded: challenge.challengeWorth, allChallenges: user.challenges});
+									return;
+								});
 
 						}
-						//res.json({error: "invalid-challenge-id"});
-						//return;
-
-
 					});
-				}
-
-				//res.json({error: "invalid-user-id"});
-				//return;
-				
+				}				
 			});
-
-
-
-
 		});
 
 		// CHALLENGE CREATE - POST
->>>>>>> 62e862f637d555c19b15a92d32d43fc8c9847cc5
 		router.route('/challenge/create').post(function(req, res)
 		{
 			var challenge = new models.modelChallenge();
