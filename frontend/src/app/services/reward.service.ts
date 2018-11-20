@@ -12,11 +12,11 @@ export class RewardService {
   constructor(private http: HttpClient) {}
 
   getAllRewards() {
-    return this.http.get<Reward[]>('https://nodejs.tomvdr.com/node/api/reward/all?token=ABCDEF', {responseType: 'json'});
+    return this.http.get<Reward[]>('https://nodejs.tomvdr.com/node/api/reward/all?token=ABCDEF', {responseType: 'json', withCredentials: false});
   }
 
   getAllRewardCategories() {
-    return this.http.get<RewardCategory[]>('https://nodejs.tomvdr.com/node/api/rewardcategory/all?token=ABCDEF', {responseType: 'json'});
+    return this.http.get<RewardCategory[]>('https://nodejs.tomvdr.com/node/api/rewardcategory/all?token=ABCDEF', {responseType: 'json', withCredentials: false});
   }
 
   createReward(reward: {}) {
