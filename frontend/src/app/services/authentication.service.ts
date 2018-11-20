@@ -17,6 +17,7 @@ export class AuthenticationService {
                 console.log(user)
                 if (user && user.token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    user.password = password;
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.userData$.next({
                         email: user.email,
@@ -26,7 +27,7 @@ export class AuthenticationService {
                         token: user.token,
                         userLevel: user.userLevel
                     });
-                    this.router.navigate(['/home']);
+                    this.router.navigate(['/store']);
                 }
                 return user;
             }));
