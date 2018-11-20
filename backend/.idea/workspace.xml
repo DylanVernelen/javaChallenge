@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94ea769b-89e0-4410-97fe-44ce787fdaf0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/api_routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/api_routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/reward.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/reward.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/interfaces/reward.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/interfaces/reward.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/manage-rewards.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/manage-rewards.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/reward-item/reward-item.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/reward-item/reward-item.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/services/reward.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/services/reward.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/reward-item/reward-item.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/reward-item/reward-item.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/store/store.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/store/store.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/store/store.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/store/store.component.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -198,7 +199,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3757000" />
+    <option name="totallyTimeSpent" value="4931000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />

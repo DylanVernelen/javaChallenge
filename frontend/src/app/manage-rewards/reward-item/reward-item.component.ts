@@ -20,8 +20,16 @@ export class RewardItemComponent implements OnInit {
 
   deleteReward() {
     console.log(this.item._id);
-    this.rewardService.deleteReward(this.item._id);
-    this.rewardService.getAllRewards();
+    this.rewardService.deleteReward(this.item._id)
+      .subscribe(
+      (result: Reward) => {
+        console.log('success', result);
+        this.rewardService.getAllRewards();
+      },
+      (error: any) => {
+        console.log('error', error);
+      }
+    );
   }
 
 }
