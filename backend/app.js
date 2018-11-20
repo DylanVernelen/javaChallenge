@@ -54,53 +54,22 @@ var apiRoutes = require('./api_routes.js');
 router.all('*', cors());
 
 router.use(function(req, res, next) {
-	  		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-
-/*
-	if ('OPTIONS' == req.method) {
-  		res.header('Access-Control-Allow-Origin', '*');
-  		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-  		res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  		res.send(200);
-	}
-*/
-/*
-
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS");
-  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  	res.header("Access-Control-Allow-Credentials", "true");
-*/
-	//res.header("Access-Control-Allow-Headers", "Authorization");
-
-  	//res.header("Access-Control-Allow-Credentials", "true");
- //	res.header('Access-Control-Allow-Origin', '*');
-   // res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-   // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  /*  if ('OPTIONS' == req.method)
-    {
-	    res.sendStatus(200);
-	    return;
-    } 
-*/
-
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
     console.log('API: routing new query: ' + req.url);
 
-    var token = req.query.token;
- 
-    res.locals.token = token;
+    res.locals.token = req.query.token;
 
 
     if(req.url == "/token/validate" || req.url == "/token/validate/")
     {
     	next();
-    } else if(!token)
+    } else if(!res.locals.token)
 	{
 		res.json({error: "no-token"});
 		return;
 	} else 
 	{
-		authentication.isValidToken(res, token, function(user){next();});   
+		authentication.isValidToken(res, res.locals.token, function(user){next();});   
 	}
 
 

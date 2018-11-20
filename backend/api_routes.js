@@ -321,6 +321,80 @@ module.exports =
 			})
 		});
 
+		// CHALLENGE COMPLETED - POST 
+		router.route('/challenge/completed').post(function(req, res)
+		{	
+			var userid = req.body.userid;
+			var challengeid = req.body.challengeid;
+
+
+			models.modelUser.findById(userid, function(err, user)
+			{
+				if(err)
+				{
+					console.log(err);
+					res.send(err);
+				}	
+
+
+				if(user && user._id)
+				{
+					models.modelChallenge.findById(challengeid, function(err, challenge)
+					{
+						if(err)
+						{
+							console.log(err);
+						
+							return;
+						}			
+
+
+						if(challenge && challenge._id)
+						{
+
+
+							user.pointCount += challenge.challengeWorth;
+
+							user.challenges = (user.challenges || {})
+
+
+							user.challenges.push(
+							{
+								challengeid: challengeid,
+								timestamp: Math.floor(new Date() / 1000),
+								pointsAwarded: challenge.challengeWorth
+							});
+
+							user.save(function(err)
+							{
+								if(err)
+								{
+									console.log(err);
+									return;
+								}
+								
+								res.json({succes: true, pointCount: user.pointCount, pointsAwarded: challenge.challengeWorth});
+								return;
+							})
+
+						}
+						//res.json({error: "invalid-challenge-id"});
+						//return;
+
+
+					});
+				}
+
+				//res.json({error: "invalid-user-id"});
+				//return;
+				
+			});
+
+
+
+
+		});
+
 		// CHALLENGE CREATE - POST
 		router.route('/challenge/create').post(function(req, res)
 		{
@@ -396,6 +470,9 @@ module.exports =
 		});
 
 
+
+
+
 		router.route('/reward/fileupload/:reward_id').post(function(req, res)
 		{
 			console.log("File upload: post");
@@ -414,17 +491,7 @@ module.exports =
 
   				fs.rename(oldpath, newpath, function (err) {
 			        if (err) throw err;
-			        
-
-
-			     
-
-
-
-
-
-
-
+	
 			        models.modelReward.findById(req.params.reward_id, function(err, reward) {
 			        	if(err)
 			        	{
