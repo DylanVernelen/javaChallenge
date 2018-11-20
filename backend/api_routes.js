@@ -157,6 +157,7 @@ module.exports =
 			reward.rewardName = req.body.name;
 			reward.rewardOwner = req.body.owner;
 			reward.rewardWorth = req.body.worth;
+			reward.rewardCategory = req.body.category;
 			reward.enabled = req.body.enabled;
 			reward.description = req.body.description;
 			reward.imgUrl = req.body.imgurl || undefined;

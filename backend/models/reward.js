@@ -6,6 +6,7 @@ var Schema = mongoose.Schema
 	rewardName: String,
 	rewardOwner: String,
 	rewardWorth: Number,
+	rewardCategory: String,
 	enabled: Boolean,
 	description: String,
 	imgUrl: String

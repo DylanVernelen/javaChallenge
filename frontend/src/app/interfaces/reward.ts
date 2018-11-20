@@ -3,5 +3,5 @@ export class Reward {
   rewardName: string;
   rewardWorth: number;
   rewardCategory: string;
-  rewardDescription: string;
+  description: string;
 }
