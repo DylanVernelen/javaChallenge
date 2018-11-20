@@ -27,7 +27,6 @@ export class AuthenticationService {
                         token: user.token,
                         userLevel: user.userLevel
                     });
-                    this.router.navigate(['/store']);
                 }
                 return user;
             }));
