@@ -29,12 +29,13 @@ export class ManageUsersService {
     return this.http.post('https://nodejs.tomvdr.com/node/api/user/create?token=ABCDEF', user, {responseType: 'json'});
   }
 
-  updateUser(user: User, i: number) {
-    this.userList[i] = user;
+  updateUser(user: User) {
+    //this.userList[i] = user;
+    return this.http.patch('https://nodejs.tomvdr.com/node/api/user/update?token=ABCDEF', user, {responseType: 'json'});
   }
 
   deleteUser(id: string) {
-    return this.http.delete('https://nodejs.tomvdr.com/node/api/reward/get/' + id + '?token=ABCDEF', {responseType: 'json'});
+    return this.http.delete('https://nodejs.tomvdr.com/node/api/user/delete/' + id + '?token=ABCDEF', {responseType: 'json'});
   }
 
   // LocalStorage operaties
