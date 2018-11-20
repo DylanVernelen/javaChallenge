@@ -26,4 +26,8 @@ export class RewardService {
   deleteReward(id: string) {
     return this.http.delete('https://nodejs.tomvdr.com/node/api/reward/delete/' + id + '?token=ABCDEF');
   }
+
+  buyReward(data: {}) {
+    return this.http.post('https://nodejs.tomvdr.com/node/api/reward/buy?token=ABCDEF', data, {responseType: 'json'});
+  }
 }

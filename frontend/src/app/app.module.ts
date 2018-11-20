@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { NgBootstrapModule } from './sharedModules/ng-bootstrap.module';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HomeComponent } from './home/home.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageChallengesComponent } from './manage-challenges/manage-challenges.component';
 import { StoreModule } from './store/store.module';
@@ -18,7 +19,8 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import {HttpModule} from '@angular/http';
 
 import { ManageRewardsModule } from './manage-rewards/manage-rewards.module';
-import {ChallengesModule} from "./challenges/challenges.module";
+import { ChallengesComponent } from 'src/app/challenges/challenges.component';
+import { AccountComponent } from 'src/app/account/account.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,9 @@ import {ChallengesModule} from "./challenges/challenges.module";
     ManageUsersComponent,
     ManageChallengesComponent,
     UserItemComponent,
+    HomeComponent,
+    ChallengesComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +42,7 @@ import {ChallengesModule} from "./challenges/challenges.module";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ManageRewardsModule,
-      ChallengesModule
+    ManageRewardsModule
   ],
   providers: [
     StoreModule,

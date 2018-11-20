@@ -71,15 +71,32 @@ CATEGORIES:
 
 CHALLENGES:
 	
+
+	/challenge/request 
+	- POST
+	- Een user vraagt een challenge aan 
+	- Vereist:
+		- userid: id
+		- challengeid: id
+		- Optioneel: description: string
+	- Retourneert: 
+		- unieke identifier
+
+
+
 	/challenge/complete
 	- POST
 	- Een user heeft een challenge gecomplete
 	- Vereist:
 		- userid: id
 		- challengeid: id
+		- uniqueindex: string - unieke identifier van hierboven
 	- Retourneert:
 		- indien succesvol
-		- aantal punten gekregen
-		- totaal aantal punten
+			- aantal punten gekregen
+			- totaal aantal punten
+		- indien onsuccesvol
+			- waarschijnlijk al gecomplete 
 	- Vult het user document verder aan met historiek
-	
+	- Geeft de punten automatisch
+

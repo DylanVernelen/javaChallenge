@@ -6,19 +6,32 @@
   </div>
   <div class="card-footer">
     <p>Cost: {{item.rewardWorth}}</p>
-    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Buy</button>
+    <button class="btn btn-lg btn-outline-primary" (click)="open(confirmation)">Buy</button>
   </div>
 </div>
 
-<ng-template #content let-modal>
+<ng-template #confirmation let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Purchase reward</h4>
+    <div *ngIf="!(user.pointCount >= item.rewardWorth)">Niet genoeg credits</div>
+    <h4 class="modal-title">Purchase reward</h4>
   </div>
   <div class="modal-body">
     <h5>Are you sure you want to purchase {{item.rewardName}} for {{item.rewardWorth}} points?</h5>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>
-    <button type="button" class="btn btn-outline-dark" (click)="close()">Yes</button>
+    <button type="button" class="btn btn-outline-dark" (click)="request(item, info)" *ngIf="user.pointCount >= item.rewardWorth">Yes</button>
+  </div>
+</ng-template>
+
+<ng-template #info let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Reward ordered</h4>
+  </div>
+  <div class="modal-body">
+    <h5>Your reward, {{item.rewardName}}, has been ordered. Your balance has been reduced with {{item.rewardWorth}} credits and an administrator will contact you when you can pick up your reward at HR. You can find an overview of your rewards in your account.</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Ok</button>
   </div>
 </ng-template>

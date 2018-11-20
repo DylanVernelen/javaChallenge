@@ -4,6 +4,17 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema 
 
+var ChallengeSchema = new Schema(
+{
+	challengeid: String,
+	timestampAdded: Number,
+	timestampCompleted: Number,
+	challengeCompleted: Boolean,
+	challengeStatus: String,
+	pointsAwarded: Number,
+	description: String,
+	uniqueindex: String
+});
 
 var UserSchema = new Schema(
 {
@@ -13,8 +24,7 @@ var UserSchema = new Schema(
     pointCount: Number,
     token: String,
     history: Array,
-    challenges: Array
+    challenges: [ChallengeSchema]
 });
-
 
 module.exports = mongoose.model('User', UserSchema);
