@@ -48,5 +48,6 @@ export class ManageChallengesComponent implements OnInit {
                   console.log('error', error);
               }
           );
+      this.getAllChallenges();
   }
 }

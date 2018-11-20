@@ -12,6 +12,8 @@ export class ChallengesComponent implements OnInit {
   constructor(private manageChallengeService: ManageChallengesService ) { }
     challengeList: Challenge[];
   ngOnInit() {
+      this.getAllChallenges();
+      console.log(this.challengeList);
   }
     getAllChallenges() {
         this.manageChallengeService.getChallenges()
