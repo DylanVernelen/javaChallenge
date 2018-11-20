@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'manageusers', component: ManageUsersComponent},
   {path: 'managerewards', component: ManageRewardsComponent},
-    {path: 'challenges', component: ChallengesComponent}
+  {path: 'challenges', component: ChallengesComponent},
   // {path: '', redirectTo: 'login', pathMatch: 'full'}
   // {path: '**', redirectTo: 'todo'}
 ];

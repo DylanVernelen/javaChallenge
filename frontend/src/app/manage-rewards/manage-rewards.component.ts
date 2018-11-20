@@ -12,16 +12,13 @@ import {User} from '../interfaces/user';
 export class ManageRewardsComponent implements OnInit {
 
   rewardList: Reward[];
-  rewardCategoryList: RewardCategory[] = [
-    {id: '0', categoryName: 'Consumables'},
-    {id: '0', categoryName: 'Coupons'},
-    {id: '0', categoryName: 'Gadgets'}
-  ];
+  rewardCategoryList: RewardCategory[];
 
   constructor(public rewardService: RewardService) { }
 
   ngOnInit() {
     this.getRewards();
+    this.getCategories();
   }
 
   addReward(name: string, worth: number, category: string, description: string) {
@@ -44,6 +41,18 @@ export class ManageRewardsComponent implements OnInit {
       .subscribe(
         (result: Reward[]) => {
           this.rewardList = result;
+        },
+        (error: any) => {
+          console.log('error', error);
+        }
+      );
+  }
+
+  getCategories() {
+    this.rewardService.getAllRewardCategories()
+      .subscribe(
+        (result: RewardCategory[]) => {
+          this.rewardCategoryList = result;
         },
         (error: any) => {
           console.log('error', error);

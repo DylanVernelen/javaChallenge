@@ -51,16 +51,16 @@ export class StoreComponent implements OnInit {
     this.rewardSubscription.unsubscribe();
   }
 
-  filter(category) {
-    console.log('Het werkt!' + category);
-    for (const reward of this.rewardList) {
-      console.log('match met categorie ' + reward.rewardCategory);
-      if (reward.rewardCategory !== category) {
-        console.log('geen maatch, categorie ' + reward.rewardCategory);
-        const index = this.rewardList.indexOf(reward, 0);
-        this.rewardList.splice(index, 1);
-      }
-    }
-  }
+  // filter(category) {
+  //   console.log('Het werkt!' + category);
+  //   for (const reward of this.rewardList) {
+  //     console.log('match met categorie ' + reward.rewardCategory);
+  //     if (reward.rewardCategory !== category) {
+  //       console.log('geen maatch, categorie ' + reward.rewardCategory);
+  //       const index = this.rewardList.indexOf(reward, 0);
+  //       this.rewardList.splice(index, 1);
+  //     }
+  //   }
+  // }
 
 }
