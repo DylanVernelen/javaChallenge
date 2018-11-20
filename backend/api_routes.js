@@ -442,9 +442,9 @@ module.exports =
 	                    		return;
 	                		}	
 
-	                		console.log("Gebruiker heeft reward ", reward.rewardName, " gekocht voor ", reward.rewardWorth, " punten (Resterend: ", user.pointCount, ")");
+	                		console.log("OKOKOK");
 
-							res.json({succes: true, newPoints: user.pointCount});
+							res.json({succes: true});
 	                	});
 
 
