@@ -20,10 +20,10 @@ export class RewardService {
   }
 
   createReward(reward: Reward) {
-    return this.http.post('https://nodejs.tomvdr.com/node/api/reward/create?token=ABCDEF', reward).toPromise();
+    return this.http.post('https://nodejs.tomvdr.com/node/api/reward/create?token=ABCDEF', reward, {responseType: 'json'});
   }
 
   deleteReward(index: string) {
-    return this.http.delete('https://nodejs.tomvdr.com/node/api/reward/delete/' + index + '?token=ABCDEF').toPromise();
+    return this.http.delete('https://nodejs.tomvdr.com/node/api/reward/delete/' + index + '?token=ABCDEF');
   }
 }
