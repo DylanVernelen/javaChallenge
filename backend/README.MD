@@ -67,3 +67,19 @@ CATEGORIES:
 	/category/all
 	- GET
 	- Alle categorieën
+
+
+CHALLENGES:
+	
+	/challenge/complete
+	- POST
+	- Een user heeft een challenge gecomplete
+	- Vereist:
+		- userid: id
+		- challengeid: id
+	- Retourneert:
+		- indien succesvol
+		- aantal punten gekregen
+		- totaal aantal punten
+	- Vult het user document verder aan met historiek
+	
