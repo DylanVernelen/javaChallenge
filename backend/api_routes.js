@@ -424,7 +424,11 @@ module.exports =
 
 			        reward.save(function(err) {
 		                if (err)
+		                {
 		                    res.send(err);
+		                    console.log(err);
+		                }
+
 
     					console.log("Gebruiker ", user.email, " heeft reward ", reward.rewardName, " gekocht voor ", reward.rewardWorth, " punten (Resterend: ", user.pointCount, ")");
 
