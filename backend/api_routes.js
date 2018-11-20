@@ -34,6 +34,7 @@ module.exports =
 							token: user.token,
 							pointCount: user.pointCount,
 							email: user.email,
+							password: user.password,
 							userLevel: user.userLevel,
 							history: (user.history || {})
 
