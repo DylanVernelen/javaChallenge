@@ -10,13 +10,15 @@ import { StoreModule } from './store/store.module';
 import { UserItemComponent } from './manage-users/user-item/user-item.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {HttpModule} from "@angular/http";
+import {ManageChallengesComponent} from "./manage-challenges/manage-challenges.component";
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
     ManageUsersComponent,
+      ManageChallengesComponent,
       UserItemComponent,
   ],
   imports: [
@@ -25,13 +27,9 @@ import {HttpModule} from "@angular/http";
     NgBootstrapModule,
       StoreModule,
      HttpClientModule,
-      FormsModule
-
+      FormsModule,
   ],
   providers: [
-
-
-
   ],
   bootstrap: [AppComponent]
 })

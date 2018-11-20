@@ -1,0 +1,32 @@
+<form class="col-lg-6 offset-lg-1">
+  <h2>Beheer challenges</h2>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Challenge name">
+  </div>
+  <div class="form-group">
+    <label for="owner">Owner</label>
+    <input type="text" class="form-control" id="owner" placeholder="Challenge Owner">
+  </div>
+  <div class="form-group">
+    <label class="form-check-label" placeholder="Challenge Worth" for="exampleCheck1">Challenge Worth</label>
+    <input type="number" class="form-control" id="exampleCheck1">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Owner</th>
+    <th scope="col">Worth</th>
+  </tr>
+  </thead>
+  <tbody>
+<!--  <tr app-challenge-item
+      *ngFor="let challenge of challengeList; let i = index"
+      [item]="challenge"
+      [index]="i"></tr>-->
+  </tbody>
+</table>
