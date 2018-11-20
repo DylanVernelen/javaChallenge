@@ -413,7 +413,6 @@ module.exports =
 
       			console.log('rewardid', req.params.reward_id);
       			console.log('extension', path.extname(files.file.name));
-      			console.log(oldpath, newpath);
 
   				fs.rename(oldpath, newpath, function (err) {
 			        if (err) throw err;
@@ -436,6 +435,7 @@ module.exports =
 			        		return;
 			        	}
 
+			        	reward.imgUrl = filename;
 			        	reward.save(function(err) {
 			                if (err)
 	                		{
@@ -446,7 +446,7 @@ module.exports =
 
 	                		console.log("OKOKOK");
 
-							res.json({succes: true});
+							res.json({succes: true, imgUrl: "https://nodejs.tomvdr.com/" + filename});
 	                	});
 
 
