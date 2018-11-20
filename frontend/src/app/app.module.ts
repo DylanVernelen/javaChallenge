@@ -18,6 +18,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import {HttpModule} from '@angular/http';
 
 import { ManageRewardsModule } from './manage-rewards/manage-rewards.module';
+import {ChallengesModule} from "./challenges/challenges.module";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ManageRewardsModule } from './manage-rewards/manage-rewards.module';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ManageRewardsModule
+    ManageRewardsModule,
+      ChallengesModule
   ],
   providers: [
     StoreModule,

@@ -12,7 +12,6 @@ import {User} from "../interfaces/user";
 export class ManageChallengesComponent implements OnInit {
 
   constructor(private manageChallengeService: ManageChallengesService ) { }
-  form: FormGroup;
 
   challengeList: Challenge[];
   ngOnInit() {
@@ -34,7 +33,8 @@ export class ManageChallengesComponent implements OnInit {
    if (challengeName.trim() !== '' && challengeOwner.trim() !== '' && challengeWorth.trim() !== '') {
 
        const newChallenge = { challengeName: challengeName.trim(), challengeOwner :  challengeOwner.trim() , challengeWorth :parseInt(challengeWorth) };
-       this.manageChallengeService.createChallenge(newChallenge)
+       this.manageChallengeService.createChallenge(newChallenge);
+       this.getAllChallenges();
 
     }
   }
