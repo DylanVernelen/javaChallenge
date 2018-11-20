@@ -6,6 +6,8 @@ var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 var bcrypt     = require('bcrypt');
+var cors 	   = require('cors');
+
 
 // Database
 var mongoose = require('mongoose');
@@ -22,6 +24,9 @@ mongoose.connect('mongodb://root:ThomasMore1@ds055762.mlab.com:55762/rewardsyste
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
+
+app.options('*', cors());
 
 var port = process.env.PORT || 8080;        // set our port
 
@@ -46,23 +51,36 @@ var models =
 
 var apiRoutes = require('./api_routes.js');
 
+router.all('*', cors());
 
 router.use(function(req, res, next) {
-
+/*
 	if ('OPTIONS' == req.method) {
   		res.header('Access-Control-Allow-Origin', '*');
   		res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
   		res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
   		res.send(200);
 	}
-
-
+*/
+/*
 
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, PATCH, OPTIONS");
   	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
- 
+  	res.header("Access-Control-Allow-Credentials", "true");
+*/
 	//res.header("Access-Control-Allow-Headers", "Authorization");
+
+  	//res.header("Access-Control-Allow-Credentials", "true");
+ //	res.header('Access-Control-Allow-Origin', '*');
+   // res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+   // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  /*  if ('OPTIONS' == req.method)
+    {
+	    res.sendStatus(200);
+	    return;
+    } 
+*/
 
     console.log('API: routing new query: ' + req.url);
 

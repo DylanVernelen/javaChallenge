@@ -12,18 +12,18 @@ export class RewardService {
   constructor(private http: HttpClient) {}
 
   getAllRewards() {
-    return this.http.get<Reward[]>('https://nodejs.tomvdr.com/node/api/reward/all?token=ABCDEF', {responseType: 'json'});
+    return this.http.get<Reward[]>('https://nodejs.tomvdr.com/node/api/reward/all?token=ABCDEF', {responseType: 'json', withCredentials: false});
   }
 
   getAllRewardCategories() {
-    return this.http.get<RewardCategory[]>('https://nodejs.tomvdr.com/node/api/rewardcategory/all?token=ABCDEF', {responseType: 'json'});
+    return this.http.get<RewardCategory[]>('https://nodejs.tomvdr.com/node/api/rewardcategory/all?token=ABCDEF', {responseType: 'json', withCredentials: false});
   }
 
-  createReward(reward: Reward) {
+  createReward(reward: {}) {
     return this.http.post('https://nodejs.tomvdr.com/node/api/reward/create?token=ABCDEF', reward, {responseType: 'json'});
   }
 
-  deleteReward(index: string) {
-    return this.http.delete('https://nodejs.tomvdr.com/node/api/reward/delete/' + index + '?token=ABCDEF');
+  deleteReward(id: string) {
+    return this.http.delete('https://nodejs.tomvdr.com/node/api/reward/delete/' + id + '?token=ABCDEF');
   }
 }

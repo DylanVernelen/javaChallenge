@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RewardService} from '../services/reward.service';
 import {Reward} from '../interfaces/reward';
 import {RewardCategory} from '../interfaces/reward-category';
+import {User} from '../interfaces/user';
 
 @Component({
   selector: 'app-manage-rewards',
@@ -24,14 +25,18 @@ export class ManageRewardsComponent implements OnInit {
   }
 
   addReward(name: string, worth: number, category: string, description: string) {
-    const reward = new Reward();
-    reward.name = name;
-    reward.worth = worth;
-    reward.category = category;
-    reward.description = description;
+    const reward = {name: name, worth: worth, category: category, description: description};
     console.log(reward);
-    this.rewardService.createReward(reward);
-    this.getRewards();
+    this.rewardService.createReward(reward)
+      .subscribe(
+        (result: Reward) => {
+          console.log('success', result);
+          this.getRewards();
+        },
+        (error: any) => {
+          console.log('error', error);
+        }
+      );
   }
 
   getRewards() {

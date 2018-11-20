@@ -1,11 +1,11 @@
 <div class="card">
-  <p class="card-header">{{item.name}}</p>
+  <p class="card-header">{{item.rewardName}}</p>
   <div class="card-body">
     <img class="card-img" src="" />
     <p>loremipsum</p>
   </div>
   <div class="card-footer">
-    <p>Cost: {{item.worth}}</p>
+    <p>Cost: {{item.rewardWorth}}</p>
     <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Buy</button>
   </div>
 </div>
@@ -15,7 +15,7 @@
     <h4 class="modal-title" id="modal-basic-title">Purchase reward</h4>
   </div>
   <div class="modal-body">
-    <h5>Are you sure you want to purchase {{item.name}} for {{item.worth}} points?</h5>
+    <h5>Are you sure you want to purchase {{item.rewardName}} for {{item.rewardWorth}} points?</h5>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>

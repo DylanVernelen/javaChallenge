@@ -16,11 +16,11 @@ import {RewardCategory} from '../interfaces/reward-category';
 export class StoreComponent implements OnInit {
 
   rewardList: Reward[];
-  rewardCategoryList: RewardCategory[] = [
-    {id: '0', categoryName: 'Consumables'},
-    {id: '0', categoryName: 'Coupons'},
-    {id: '0', categoryName: 'Gadgets'}
-    ];
+  rewardCategoryList: RewardCategory[];
+    // {id: '0', categoryName: 'Consumables'},
+    // {id: '0', categoryName: 'Coupons'},
+    // {id: '0', categoryName: 'Gadgets'}
+    // ];
   rewardSubscription: Subscription;
 
   constructor(private rewardService: RewardService) { }
@@ -36,15 +36,15 @@ export class StoreComponent implements OnInit {
         }
       );
 
-    // this.rewardService.getAllRewardCategories()
-    //   .subscribe(
-    //     (result: RewardCategory[]) => {
-    //       this.rewardCategoryList = result;
-    //     },
-    //     (error: any) => {
-    //       console.log('error', error);
-    //     }
-    //   );
+    this.rewardService.getAllRewardCategories()
+      .subscribe(
+        (result: RewardCategory[]) => {
+          this.rewardCategoryList = result;
+        },
+        (error: any) => {
+          console.log('error', error);
+        }
+      );
   }
 
   OnDestroy() {
@@ -54,7 +54,7 @@ export class StoreComponent implements OnInit {
   filter(category) {
     console.log('Het werkt!');
     for (const reward of this.rewardList) {
-      if (reward.category !== category) {
+      if (reward.rewardCategory !== category) {
         const index = this.rewardList.indexOf(reward, 0);
         this.rewardList.splice(index, 1);
       }
