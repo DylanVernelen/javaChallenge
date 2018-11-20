@@ -433,7 +433,7 @@ module.exports =
 			        		return;
 			        	}
 
-			        	reward.imgUrl = 
+			        	reward.imgUrl = filename;
 			        	reward.save(function(err) {
 			                if (err)
 	                		{
