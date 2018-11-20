@@ -7,6 +7,7 @@ var Schema = mongoose.Schema
 	rewardOwner: String,
 	rewardWorth: Number,
 	enabled: Boolean,
-	description: String
+	description: String,
+	imgUrl: String
 });
  module.exports = mongoose.model('Reward', RewardSchema);

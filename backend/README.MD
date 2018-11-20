@@ -1,12 +1,35 @@
 API documentatie:
 
 
-Alle API calls zijn voorafgaand met /api, bv: /api/reward/get/1
+Alle API calls zijn voorafgaand met /api, bv: /api/reward/get/1?token=XYZ
+
+
+
+
+AUTHENTICATIE:
+	
+	/token/validate
+	- POST
+	- Invoer:
+		- email: string
+		- password: string
+	- Resultaat:
+		GELDIG:
+		- {token: "xyz"}
+		ONGELDIG:
+		- {"error": "invalid-login"}
 
 
 REWARDS:
-
 	
+	/reward/buy
+	- POST
+	- Vereist een reward id
+		- rewardId: id
+	- Gaat via token de gebruiker ophalen
+	- Punten worden automatisch afgetrokken
+	- Gebruiker historiek wordt toegevoegd
+
 	
 	/reward/get/{id} 
 	- GET
@@ -27,4 +50,16 @@ REWARDS:
 	- GET 
 	- Alle rewards
 	
+	/reward/update
+	- PATCH
+	- Veranderen van reward
+		- name: string
+		- worth: number
+		- owner: id
+		
 
+CATEGORIES:
+	
+	/category/all
+	- GET
+	- Alle categorieën

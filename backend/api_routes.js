@@ -2,28 +2,153 @@
 // ^ Nodig voor LINUX 
 
 // more routes for our API will happen here
+var authentication = require('./authentication');
+var formidable = require('formidable');
+var fs = require('fs');
+var path = require('path')
 
 
 module.exports = 
 {
 	init: function(router, models)
 	{
-
 		// AUTHENTICATION: GET TOKEN BY EMAIL & PASS - GET
-		router.route('/gettoken/').post(function(req, res)
+		router.route('/token/validate').post(function(req, res)
 		{
-			var modelUser = new models.modelUser();
+			var modelUser = models.modelUser;
 
-			modelUser.findById(req.params.reward_id, function(err, reward)
+			var email = req.body.email;
+			var password = req.body.password;
+
+			var bcrypt     = require('bcrypt');
+
+
+
+			modelUser.findOne({email: email}).exec().then(user => 
 			{
-				if(err)
-					res.send(err)
+				console.log(user);
+				if(user && user.token)
+				{
+					if(bcrypt.compareSync(password, user.password))
+						res.json({
+							token: user.token,
+							pointCount: user.pointCount,
+							email: user.email,
+							userLevel: user.userLevel,
+							history: (user.history || {})
 
-				res.json(reward);
-			})	
-		})
+						});
+					else 
+						res.json({error: "invalid-login"});
+
+				} else 
+				{
+					res.json({error: "invalid-login"});
+				}
+				
+			})
 
 
+		});
+
+
+		// REWARD BUY 
+		router.route('/reward/buy/').post(function(req, res)
+		{
+
+
+			var userId = req.body.id;
+			var rewardId = req.body.rewardid;
+
+
+			console.log(res.locals.token);
+			authentication.getUserInfo(res.locals.token, function(user)
+			{
+				models.modelReward.findById(rewardId, function(err, reward)
+				{
+					if(err)
+						res.send(err);
+
+
+
+					if(user.pointCount < reward.rewardWorth)
+					{
+						res.json({error: "not-enough-points"});
+						return;
+					}
+
+
+					user.pointCount -= reward.rewardWorth;
+					user.history.push(
+					{
+						rewardId: rewardId,
+						pointsSpent: reward.rewardWorth,
+						timestamp: Math.floor(new Date() / 1000),
+						opgehaald: false
+					});
+
+					user.save(function(err) {
+		                if (err)
+		                    res.send(err);
+
+    					console.log("Gebruiker ", user.email, " heeft reward ", reward.rewardName, " gekocht voor ", reward.rewardWorth, " punten (Resterend: ", user.pointCount, ")");
+
+						res.json({succes: true, newPoints: user.pointCount});
+		            });
+				})
+			});
+		});
+
+
+		// REWARD UPDATE - PATCH
+		router.route('/reward/update').put(function(req, res)
+		{
+			var id = req.body.id;
+
+			if(!id) 
+			{
+				res.json({error: "no-id"});
+			}
+
+			var name = req.body.name || undefined;
+			var worth = parseInt(req.body.worth) || undefined;
+			var owner = req.body.owner || undefined;
+			var enabled = req.body.enabled || undefined;
+			var description = req.body.description || undefined;
+			var imgurl = req.body.imgurl || undefined;
+			
+	        models.modelReward.findById(id, function(err, reward) {
+
+	            if (err)
+	                res.send(err);
+
+	            if(name)
+					reward.rewardName = name;
+
+				if(owner)
+					reward.rewardOwner = owner;
+
+				if(worth)
+					reward.rewardWorth = worth;
+
+				if(enabled)
+					reward.enabled = enabled;
+
+				if(description)
+					reward.description = description;
+
+				if(imgurl)
+					reward.imgUrl = imgurl;
+
+	            reward.save(function(err) {
+	                if (err)
+	                    res.send(err);
+
+					res.json({succes: true});
+	            });
+	        });
+		});
+		
 		// REWARD CREATE - POST
 		router.route('/reward/create').post(function(req, res)
 		{
@@ -34,6 +159,7 @@ module.exports =
 			reward.rewardWorth = req.body.worth;
 			reward.enabled = req.body.enabled;
 			reward.description = req.body.description;
+			reward.imgUrl = req.body.imgurl || undefined;
 
 
 			reward.save(function(err)
@@ -89,15 +215,22 @@ module.exports =
 		// USER CREATE - POST
 		router.route('/user/create').post(function(req, res)
 		{
-			var user = new models.modelUser();
+			var user = models.modelUser;
+			var bcrypt     = require('bcrypt');
+			var timestamp = Math.floor(new Date() / 1000);
 
 			user.email = req.body.email;
-			user.password = req.body.password;
+			user.password = bcrypt.hashSync(req.body.password, 10);
 			user.userLevel = req.body.userLevel;
 			user.pointCount = req.body.pointCount;
 
 
-			reward.save(function(err)
+			user.token = bcrypt.hashSync(timestamp.toString(), 10);
+			user.token = user.token.replace(/[^0-9a-z]/gi, '');
+
+
+
+			models.modelUser.save(function(err)
 			{
 				if(err)
 					res.send(err);
@@ -204,6 +337,50 @@ module.exports =
 			})
 		});
 
+
+		// GET ALL CATEGORIES - GET 
+		router.route('/category/all').get(function(req, res)
+		{
+			models.modelRewardCategory.find({}, function(err, rewards)
+			{
+				if(err)
+				{
+					res.json(err);
+					console.log(err);
+				}	
+
+				res.json(rewards);
+			})
+		});
+
+
+		router.route('/reward/fileupload/:reward_id').post(function(req, res)
+		{
+			console.log("File upload: post");
+			var form = new formidable.IncomingForm();
+			var filename = '';
+
+		    form.parse(req, function (err, fields, files) {
+		    	console.log('File uploaded!');
+
+		      	var oldpath = files.file.path;
+      			filename = req.params.reward_id + path.extname(files.file.name);
+      			var newpath = './../' + filename;
+
+      			console.log('rewardid', req.params.reward_id);
+      			console.log('extension', path.extname(files.file.name));
+      			console.log(oldpath, newpath);
+
+  				fs.rename(oldpath, newpath, function (err) {
+			        if (err) throw err;
+			        
+					res.json({succes: true, imgurl: "https://nodejs.tomvdr.com/" + filename});
+					return;
+		      	});
+		    });
+
+		   // res.json({error: true});
+		});
 	}
 
 

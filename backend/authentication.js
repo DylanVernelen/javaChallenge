@@ -31,6 +31,9 @@ module.exports =
 	getToken: function(res, email, password, callback)
 	{
 
+		var modelUser = require('./models/user.js');
+
+
 		modelUser.findOne({email: email, password: password}).then(user => 
 		{
 			if(user._id)
@@ -38,11 +41,19 @@ module.exports =
 				console.log("Geldige login", email, password);
 			}
 		})
+	},
+
+	getUserInfo: function(token, callback)
+	{
+		var modelUser = require('./models/user.js');
 
 
+		modelUser.findOne({token: token}).exec().then(user =>
+		{
 
-
-		
+			callback(user);
+			
+		})
 	}
 
 

@@ -5,6 +5,7 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
+var bcrypt     = require('bcrypt');
 
 // Database
 var mongoose = require('mongoose');
@@ -12,6 +13,8 @@ var mongoose = require('mongoose');
 var modelReward = require('./models/reward.js');
 var modelChallenge = require('./models/challenge.js');
 var modelUser = require('./models/user.js');
+var modelRewardCategory = require('./models/rewardcategory.js');
+
 
 mongoose.connect('mongodb://root:ThomasMore1@ds055762.mlab.com:55762/rewardsystem', {useNewUrlParser: true}); // connect to our database
 
@@ -27,40 +30,8 @@ var port = process.env.PORT || 8080;        // set our port
 var router = express.Router();              // get an instance of the express Router
 
 var authentication = require('./authentication');
+	
 
-
-
-
-
-router.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
-    console.log('API: routing new query');
-
-    var token = req.query.token;
-    
-
-	if(!token)
-	{
-		res.json({error: "no-token"});
-		return;
-	}
-
-
-	console.log(token);
-
-
-
-//	authentication.isValidToken(res, token, function(user){next();});   
-next();
-});
-
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-router.get('/', function(req, res) {
-
-    res.json({ message: 'iAdviseRewardSystem: main content' });   
-});
 
 
 
@@ -68,11 +39,47 @@ var models =
 {
     modelReward,
     modelChallenge,
-    modelUser
+    modelUser,
+    modelRewardCategory
 }
 
 
 var apiRoutes = require('./api_routes.js');
+
+
+router.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
+    console.log('API: routing new query: ' + req.url);
+
+    var token = req.query.token;
+ 
+    res.locals.token = token;
+
+    console.log("Token: " , token);
+
+    if(req.url == "/token/validate" || req.url == "/token/validate/")
+    {
+    	next();
+    } else if(!token)
+	{
+		res.json({error: "no-token"});
+		return;
+	} else 
+	{
+		authentication.isValidToken(res, token, function(user){next();});   
+	}
+
+});
+
+// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+router.get('/', function(req, res) {
+    res.json({ message: 'iAdviseRewardSystem: main content' });   
+});
+
+
+
 apiRoutes.init(router, models);
 
 
