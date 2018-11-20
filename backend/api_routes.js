@@ -442,7 +442,7 @@ module.exports =
 	                    		return;
 	                		}	
 
-	                		console.log("Gebruiker ", user.email, " heeft reward ", reward.rewardName, " gekocht voor ", reward.rewardWorth, " punten (Resterend: ", user.pointCount, ")");
+	                		console.log("Gebruiker heeft reward ", reward.rewardName, " gekocht voor ", reward.rewardWorth, " punten (Resterend: ", user.pointCount, ")");
 
 							res.json({succes: true, newPoints: user.pointCount});
 	                	});
