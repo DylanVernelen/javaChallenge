@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Challenge} from '../interfaces/challenge';
 import {ManageChallengesService} from '../services/manage-challenges.service';
 import {FormControl, FormGroup} from '@angular/forms';
+import {User} from "../interfaces/user";
 
 @Component({
   selector: 'app-manage-challenges',
@@ -12,6 +13,7 @@ export class ManageChallengesComponent implements OnInit {
 
   constructor(private manageChallengeService: ManageChallengesService ) { }
   form: FormGroup;
+
   challengeList: Challenge[];
   ngOnInit() {
     this.getAllChallenges();
@@ -34,14 +36,20 @@ export class ManageChallengesComponent implements OnInit {
         }
       );
   }
-  addChallenge(challenge: string) {
-    if (challenge.trim() !== '') {
-      const newChallenge = { };
-      this.manageChallengeService.createChallenge(newChallenge)
-        .catch(function (error) {
-          console.log(error);
-        });
+ addChallenge(challengeName: string, challengeOwner: string, challengeWorth: string) {
+   if (challengeName.trim() !== '' && challengeOwner.trim() !== '' && challengeWorth.trim() !== '') {
+
+       const newChallenge = { challengeName: challengeName.trim(), challengeOwner :  challengeOwner.trim() , challengeWorth :parseInt(challengeWorth) };
+       this.manageChallengeService.createChallenge(newChallenge)
+           .subscribe(
+               (result: User) => {
+                   console.log('success', result);
+                   this.getAllChallenges();
+               },
+               (error: any) => {
+                   console.log('error', error);
+               }
+           );
     }
   }
-
 }

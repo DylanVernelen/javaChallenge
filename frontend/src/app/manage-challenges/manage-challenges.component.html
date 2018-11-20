@@ -1,19 +1,26 @@
-<form  class="col-lg-6 offset-lg-1">
-  <h2>Beheer challenges</h2>
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text"  class="form-control" id="name" aria-describedby="emailHelp"  placeholder="Challenge name">
+<div class="row">
+  <div class="offset-lg-1 col-lg-3">
+    <div class="form-group">
+      <label for="challengeName">Challenge Name</label>
+      <input type="email" class="form-control" id="challengeName" placeholder="" #i>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="owner">Owner</label>
-    <input type="text"    class="form-control" id="owner" placeholder="Challenge Owner">
+  <div class="col-lg-3">
+    <div class="form-group">
+      <label for="owner">Challenge Owner</label>
+      <input type="text" class="form-control" id="owner" placeholder="owner" #j>
+    </div>
   </div>
-  <div class="form-group">
-    <label class="form-check-label" placeholder="Challenge Worth" for="exampleCheck1">Challenge Worth</label>
-    <input type="number" class="form-control" id="exampleCheck1">
+    <div class="col-lg-3">
+      <div class="form-group">
+        <label for="worth">Challenge Worth</label>
+        <input type="number" class="form-control" id="worth"  #f>
+      </div>
   </div>
-  <button type="submit" (click)="addChallenge(form)" class="btn btn-primary">Submit</button>
-</form>
+  <div class="col-lg-2">
+    <button class="btn-primary btn" (click)="addChallenge(i.value, j.value, f.value); i.value=''; j.value='' ; f.value=0">Add</button>
+  </div>
+</div>
 <table class="table table-striped">
   <thead>
   <tr>
