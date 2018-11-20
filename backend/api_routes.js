@@ -24,6 +24,7 @@ module.exports =
 
 
 
+
 			modelUser.findOne({email: email}).exec().then(user => 
 			{
 				if(user && user.token && user.password && password)
@@ -419,6 +420,7 @@ module.exports =
 
 			        reward = new models.modelReward();
 
+			        reward._id = rewardid;
 			        reward.imgUrl = "https://nodejs.tomvdr.com/" + filename;
 
 
