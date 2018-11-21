@@ -113,9 +113,9 @@ module.exports =
 				res.json({error: "no-id"});
 			}
 
-			var name = req.body.name || undefined;
-			var worth = parseInt(req.body.worth) || undefined;
-			var owner = req.body.owner || undefined;
+			var name = req.body.challengeName || undefined;
+			var worth = parseInt(req.body.challengeWorth) || undefined;
+			var owner = req.body.challengeOwner || undefined;
 
 	        models.modelChallenge.findById(id, function(err, challenge) {
 
