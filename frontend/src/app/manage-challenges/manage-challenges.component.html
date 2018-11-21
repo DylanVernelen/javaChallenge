@@ -1,47 +1,43 @@
-<h2 class="justify-content-center">Add challenge</h2>
-<div class="addchallenge row">
-
-  <div class="offset-lg-1 col-lg-3">
-    <div class="form-group">
-      <label for="challengeName">Challenge Name</label>
+<div class="offset-lg-2 col-lg-8">
+<h3 class="justify-content-center">Manage challenges</h3>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Owner</th>
+      <th scope="col">Worth</th>
+      <th scope="col">Challenges</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>New</td>
+  <td>
       <input type="email" class="form-control" id="challengeName" placeholder="" #i>
-    </div>
-  </div>
-  <div class="col-lg-3">
-    <div class="form-group">
-      <label for="owner">Challenge Owner</label>
+  </td>
+      <td>
       <input type="text" class="form-control" id="owner" placeholder="owner" #j>
-    </div>
-  </div>
-  <div class="col-lg-3">
-    <div class="form-group">
-      <label for="worth">Challenge Worth</label>
+      </td>
+ <td>
       <input type="number" class="form-control" id="worth"  #f>
-    </div>
-  </div>
-  <div class="col-lg-2">
+      </td>
+      <td>
     <button class="btn-primary btn" (click)="addChallenge(i.value, j.value, f.value); i.value=''; j.value='' ; f.value=0">Add</button>
-  </div>
-</div>
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Name</th>
-    <th scope="col">Owner</th>
-    <th scope="col">Worth</th>
-  </tr>
-  </thead>
-  <tbody>
+      </td>
+
+    </tr>
+
  <tr
       *ngFor="let item of challengeList; let i = index ">
    <td>{{i +1}}</td>
    <td>{{item.challengeName}}</td>
    <td>{{item.challengeOwner}}</td>
    <td>{{item.challengeWorth}}</td>
-   <td><i class="far fa-trash-alt"
-          (click)="open(delete)"></i></td>
-
+   <td><i class="fas fa-pencil-alt"
+          (click)="open(edit)"></i><i class="far fa-trash-alt ml-3"
+          (click)="open(delete)"></i>
+  </td>
 
 <ng-template #delete let-modal>
   <div class="modal-header">
@@ -56,7 +52,33 @@
   </div>
 
 </ng-template>
+   <ng-template #edit let-modal>
+     <div class="modal-header">
+       <h4 class="modal-title" id="modal-edit-title">Edit <b>{{ item.challengeName }}</b></h4>
+     </div>
+     <div class="modal-body">
+       <!--<div  class="alert alert-danger"></div>-->
+       <div class="form-group">
+         <label for="editChallengeName">Challenge name</label>
+         <input type="text" class="form-control" id="editChallengeName" placeholder="name@example.com" value="{{ item.challengeName }}" #i>
+       </div>
+       <div class="form-group">
+         <label for="editChallengeOwner">Challenge owner</label>
+         <input type="text" class="form-control" id="editChallengeOwner" placeholder="0" value="{{ item.challengeOwner }}" #c>
+       </div>
+       <div class="form-group">
+         <label for="editChallengeWorth">Challenge worth</label>
+         <input type="number" class="form-control" id="editChallengeWorth" placeholder="user" value="{{ item.challengeWorth }}" #j>
+       </div>
+
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-outline-dark" (click)="close()">Cancel</button>
+       <button type="button" class="btn btn-outline-dark" (click)="updateChallenge(item._id, i.value, j.value, c.value)">Save</button>
+     </div>
+   </ng-template>
 </tr>
   </tbody>
 </table>
 <pre>{{ challengeList | json }}</pre>
+</div>
