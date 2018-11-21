@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Challenge} from '../interfaces/challenge';
 import {ManageChallengesService} from '../services/manage-challenges.service';
 import {CompletedChallenge} from '../interfaces/completed-challenge';
+import {User} from "../interfaces/user";
 
 
 
@@ -14,10 +15,13 @@ export class ChallengesComponent implements OnInit {
 
   constructor(private manageChallengeService: ManageChallengesService ) { }
     challengeList: Challenge[];
-  challenge: CompletedChallenge;
+    challenge: CompletedChallenge;
+    pointsinmessage: String;
     points: Number ;
     user = JSON.parse(localStorage.getItem('currentUser'));
     userid = this.user.id;
+    succesMessage: string;
+    errorMessage: string;
   ngOnInit() {
       this.getAllChallenges();
       console.log(this.challengeList);
@@ -26,6 +30,7 @@ export class ChallengesComponent implements OnInit {
         this.manageChallengeService.getChallenges()
             .subscribe(
                 (result: Array<Challenge>) => {
+
                     console.log('success', result);
                     this.challengeList = result;
                 },
@@ -39,7 +44,32 @@ export class ChallengesComponent implements OnInit {
             if (challengeId !== 0 && info !== '') {
                 const newCompletedChallenge = {userid: this.userid, challengeid: challengeId, info : info };
                 console.log(newCompletedChallenge);
-               this.manageChallengeService.createCompletedChallenge(newCompletedChallenge);
+                this.pointsinmessage = this.points.toString() + ' points';
+                this.points = null;
+                if (this.pointsinmessage=== '1'){
+                    this.pointsinmessage= this.pointsinmessage + ' point';
+                }
+               this.manageChallengeService.createCompletedChallenge(newCompletedChallenge)
+                   .subscribe(
+                       (result: Challenge) => {
+                           this.errorMessage = "";
+                           (async () => {
+                               this.succesMessage = "Request succesfully. If your request is accepted, you have earned " + this.pointsinmessage ;
+
+                               await this.delay(8000);
+                               this.succesMessage = "";
+                               this.pointsinmessage= null;
+                           })();
+                       },
+                       (error: any) => {
+                           this.succesMessage = "";
+                           (async () => {
+                               this.errorMessage = "Failed request. Try again later.";
+                               await this.delay(3000);
+                               this.errorMessage = "";
+                           })();
+                       }
+                   );
                 this.getAllChallenges();
         }
     }
@@ -50,5 +80,8 @@ export class ChallengesComponent implements OnInit {
     console.log(challenge[0]);
 
  }
+     delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
 
 }

@@ -40,15 +40,7 @@ console.log(id);
     }
     createCompletedChallenge(challenge: CompletedChallenge) {
         return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/request?token=ABCDEF', challenge, {responseType: 'json'})
-          .subscribe(
-            (result: Challenge) => {
-              console.log('success', result);
 
-            },
-            (error: any) => {
-              console.log('error', error);
-            }
-          );
     }
 
 }
