@@ -370,7 +370,6 @@ module.exports =
 		});
 
 
-
 		// REWARD DELETE BY ID - DELETE
 		router.route('/reward/delete/:reward_id').delete(function(req, res)
 		{
@@ -599,7 +598,7 @@ module.exports =
 			var model = models.modelChallenge;
 
 			model.remove({
-				_id: req.params.user_id
+				_id: req.params.challenge_id
 			}, function(err, challenge)
 			{
 				if(err)

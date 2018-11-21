@@ -34,14 +34,29 @@
   </thead>
   <tbody>
  <tr
-      *ngFor="let challenge of challengeList; let i = index ">
+      *ngFor="let item of challengeList; let i = index ">
    <td>{{i +1}}</td>
-   <td>{{challenge.challengeName}}</td>
-   <td>{{challenge.challengeOwner}}</td>
-   <td>{{challenge.challengeWorth}}</td>
+   <td>{{item.challengeName}}</td>
+   <td>{{item.challengeOwner}}</td>
+   <td>{{item.challengeWorth}}</td>
    <td><i class="far fa-trash-alt"
-          (click)="deleteChallenge(challenge._id)"></i></td>
- </tr>
+          (click)="open(delete)"></i></td>
+
+
+<ng-template #delete let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-delete-title">Deleting <b>{{item.challengeName}}</b></h4>
+  </div>
+  <div class="modal-body">
+    <h5>Are you sure you want to delete <b></b>{{item.challengeName}}?</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>
+    <button type="button" class="btn btn-outline-dark" (click)="deleteChallenge(item._id)">Yes</button>
+  </div>
+
+</ng-template>
+</tr>
   </tbody>
 </table>
 <pre>{{ challengeList | json }}</pre>

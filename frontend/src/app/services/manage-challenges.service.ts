@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Challenge} from '../interfaces/challenge';
-import {CompletedChallenge} from "../interfaces/completed-challenge";
+import {CompletedChallenge} from '../interfaces/completed-challenge';
 import {HttpClient} from '@angular/common/http';
-import {User} from "../interfaces/user";
+import {User} from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +10,12 @@ import {User} from "../interfaces/user";
 export class ManageChallengesService {
 
   constructor(private http: HttpClient) { }
-    List: Challenge[] = [
-        {challengeName: 'Beer', challengeOwner: 'Louis', challengeWorth: 5}
-    ];
+
     createChallenge(challenge: Challenge) {
         console.log(challenge);
         return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/create?token=ABCDEF', challenge, {responseType: 'json'})
     .subscribe(
-            (result: User) => {
+            (result: Challenge) => {
                 this.getChallenges();
                 console.log('success', result);
 
@@ -29,18 +27,28 @@ export class ManageChallengesService {
     }
 
     updateChallenge(challenge: Challenge, i: number) {
-        this.List[i] = challenge;
+
     }
 
-    deleteChallenge(i: number) {
-        return this.http.delete('https://nodejs.tomvdr.com/node/api/challenge/delete/' + i + '?token=ABCDEF', {responseType: 'json'});
+    deleteChallenge(id: String) {
+console.log(id);
+        return this.http.delete('https://nodejs.tomvdr.com/node/api/challenge/delete/' + id + '?token=ABCDEF', {responseType: 'json'});
 
     }
     getChallenges() {
       return this.http.get<Array<Challenge>>('https://nodejs.tomvdr.com/node/api/challenge/all?token=ABCDEF', {responseType: 'json'});
     }
-    createCompletedChallenge(challenge : CompletedChallenge){
-        return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/complete?token=ABCDEF', challenge, {responseType: 'json'})
+    createCompletedChallenge(challenge: CompletedChallenge) {
+        return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/request?token=ABCDEF', challenge, {responseType: 'json'})
+          .subscribe(
+            (result: Challenge) => {
+              console.log('success', result);
+
+            },
+            (error: any) => {
+              console.log('error', error);
+            }
+          );
     }
 
 }
