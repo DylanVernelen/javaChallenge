@@ -8,11 +8,12 @@ import { ManageRewardsComponent} from './manage-rewards/manage-rewards.component
 import { ChallengesComponent} from './challenges/challenges.component';
 import { AccountComponent} from './account/account.component';
 import { HomeComponent } from 'src/app/home/home.component';
+import {AdminComponent} from "./admin/admin.component";
 
 const routes: Routes = [
   {path: 'store', component: StoreComponent},
   {path: 'managechallenge', component: ManageChallengesComponent},
-  {path: 'admin', component: ManageUsersComponent},
+  {path: 'admin', component: AdminComponent},
   {path: 'login', component: LoginComponent},
   {path: 'manageusers', component: ManageUsersComponent},
   {path: 'managerewards', component: ManageRewardsComponent},

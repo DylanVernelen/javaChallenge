@@ -1,0 +1,17 @@
+.panel-body .btn:not(.btn-block)
+{
+  height:200px;
+  margin-top: 20px;
+  margin-bottom:10px;
+  border: 10px solid white;
+    i{
+      margin-top: 10px;
+    font-size: 100px;
+      color: white;
+  }
+  h2{
+    font-size: 25px !important;
+    margin-top: 10px;
+    color: white;
+  }
+}

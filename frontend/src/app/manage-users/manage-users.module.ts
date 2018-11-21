@@ -8,10 +8,11 @@ import { UserItemComponent } from './user-item/user-item.component';
 import {ManageUsersService} from '../services/manage-users.service';
 import {ManageUsersComponent} from './manage-users.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [ManageUsersComponent, UserItemComponent],
   providers: [ManageUsersService]

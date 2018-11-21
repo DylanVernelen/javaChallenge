@@ -21,6 +21,7 @@ import {HttpModule} from '@angular/http';
 import { ManageRewardsModule } from './manage-rewards/manage-rewards.module';
 import { ChallengesComponent } from 'src/app/challenges/challenges.component';
 import { AccountComponent } from 'src/app/account/account.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AccountComponent } from 'src/app/account/account.component';
     UserItemComponent,
     HomeComponent,
     ChallengesComponent,
-    AccountComponent
+    AccountComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
