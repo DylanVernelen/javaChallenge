@@ -20,44 +20,44 @@ export class ManageUsersComponent implements OnInit {
   }
 
   addUser(userEmail: string, userLevel: string, pointCoint: number) {
-    if(!pointCoint){
+    if (!pointCoint) {
       pointCoint = 0;
     }
     this.getUsers();
-    let exists: boolean = false;
-    for(let user of this.userList){
-      if(user.email.toLowerCase() == userEmail.toLowerCase()){
+    let exists = false;
+    for (const user of this.userList) {
+      if (user.email.toLowerCase() == userEmail.toLowerCase()) {
         exists = true;
       }
     }
-    if(!exists){
-      if(userEmail.trim() != "" && userLevel.trim() != ""){
-        const newUser = { _id:"", email: userEmail.trim(), password: userEmail.trim()+"2018", userLevel: userLevel, pointCount: pointCoint, token: ""};
+    if (!exists) {
+      if (userEmail.trim() != '' && userLevel.trim() != '') {
+        const newUser = { _id: '', email: userEmail.trim(), password: userEmail.trim() + '2018', userLevel: userLevel, pointCount: pointCoint, token: ''};
         this.manageUsersService.createUser(newUser)
           .subscribe(
             (result: User) => {
               console.log('success', result);
               this.getUsers();
-              this.succesMessage = "Succes! User added!";
-              this.errorMessage = "";
+              this.succesMessage = 'Succes! User added!';
+              this.errorMessage = '';
             },
             (error: any) => {
               console.log('error', error);
-              this.succesMessage = "";
-              this.errorMessage = "Failed to add the user. Try again later.";
+              this.succesMessage = '';
+              this.errorMessage = 'Failed to add the user. Try again later.';
             }
           );
       } else {
-        this.succesMessage = "";
-        this.errorMessage = "Failed to add the user. Make sure email and user level are filled in.";
+        this.succesMessage = '';
+        this.errorMessage = 'Failed to add the user. Make sure email and user level are filled in.';
       }
     } else {
-      this.succesMessage = "";
-      this.errorMessage = "Failed to add the user. There's already an user with the same email adress.";
+      this.succesMessage = '';
+      this.errorMessage = 'Failed to add the user. There\'s already an user with the same email adress.';
     }
   }
 
-  getUsers(){
+  getUsers() {
     this.manageUsersService.getUsers()
       .subscribe(
         (result: Array<User>) => {
@@ -75,8 +75,8 @@ export class ManageUsersComponent implements OnInit {
         },
         (error: any) => {
           console.log('error', error);
-          this.succesMessage = "";
-          this.errorMessage = "Couldn't load the Users. Please try again later.";
+          this.succesMessage = '';
+          this.errorMessage = 'Couldn\'t load the Users. Please try again later.';
         }
       );
   }

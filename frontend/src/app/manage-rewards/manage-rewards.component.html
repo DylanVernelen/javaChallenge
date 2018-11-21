@@ -1,26 +1,35 @@
 
 <div class="container">
   <div class="row">
+    <div *ngIf="successMessage" class="alert alert-success w-100 text-center m-3">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger w-100 text-center m-3">{{ errorMessage }}</div>
     <table class="table table-striped" style="text-align: center;">
       <thead>
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Worth</th>
-        <th scope="col">Category</th>
+        <th scope="col">
+          Category
+          <button class="ml-2" (click)="open(category)">
+            <i class="fas fa-plus"></i>
+             /
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </th>
         <th scope="col">Description</th>
         <th scope="col">Image</th>
       </tr>
       </thead>
       <tbody>
-      <th scope="row"><input #name type="text" /></th>
-      <td><input #worth type="text" /></td>
-      <td><select #category>
+      <th scope="row"><input #name type="text" value="{{newItem.rewardName}}" (change)="updateAttribute('name', name.value)" #name /></th>
+      <td><input #worth type="number" value="{{newItem.rewardWorth}}" (change)="updateAttribute('worth', worth.value)" #worth /></td>
+      <td><select #category value="{{newItem.rewardCategory}}" (change)="updateAttribute('category', category.value)" #category >
         <option *ngFor="let rewardCategory of rewardCategoryList">{{ rewardCategory.categoryName }}</option>
       </select></td>
-      <td><input #description type="text" /></td>
+      <td><input #description type="text" value="{{newItem.description}}" (change)="updateAttribute('description', description.value)" #description /></td>
       <td><button><i class="fa fa-upload" aria-hidden="true"></i></button></td>
       <td>
-        <button (click)="addReward(name.value, worth.value, category.value, description.value)">Add New</button>
+        <button (click)="addReward()">Add New</button>
       </td>
       <tr app-reward-item
           *ngFor="let reward of rewardList; let i = index"
@@ -29,5 +38,34 @@
       </tbody>
     </table>
   </div>
-  <pre>{{rewardCategoryList | json}}</pre>
+
+  <ng-template #category let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Manage categories</h4>
+    </div>
+    <div class="modal-body">
+      <table class="table table-striped" style="text-align: center;">
+        <thead>
+        <tr>
+          <th scope="col">Categories</th>
+          <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><input type="text" #newCategory /></td>
+          <td><button (click)="addCategory(newCategory.value)">Add New</button></td>
+        </tr>
+
+        <tr *ngFor="let category of rewardCategoryList">
+          <td>{{category.categoryName}}</td>
+          <td><i class="far fa-trash-alt ml-3" (click)="removeCategory(category.id)"></i></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="close()">Back</button>
+    </div>
+  </ng-template>
 </div>

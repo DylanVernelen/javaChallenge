@@ -30,7 +30,7 @@ export class ManageUsersService {
   }
 
   updateUser(user: User) {
-    //this.userList[i] = user;
+    // this.userList[i] = user;
     return this.http.patch('https://nodejs.tomvdr.com/node/api/user/update?token=ABCDEF', user, {responseType: 'json'});
   }
 

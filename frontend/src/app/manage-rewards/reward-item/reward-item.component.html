@@ -4,6 +4,44 @@
 <td>{{ item.description }}</td>
 <td><img src="" /></td>
 <td>
-  <i class="far fa-trash-alt"
+  <i class="fas fa-pencil-alt"
+     (click)="open(edit)"></i>
+  <i class="far fa-trash-alt ml-3"
      (click)="deleteReward()"></i>
 </td>
+
+<ng-template #edit let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Edit reward</h4>
+  </div>
+  <div class="modal-body">
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <div class="form-group">
+      <label for="rewardName">Reward name *:</label>
+      <input id="rewardName" class="form-control" type="text" value="{{item.rewardName}}" (change)="updateAttribute('name', name.value)" #name />
+    </div>
+    <div class="form-group">
+      <label for="rewardWorth">Reward worth *:</label>
+      <input id="rewardWorth" class="form-control" type="number" value="{{item.rewardWorth}}" (change)="updateAttribute('worth', worth.value)" #worth />
+    </div>
+    <div class="form-group">
+      <label for="rewardCategory">Reward category *:</label>
+      <select id="rewardCategory" class="form-control" (change)="updateAttribute('category', category.value)" #category >
+        <option>{{item.rewardCategory}}</option>
+        <option *ngFor="let rewardCategory of reduceRewardCategory(manageRewards.rewardCategoryList)">{{ rewardCategory.categoryName }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="description">Reward description *:</label>
+      <input id="description" class="form-control" type="text" value="{{item.description}}" (change)="updateAttribute('description', description.value)" #description />
+    </div>
+    <div class="form-group">
+      <label for="image">Reward image:</label>
+      <input id="image" class="form-control" type="text" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Cancel</button>
+    <button type="button" class="btn btn-outline-dark" (click)="updateReward()">Save</button>
+  </div>
+</ng-template>
