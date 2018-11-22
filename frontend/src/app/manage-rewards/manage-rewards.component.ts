@@ -25,9 +25,10 @@ export class ManageRewardsComponent implements OnInit {
     this.getRewards();
     this.getCategories();
     this.newItem = new Reward();
+    this.newItem.rewardCategory = 'Consumables';
   }
 
-  addReward() {
+  addReward(form) {
     if (this.newItem.rewardName === '' || !this.newItem.rewardWorth || this.newItem.rewardCategory === '' || this.newItem.description === '') {
       this.showMessage('error', 'Please fill out "Name", "Worth", "Category" and "Description".');
     } else {
@@ -42,6 +43,10 @@ export class ManageRewardsComponent implements OnInit {
           (result: Reward) => {
             this.showMessage('success', 'Reward added successfully');
             this.getRewards();
+            const newRewardId = this.rewardList[this.rewardList.length - 1]._id;
+            console.log(this.rewardList[this.rewardList.length - 1].imgUrl);
+            form.action = 'https://nodejs.tomvdr.com/node/api/reward/fileupload/' + newRewardId + '?token=ABCDEF';
+            form.submit();
             this.newItem = new Reward();
           },
           (error: any) => {
@@ -115,6 +120,7 @@ export class ManageRewardsComponent implements OnInit {
     this.activeModal.close();
   }
 
+
 /*  addCategory(categoryName: string) {
     const category = {name: categoryName};
     this.rewardService.createCategory(category)
@@ -139,5 +145,7 @@ export class ManageRewardsComponent implements OnInit {
       }
     );
   }*/
+
+
 
 }

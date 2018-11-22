@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Reward} from '../interfaces/reward';
 import {RewardService} from '../services/reward.service';
 
-import {User} from '../interfaces/user';
-
-import {Observable, Subscription} from 'rxjs';
 import {RewardCategory} from '../interfaces/reward-category';
 
 
@@ -16,20 +13,21 @@ import {RewardCategory} from '../interfaces/reward-category';
 export class StoreComponent implements OnInit {
 
   rewardList: Reward[];
+  rewardListShown: Reward[];
   rewardCategoryList: RewardCategory[];
-    // {id: '0', categoryName: 'Consumables'},
-    // {id: '0', categoryName: 'Coupons'},
-    // {id: '0', categoryName: 'Gadgets'}
-    // ];
-  rewardSubscription: Subscription;
+  rewardCategoryListFiltered: string[];
 
   constructor(private rewardService: RewardService) { }
 
   ngOnInit() {
-    this.rewardSubscription = this.rewardService.getAllRewards()
+    this.rewardCategoryListFiltered = [];
+
+    this.rewardService.getAllRewards()
       .subscribe(
         (result: Reward[]) => {
           this.rewardList = result;
+          this.shortenDescriptions();
+          this.rewardListShown = result;
         },
         (error: any) => {
           console.log('error', error);
@@ -47,20 +45,35 @@ export class StoreComponent implements OnInit {
       );
   }
 
-  OnDestroy() {
-    this.rewardSubscription.unsubscribe();
+  filter(filterCategory) {
+    if (!this.rewardCategoryListFiltered.includes(filterCategory)) {
+      this.rewardCategoryListFiltered.push(filterCategory);
+    } else {
+      const index = this.rewardCategoryListFiltered.indexOf(filterCategory);
+      this.rewardCategoryListFiltered.splice(index, 1);
+    }
+
+    this.rewardListShown = [];
+    for (const reward of this.rewardList) {
+      if (this.rewardCategoryListFiltered.length !== 0) {
+        for (const category of this.rewardCategoryListFiltered) {
+          if (reward.rewardCategory === category) {
+            this.rewardListShown.push(reward);
+          }
+        }
+      } else {
+        this.rewardListShown.push(reward);
+      }
+    }
   }
 
-  // filter(category) {
-  //   console.log('Het werkt!' + category);
-  //   for (const reward of this.rewardList) {
-  //     console.log('match met categorie ' + reward.rewardCategory);
-  //     if (reward.rewardCategory !== category) {
-  //       console.log('geen maatch, categorie ' + reward.rewardCategory);
-  //       const index = this.rewardList.indexOf(reward, 0);
-  //       this.rewardList.splice(index, 1);
-  //     }
-  //   }
-  // }
-
+  shortenDescriptions() {
+    for (const reward of this.rewardList) {
+      if (reward.description.length >= 30) {
+        reward['shortDescription'] = reward.description.substr(0, 30) + ' ...';
+      } else {
+        reward['shortDescription'] = reward.description;
+      }
+    }
+  }
 }

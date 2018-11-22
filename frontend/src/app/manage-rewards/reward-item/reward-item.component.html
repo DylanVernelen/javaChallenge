@@ -2,7 +2,7 @@
 <td>{{ item.rewardWorth }}</td>
 <td>{{ item.rewardCategory }}</td>
 <td>{{ item.description }}</td>
-<td><img src="" /></td>
+<td><img src="{{ 'https://nodejs.tomvdr.com/' + item.imgUrl }}" width="50px" height="50px" /></td>
 <td>
   <i class="fas fa-pencil-alt"
      (click)="open(edit)"></i>
@@ -34,10 +34,6 @@
     <div class="form-group">
       <label for="description">Reward description *:</label>
       <input id="description" class="form-control" type="text" value="{{item.description}}" (change)="updateAttribute('description', description.value)" #description />
-    </div>
-    <div class="form-group">
-      <label for="image">Reward image:</label>
-      <input id="image" class="form-control" type="text" />
     </div>
   </div>
   <div class="modal-footer">
