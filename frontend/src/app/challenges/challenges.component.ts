@@ -3,6 +3,8 @@ import {Challenge} from '../interfaces/challenge';
 import {ManageChallengesService} from '../services/manage-challenges.service';
 import {CompletedChallenge} from '../interfaces/completed-challenge';
 import {User} from "../interfaces/user";
+import {Reward} from "../interfaces/reward";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 
 
@@ -13,19 +15,31 @@ import {User} from "../interfaces/user";
 })
 export class ChallengesComponent implements OnInit {
 
-  constructor(private manageChallengeService: ManageChallengesService ) { }
+  constructor(private manageChallengeService: ManageChallengesService,private modal: NgbModal ) { }
     challengeList: Challenge[];
     challenge: CompletedChallenge;
+    history = false;
     pointsinmessage: String;
     points: Number ;
     user = JSON.parse(localStorage.getItem('currentUser'));
     userid = this.user.id;
+    challenges: Reward[];
     succesMessage: string;
     errorMessage: string;
+    activeModal: NgbActiveModal;
   ngOnInit() {
       this.getAllChallenges();
       console.log(this.challengeList);
+      console.log(this.user.history);
+      this.challenges = this.user.history;
+
   }
+    open(content) {
+        this.activeModal = this.modal.open(content);
+    }
+    close() {
+        this.activeModal.close();
+    }
     getAllChallenges() {
         this.manageChallengeService.getChallenges()
             .subscribe(
@@ -90,6 +104,13 @@ export class ChallengesComponent implements OnInit {
  }
      delay(ms: number) {
         return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+    showHistory( ){
+      if (this.history){
+          this.history=false;
+      }else{
+          this.history=true;
+      }
     }
 
 }

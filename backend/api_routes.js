@@ -488,7 +488,6 @@ module.exports =
 					res.send(err);
 				}	
 
-
 				if(user && user._id)
 				{
 					models.modelChallenge.findById(challengeid, function(err, challenge)
@@ -598,7 +597,7 @@ module.exports =
 			var model = models.modelChallenge;
 
 			model.remove({
-				_id: req.params.challenge_id
+				_id: req.params._id
 			}, function(err, challenge)
 			{
 				if(err)

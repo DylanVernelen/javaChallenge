@@ -32,5 +32,29 @@
     <div *ngIf="succesMessage" class="alert alert-success">{{ succesMessage }}</div>
   </div>
 </div></div>
+
+<div class="history">
+<button *ngIf="history" (click)="showHistory()" class="col-md-12 btn-danger btn">Close my history</button>
+  <button *ngIf="!history" (click)="showHistory()" class="col-md-12 btn-primary btn">Show my history</button>
+  <table *ngIf="history" class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Challenge</th>
+      <th scope="col">Information</th>
+      <th scope="col">Worth</th>
+      <th scope="col">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of challenges; let i = index ">
+      <td>{{i+1}}</td>
+      <td>{{c.pointsSpent.toString()}}</td>
+      <td>{{c.pointsSpent.toString()}}</td>
+      <td>{{c.pointsSpent.toString()}}</td>
+      <td>{{c.pointsSpent.toString()}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
-<!--<pre>{{ challengeList | json }}</pre>-->
+</div>

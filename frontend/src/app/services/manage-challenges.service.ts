@@ -34,6 +34,7 @@ export class ManageChallengesService {
 
   deleteChallenge(id: String) {
     console.log(id);
+    console.log('gaat deleten');
     return this.http.delete('https://nodejs.tomvdr.com/node/api/challenge/delete/' + id + '?token=ABCDEF', {responseType: 'json'});
 
   }

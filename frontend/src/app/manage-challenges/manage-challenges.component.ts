@@ -80,5 +80,6 @@ errorMessage: String;
     } else {
       this.errorMessage = 'Failed to add the user. Make sure email and user level are filled in.';
     }
+
 }
 }

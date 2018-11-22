@@ -115,9 +115,9 @@ export class ManageRewardsComponent implements OnInit {
     this.activeModal.close();
   }
 
-  addCategory(categoryName: string) {
+/*  addCategory(categoryName: string) {
     const category = {name: categoryName};
-    this.rewardService.createRewardCategory(category)
+    this.rewardService.createCategory(category)
       .subscribe(
       (result: any) => {
         this.getCategories();
@@ -126,9 +126,9 @@ export class ManageRewardsComponent implements OnInit {
         console.log('error', error);
       }
     );
-  }
+  }*/
 
-  removeCategory(categoryId: string) {
+/*  removeCategory(categoryId: string) {
     this.rewardService.removeCategory(categoryId)
       .subscribe(
       (result: RewardCategory[]) => {
@@ -138,6 +138,6 @@ export class ManageRewardsComponent implements OnInit {
         console.log('error', error);
       }
     );
-  }
+  }*/
 
 }
