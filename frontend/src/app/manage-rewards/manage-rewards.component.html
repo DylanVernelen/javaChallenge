@@ -28,8 +28,9 @@
       </select></td>
       <td><input #description type="text" value="{{newItem.description}}" (change)="updateAttribute('description', description.value)" #description /></td>
       <td>
-        <form  method="post" enctype="multipart/form-data" #imageForm>
-          <input type="file" name="file" />
+        <button (click)="upload.click()"><i class="fas fa-upload"></i></button>
+        <form  method="post" enctype="multipart/form-data" #imageForm hidden>
+          <input type="file" name="file" #upload />
         </form>
       </td>
       <td>

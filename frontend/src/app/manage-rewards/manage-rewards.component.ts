@@ -45,8 +45,8 @@ export class ManageRewardsComponent implements OnInit {
             this.getRewards();
             const newRewardId = this.rewardList[this.rewardList.length - 1]._id;
             console.log(this.rewardList[this.rewardList.length - 1].imgUrl);
-            // form.action = 'https://nodejs.tomvdr.com/node/api/reward/fileupload/' + newRewardId + '?token=ABCDEF';
-            // form.submit();
+            form.action = 'https://nodejs.tomvdr.com/node/api/reward/fileupload/' + newRewardId + '?token=ABCDEF';
+            form.submit();
             this.newItem = new Reward();
           },
           (error: any) => {
