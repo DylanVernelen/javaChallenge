@@ -2,7 +2,7 @@
 <td>{{ item.rewardWorth }}</td>
 <td>{{ item.rewardCategory }}</td>
 <td>{{ item.description }}</td>
-<td><img src="" /></td>
+<td><img src="{{ 'https://nodejs.tomvdr.com/' + item.imgUrl }}" width="50px" height="50px" /></td>
 <td>
   <i class="fas fa-pencil-alt"
      (click)="open(edit)"></i>
