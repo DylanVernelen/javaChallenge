@@ -115,29 +115,29 @@ export class ManageRewardsComponent implements OnInit {
     this.activeModal.close();
   }
 
-  addCategory(categoryName: string) {
-    const category = {name: categoryName};
-    this.rewardService.createRewardCategory(category)
-      .subscribe(
-      (result: any) => {
-        this.getCategories();
-      },
-      (error: any) => {
-        console.log('error', error);
-      }
-    );
-  }
+  // addCategory(categoryName: string) {
+  //   const category = {name: categoryName};
+  //   this.rewardService.createRewardCategory(category)
+  //     .subscribe(
+  //     (result: any) => {
+  //       this.getCategories();
+  //     },
+  //     (error: any) => {
+  //       console.log('error', error);
+  //     }
+  //   );
+  // }
 
-  removeCategory(categoryId: string) {
-    this.rewardService.removeCategory(categoryId)
-      .subscribe(
-      (result: RewardCategory[]) => {
-        this.getCategories();
-      },
-      (error: any) => {
-        console.log('error', error);
-      }
-    );
-  }
+  // removeCategory(categoryId: string) {
+  //   this.rewardService.removeCategory(categoryId)
+  //     .subscribe(
+  //     (result: RewardCategory[]) => {
+  //       this.getCategories();
+  //     },
+  //     (error: any) => {
+  //       console.log('error', error);
+  //     }
+  //   );
+  // }
 
 }

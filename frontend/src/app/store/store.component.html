@@ -1,25 +1,18 @@
-<p>
-  store works!
-</p>
 <div class="container">
   <div class="row">
     <div id="categoryfilter" class="col-md-3">
       <h5>Filter by category</h5>
-      <form>
-        <ul style="list-style-type: none;">
-          <li *ngFor="let category of rewardCategoryList">
-            <label>
-              <input type="checkbox" (change)="filter(category.categoryName)"/>
-              {{category.categoryName}}
-            </label>
-          </li>
-        </ul>
-      </form>
+      <ul style="list-style-type: none;">
+        <li *ngFor="let category of rewardCategoryList">
+          <input type="checkbox" value="{{category.categoryName}}" (change)="filter(category.categoryName)" />
+          <label class="ml-2">{{category.categoryName}}</label>
+        </li>
+      </ul>
     </div>
     <div class="col-md-9">
       <div class="row">
         <app-reward class="col-md-4"
-                    *ngFor="let reward of rewardList; let i = index"
+                    *ngFor="let reward of rewardListShown; let i = index"
                     [item]="reward"
                     [index]="i">
         </app-reward>
