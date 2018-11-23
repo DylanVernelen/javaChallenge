@@ -3,10 +3,12 @@
 <td>{{ item.pointCount }}</td>
 <td>{{ item.userLevel }}</td>
 <td>
-  <i class="fas fa-pencil-alt"
-     (click)="open(edit)"></i>
-  <i class="far fa-trash-alt ml-3"
-     (click)="open(delete)"></i>
+  <div class="btn p-0">
+    <i class="fas fa-pencil-alt" (click)="open(edit)" placement="top" ngbTooltip="Edit"></i>
+  </div>
+  <div class="btn p-0">
+    <i class="far fa-trash-alt ml-3" (click)="open(delete)" placement="top" ngbTooltip="Delete"></i>
+  </div>
 </td>
 
 <ng-template #edit let-modal>
