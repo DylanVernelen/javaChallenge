@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ManageUsersService} from '../services/manage-users.service';
 import { User} from '../interfaces/user';
+import set = Reflect.set;
 
 @Component({
   selector: 'app-manage-users',
@@ -38,22 +39,18 @@ export class ManageUsersComponent implements OnInit {
             (result: User) => {
               console.log('success', result);
               this.getUsers();
-              this.succesMessage = 'Succes! User added!';
-              this.errorMessage = '';
+              this.setSuccesMessage("Succes! User <b>" + userEmail + "</b> added!");
             },
             (error: any) => {
               console.log('error', error);
-              this.succesMessage = '';
-              this.errorMessage = 'Failed to add the user. Try again later.';
+              this.setErrorMessage("Failed to add the user. Try again later.");
             }
           );
       } else {
-        this.succesMessage = '';
-        this.errorMessage = 'Failed to add the user. Make sure email and user level are filled in.';
+        this.setErrorMessage("Failed to add the user. Make sure email and user level are filled in.");
       }
     } else {
-      this.succesMessage = '';
-      this.errorMessage = 'Failed to add the user. There\'s already an user with the same email adress.';
+      this.setErrorMessage("Failed to add the user. There's already an user with the same email adress.");
     }
   }
 
@@ -75,10 +72,29 @@ export class ManageUsersComponent implements OnInit {
         },
         (error: any) => {
           console.log('error', error);
-          this.succesMessage = '';
-          this.errorMessage = 'Couldn\'t load the Users. Please try again later.';
+          this.setErrorMessage("Couldn't load the Users. Please try again later.");
         }
       );
+  }
+
+
+
+  setSuccesMessage(text: string){
+    let that = this;
+    this.succesMessage = text;
+    this.errorMessage = "";
+    setTimeout(function(){
+      that.succesMessage = "";
+    }, 3000);
+  }
+
+  setErrorMessage(text: string){
+    let that = this;
+    this.errorMessage = text;
+    this.succesMessage = "";
+    setTimeout(function(){
+      that.errorMessage = "";
+    }, 3000);
   }
 
 }

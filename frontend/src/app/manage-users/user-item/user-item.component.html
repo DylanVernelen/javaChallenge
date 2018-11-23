@@ -14,7 +14,7 @@
     <h4 class="modal-title" id="modal-edit-title">Edit <b>{{ item.email }}</b></h4>
   </div>
   <div class="modal-body">
-    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger" [innerHtml]="errorMessage"></div>
     <div class="form-group">
       <label for="emailUserEdit">Email address</label>
       <input type="email" class="form-control" id="emailUserEdit" placeholder="name@example.com" value="{{ item.email }}" #i>

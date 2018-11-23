@@ -9,41 +9,40 @@ import {catchError, share, tap} from 'rxjs/operators';
 })
 export class ManageUsersService {
 
-  // userList voorlopig dummy items
-  userList: User[] = [
-    {_id: "1", email: "test@gmail.com", userLevel: "admin", password: "", pointCount: 1, token: ""},
-    {_id: "2", email: "voorbeeld2@hotmail.com",  userLevel: "gebruiker", password: "", pointCount: 2, token: ""}
-  ];
+  curentUser: User;
+  token: string;
 
   constructor(private http: HttpClient) {
   }
 
   getUsers() {
-    return this.http.get<Array<User>>('https://nodejs.tomvdr.com/node/api/user/all?token=ABCDEF', {responseType: 'json'});
+    this.getToken();
+    return this.http.get<Array<User>>('https://nodejs.tomvdr.com/node/api/user/all?token=' + this.token, {responseType: 'json'});
 }
 
   // CRUD operaties
   createUser(user: User) {
-
-    // this.userList.unshift(user);
-    return this.http.post('https://nodejs.tomvdr.com/node/api/user/create?token=ABCDEF', user, {responseType: 'json'});
+    this.getToken();
+    return this.http.post('https://nodejs.tomvdr.com/node/api/user/create?token=' + this.token, user, {responseType: 'json'});
   }
 
   updateUser(user: User) {
-    // this.userList[i] = user;
-    return this.http.put('https://nodejs.tomvdr.com/node/api/user/update?token=ABCDEF', user, {responseType: 'json'});
+    this.getToken();
+    return this.http.put('https://nodejs.tomvdr.com/node/api/user/update?token=' + this.token, user, {responseType: 'json'});
   }
 
   deleteUser(id: string) {
-    return this.http.delete('https://nodejs.tomvdr.com/node/api/user/delete/' + id + '?token=ABCDEF', {responseType: 'json'});
+    return this.http.delete('https://nodejs.tomvdr.com/node/api/user/delete/' + id + '?token=' + this.token, {responseType: 'json'});
   }
 
-  // LocalStorage operaties
-  writeLocalStorage() {
-    // code volgt later
+  getToken(){
+    const user_str = localStorage.getItem("currentUser");
+    if (user_str !== null) {
+      this.curentUser= JSON.parse(user_str);
+      this.token = this.curentUser.token;
+    } else {
+      this.token="";
+    }
   }
 
-  readLocaleStorage() {
-    // code volgt later
-  }
 }

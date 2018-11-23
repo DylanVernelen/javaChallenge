@@ -42,23 +42,22 @@ export class UserItemComponent implements OnInit {
               (result: User) => {
                 console.log('success', result);
                 this.manageUsersComponent.getUsers();
-                this.manageUsersComponent.succesMessage = "Succes! User " + this.item.email + " is edited!";
-                this.manageUsersComponent.errorMessage = "";
+                this.setManageSuccesMessage("Succes! User <b>" + this.item.email + "</b> is edited!");
                 this.close();
               },
               (error: any) => {
                 console.log('error', error);
-                this.errorMessage = "Failed to edit the user. Try again later.";
+                this.setThisErrorMessage("Failed to edit the user. Try again later.");
               }
             );
         } else {
-          this.errorMessage = "Failed to edit the user. Passwords aren't the same.";
+          this.setThisErrorMessage("Failed to edit the user. Passwords aren't the same.");
         }
       } else {
-        this.errorMessage = "Failed to add the user. Make sure email and user level are filled in.";
+        this.setThisErrorMessage("Failed to add the user. Make sure email and user level are filled in.");
       }
     } else {
-      this.errorMessage = "Failed to add the user. There's already an user with the same email adress.";
+      this.setThisErrorMessage("Failed to add the user. There's already an user with the same email adress.");
     }
   }
 
@@ -68,17 +67,42 @@ export class UserItemComponent implements OnInit {
       .subscribe(
         (result) => {
           console.log('success', result);
-          this.manageUsersComponent.succesMessage = "Succes! User " + this.item.email + " is deleted.";
-          this.manageUsersComponent.errorMessage = "";
+          this.setManageSuccesMessage("Succes! User <b>" + this.item.email + "</b> is deleted.");
           this.manageUsersComponent.getUsers();
           this.close();
         },
         (error: any) => {
           console.log('error', error);
-          this.manageUsersComponent.errorMessage = "Failed to delete the user. Please try again later.";
+          this.setManageErrorMessage("Failed to delete the user. Please try again later.");
           this.close();
         }
       );
+  }
+
+  setThisErrorMessage(text: string){
+    let that = this;
+    this.errorMessage = text;
+    /*setTimeout(function(){
+      that.errorMessage = "";
+      }, 3000);*/
+  }
+
+  setManageSuccesMessage(text: string){
+    let that = this;
+    this.manageUsersComponent.succesMessage = text;
+    this.manageUsersComponent.errorMessage = "";
+    setTimeout(function(){
+       that.manageUsersComponent.succesMessage = "";
+    }, 3000);
+  }
+
+  setManageErrorMessage(text: string){
+    let that = this;
+    this.manageUsersComponent.errorMessage = text;
+    this.manageUsersComponent.succesMessage = "";
+    setTimeout(function(){
+      that.manageUsersComponent.errorMessage = "";
+    }, 3000);
   }
 
   open(content) {
