@@ -6,7 +6,7 @@ import { User } from '../interfaces/user';
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  curentUser: User;
+  curentUser;
   token: string;
 
   constructor(private http: HttpClient) { }
@@ -17,7 +17,7 @@ export class UserService {
 
   getUser() {
     this.getToken();
-    return this.http.get<User>('https://nodejs.tomvdr.com/node/api/user/get/' + this.curentUser._id + '?token=' + this.token, {responseType: 'json'});
+    return this.http.get('https://nodejs.tomvdr.com/node/api/user/get/' + this.curentUser.id + '?token=' + this.token, {responseType: 'json'});
   }
 
   getToken(){

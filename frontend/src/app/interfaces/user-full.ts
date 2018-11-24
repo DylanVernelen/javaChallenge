@@ -14,7 +14,7 @@ export class HistoryList{
 }
 
 export class Challenges {
-  challengeId: string;
+  challengeid: string;
   challengeStatus: string;
   timeStampAdded: string;
   timeStampCompleted: string;

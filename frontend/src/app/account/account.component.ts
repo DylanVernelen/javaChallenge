@@ -5,6 +5,7 @@ import {ManageChallengesService} from "../services/manage-challenges.service";
 import {Challenge} from "../interfaces/challenge";
 import {RewardService} from "../services/reward.service";
 import {Reward} from "../interfaces/reward";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-account',
@@ -14,8 +15,12 @@ import {Reward} from "../interfaces/reward";
 export class AccountComponent implements OnInit {
 
   account: UserFull;
-  challengeList: [ChallengeList];
-  rewardList: [HistoryList];
+  challengeList: [ChallengeList] = [{name: "test", challengeWorth: 20, challengeStatus: "test",
+    dateAdded: "test", dateCompleted: "test", pointsAwarded: 0, description: "test"}];
+  rewardList: [HistoryList] = [{name: "test", description: "test",
+    worth: 10, date: "test", opgehaald: false,}];
+  firstChallenge: boolean = true;
+  firstReward: boolean = true;
 
   constructor(private userService: UserService, private challengeService: ManageChallengesService, private rewardService: RewardService) { }
 
@@ -41,7 +46,7 @@ export class AccountComponent implements OnInit {
 
   getChallenges(){
     for(let challenge of this.account.challenges){
-      let item: ChallengeList;
+      let item: ChallengeList = new ChallengeList();
       let datum: Date;
       item.description = challenge.description;
       item.challengeStatus = challenge.challengeStatus;
@@ -50,13 +55,18 @@ export class AccountComponent implements OnInit {
       datum = new Date(parseInt(challenge.timeStampCompleted)*1000);
       item.dateCompleted = datum.getDate() + "/" + (datum.getMonth()+1) + "/" + datum.getFullYear() + " " + datum.getHours() + ":" + datum.getMinutes() + ":" + datum.getSeconds();
       item.pointsAwarded = challenge.pointsAwarded;
-      this.challengeService.getChallenge(challenge.challengeId)
+      this.challengeService.getChallenge(challenge.challengeid)
         .subscribe(
           (result: Challenge) => {
             console.log('success', result);
             item.name = result.challengeName;
             item.challengeWorth = result.challengeWorth;
-            this.challengeList.push(item);
+            if(this.firstChallenge){
+              this.challengeList.fill(item);
+              this.firstChallenge = false;
+            } else {
+              this.challengeList.push(item);
+            }
           },
           (error: any) => {
             console.log('error', error);
@@ -68,7 +78,7 @@ export class AccountComponent implements OnInit {
 
   getHistory(){
     for(let reward of this.account.history){
-      let item: HistoryList;
+      let item: HistoryList = new HistoryList();
       let datum: Date;
       item.opgehaald = reward.opgehaald;
       datum = new Date(parseInt(reward.timeStamp)*1000);
@@ -80,7 +90,12 @@ export class AccountComponent implements OnInit {
             item.name = result.rewardName;
             item.description = result.description;
             item.worth = result.rewardWorth;
-            this.rewardList.push(item);
+            if(this.firstReward){
+              this.rewardList.fill(item);
+              this.firstReward = false;
+            } else {
+              this.rewardList.push(item);
+            }
           },
           (error: any) => {
             console.log('error', error);

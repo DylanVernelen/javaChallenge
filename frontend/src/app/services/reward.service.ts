@@ -52,7 +52,7 @@ export class RewardService {
 
   getReward(id: string) {
     this.getToken();
-    return this.http.get<Reward>('https://nodejs.tomvdr.com/node/api/reward/get/' + id + '?token=' + this.token, {responseType: 'json'});
+    return this.http.get('https://nodejs.tomvdr.com/node/api/reward/get/' + id + '?token=' + this.token, {responseType: 'json'});
   }
 
   getToken(){

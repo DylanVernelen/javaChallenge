@@ -53,7 +53,7 @@ export class ManageChallengesService {
 
   getChallenge(id: string){
     this.getToken();
-    return this.http.get<Challenge>('https://nodejs.tomvdr.com/node/api/challenge/get/' + id + '?token=' + this.token, {responseType: 'json'});
+    return this.http.get('https://nodejs.tomvdr.com/node/api/challenge/get/' + id + '?token=' + this.token, {responseType: 'json'});
   }
 
   getToken(){

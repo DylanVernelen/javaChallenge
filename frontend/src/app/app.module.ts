@@ -18,9 +18,9 @@ import {HttpModule} from '@angular/http';
 
 import { ManageRewardsModule } from './manage-rewards/manage-rewards.module';
 import { ChallengesComponent } from 'src/app/challenges/challenges.component';
-import { AccountComponent } from 'src/app/account/account.component';
 import { AdminComponent } from './admin/admin.component';
 import {ManageUsersModule} from "./manage-users/manage-users.module";
+import {AccountModule} from "./account/account.module";
 
 @NgModule({
   declarations: [
@@ -30,7 +30,6 @@ import {ManageUsersModule} from "./manage-users/manage-users.module";
     ManageChallengesComponent,
     HomeComponent,
     ChallengesComponent,
-    AccountComponent,
     AdminComponent
   ],
   imports: [
@@ -42,7 +41,8 @@ import {ManageUsersModule} from "./manage-users/manage-users.module";
     FormsModule,
     ReactiveFormsModule,
     ManageRewardsModule,
-    ManageUsersModule
+    ManageUsersModule,
+    AccountModule
   ],
   providers: [
     StoreModule,

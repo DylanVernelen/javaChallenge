@@ -6,7 +6,7 @@ var routes =
 		url: '/user/get/:id',
 		method: 'GET',
 		authentication: true,
-		userLevels: ['admin'],
+		userLevels: ['admin', 'user'],
 		function: getUserById
 	},
 	{
@@ -50,7 +50,7 @@ async function getUserById(req, res)
 	var database = res.locals.database;
 	var userid = req.params.id;
 
-	var user = await database.findOne('User', {_id: userid})
+	var user = await database.findOne('User', {_id: userid});
 	res.json(user);
 }
 
@@ -71,7 +71,7 @@ async function deleteUserById(req, res)
 async function updateUserById(req, res)
 {
 	var database = res.locals.database;
-	var userid = req.body.id;
+	var userid = req.body._id;
 
 	var fields = {};
 
@@ -150,7 +150,7 @@ async function createUser(req, res)
 	fields.password = bcrypt.hashSync(req.body.password, 10);
 	fields.email = req.body.email;
 	fields.userLevel = req.body.userLevel;
-	fields.pointCount = 0;
+	fields.pointCount = req.body.pointCount || 0;
 
 
 	var result = await database.findOne('User', {email: fields.email});

@@ -23,12 +23,12 @@ export class ManageUsersService {
   // CRUD operaties
   createUser(user: User) {
     this.getToken();
-    return this.http.post('https://nodejs.tomvdr.com/node/api/user/create?token=' + this.token, user, {responseType: 'json'});
+    return this.http.put('https://nodejs.tomvdr.com/node/api/user/create?token=' + this.token, user, {responseType: 'json'});
   }
 
   updateUser(user: User) {
     this.getToken();
-    return this.http.put('https://nodejs.tomvdr.com/node/api/user/update?token=' + this.token, user, {responseType: 'json'});
+    return this.http.patch('https://nodejs.tomvdr.com/node/api/user/update?token=' + this.token, user, {responseType: 'json'});
   }
 
   deleteUser(id: string) {
