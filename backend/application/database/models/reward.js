@@ -4,12 +4,13 @@ var Schema = mongoose.Schema
 
 var RewardSchema = new Schema(
 {
-	rewardName: String,
-	rewardOwner: String,
-	rewardWorth: Number,
-	rewardCategory: String,
+	name: String,
+	owner: String,
+	worth: Number,
+	category: String,
 	enabled: Boolean,
 	description: String,
 	imgUrl: String
 });
- module.exports = mongoose.model('Reward', RewardSchema);
+
+module.exports = mongoose.model('Reward', RewardSchema);

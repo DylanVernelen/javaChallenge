@@ -113,9 +113,9 @@ module.exports =
 				res.json({error: "no-id"});
 			}
 
-			var name = req.body.challengeName || undefined;
-			var worth = parseInt(req.body.challengeWorth) || undefined;
-			var owner = req.body.challengeOwner || undefined;
+			var name = req.body.name || undefined;
+			var worth = parseInt(req.body.worth) || undefined;
+			var owner = req.body.owner || undefined;
 
 	        models.modelChallenge.findById(id, function(err, challenge) {
 
@@ -360,7 +360,7 @@ module.exports =
 		{	
 			var model = models.modelUser;
 
-			model.findById(req.params.user_id, function(err, user)
+			model.findById(req.params.reward_id, function(err, user)
 			{
 				if(err)
 					res.send(err)
@@ -368,6 +368,7 @@ module.exports =
 				res.json(user);
 			})
 		});
+
 
 
 		// REWARD DELETE BY ID - DELETE
@@ -488,6 +489,7 @@ module.exports =
 					res.send(err);
 				}	
 
+
 				if(user && user._id)
 				{
 					models.modelChallenge.findById(challengeid, function(err, challenge)
@@ -582,7 +584,7 @@ module.exports =
 		{	
 			var model = models.modelChallenge;
 
-			model.findById(req.params.challenge_id, function(err, challenge)
+			model.findById(req.params.reward_id, function(err, challenge)
 			{
 				if(err)
 					res.send(err)
@@ -597,7 +599,7 @@ module.exports =
 			var model = models.modelChallenge;
 
 			model.remove({
-				_id: req.params._id
+				_id: req.params.user_id
 			}, function(err, challenge)
 			{
 				if(err)

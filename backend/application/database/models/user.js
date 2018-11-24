@@ -13,7 +13,17 @@ var ChallengeSchema = new Schema(
 	challengeStatus: String,
 	pointsAwarded: Number,
 	description: String,
-	uniqueindex: String
+	uniqueid: String
+});
+
+
+var HistorySchema = new Schema(
+{
+	rewardid: String,
+	pointsSpent: Number,
+	timestamp: Number,
+	opgehaald: Boolean,
+	uniqueid: String
 });
 
 var UserSchema = new Schema(
@@ -23,7 +33,7 @@ var UserSchema = new Schema(
     userLevel: String,
     pointCount: Number,
     token: String,
-    history: Array,
+    history: [HistorySchema],
     challenges: [ChallengeSchema]
 });
 

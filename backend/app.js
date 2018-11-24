@@ -2,37 +2,49 @@
 // =============================================================================
 
 // call the packages we need
-var express    = require('express');        // call express
-var app        = express();                 // define our app using express
-var bodyParser = require('body-parser');
 var bcrypt     = require('bcrypt');
-var cors 	   = require('cors');
+var application = require('./application/application');
 
 
-// Database
-var mongoose = require('mongoose');
+var config = 
+{
+    database:
+    {
+        username: 'root',
+        password: 'ThomasMore1',
+        host: 'ds055762.mlab.com:55762/rewardsystem'
+    },
+    router: 
+    {
+        path: '/api',
 
-var modelReward = require('./models/reward.js');
-var modelChallenge = require('./models/challenge.js');
-var modelUser = require('./models/user.js');
-var modelRewardCategory = require('./models/rewardcategory.js');
+    },
+
+    application: 
+    {
+        port: 8080
+        
+    }
 
 
-mongoose.connect('mongodb://root:ThomasMore1@ds055762.mlab.com:55762/rewardsystem', {useNewUrlParser: true}); // connect to our database
+}
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(cors());
 
-app.options('*', cors());
 
-var port = process.env.PORT || 8080;        // set our port
+var app =  new application(config);
+
+
+
+
+/*
+
+    
+
+
+
 
 // ROUTES FOR OUR API
 // =============================================================================
-var router = express.Router();              // get an instance of the express Router
 
 var authentication = require('./authentication');
 	
@@ -51,7 +63,6 @@ var models =
 
 var apiRoutes = require('./api_routes.js');
 
-router.all('*', cors());
 
 router.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
@@ -98,3 +109,4 @@ app.use('/api', router);
 // =============================================================================
 app.listen(port);
 console.log('Starting server on port: ' + port);
+*/
