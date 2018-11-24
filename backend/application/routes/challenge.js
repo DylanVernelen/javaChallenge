@@ -153,7 +153,7 @@ async function requestChallengeById(req, res)
 
 	var description = undefined;
 	if(req.body.description)
-		description = res.body.description;
+		description = req.body.description;
 
 
 	if(!challenge)
