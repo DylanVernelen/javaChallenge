@@ -6,10 +6,8 @@ import { NgBootstrapModule } from './sharedModules/ng-bootstrap.module';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
-import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageChallengesComponent } from './manage-challenges/manage-challenges.component';
 import { StoreModule } from './store/store.module';
-import { UserItemComponent } from './manage-users/user-item/user-item.component';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -22,15 +20,14 @@ import { ManageRewardsModule } from './manage-rewards/manage-rewards.module';
 import { ChallengesComponent } from 'src/app/challenges/challenges.component';
 import { AccountComponent } from 'src/app/account/account.component';
 import { AdminComponent } from './admin/admin.component';
+import {ManageUsersModule} from "./manage-users/manage-users.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    ManageUsersComponent,
     ManageChallengesComponent,
-    UserItemComponent,
     HomeComponent,
     ChallengesComponent,
     AccountComponent,
@@ -44,7 +41,8 @@ import { AdminComponent } from './admin/admin.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ManageRewardsModule
+    ManageRewardsModule,
+    ManageUsersModule
   ],
   providers: [
     StoreModule,
