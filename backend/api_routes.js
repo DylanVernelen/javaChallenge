@@ -360,7 +360,7 @@ module.exports =
 		{	
 			var model = models.modelUser;
 
-			model.findById(req.params.reward_id, function(err, user)
+			model.findById(req.params.user_id, function(err, user)
 			{
 				if(err)
 					res.send(err)
