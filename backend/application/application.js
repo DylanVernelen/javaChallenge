@@ -22,6 +22,8 @@ class Application
 
 	initializeExpress()
 	{	
+
+
 		this.express = express();
 		this.express.use(bodyParser.urlencoded({ extended: true }));
 		this.express.use(bodyParser.json());
