@@ -582,7 +582,7 @@ module.exports =
 		{	
 			var model = models.modelChallenge;
 
-			model.findById(req.params.reward_id, function(err, challenge)
+			model.findById(req.params.challenge_id, function(err, challenge)
 			{
 				if(err)
 					res.send(err)
