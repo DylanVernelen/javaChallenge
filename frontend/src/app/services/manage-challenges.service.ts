@@ -9,6 +9,9 @@ import {User} from '../interfaces/user';
 })
 export class ManageChallengesService {
 
+  curentUser: User;
+  token: string;
+
   constructor(private http: HttpClient) {
   }
 
@@ -48,5 +51,18 @@ export class ManageChallengesService {
 
   }
 
+  getChallenge(id: string){
+    this.getToken();
+    return this.http.get<Challenge>('https://nodejs.tomvdr.com/node/api/challenge/get/' + id + '?token=' + this.token, {responseType: 'json'});
+  }
 
+  getToken(){
+    const user_str = localStorage.getItem("currentUser");
+    if (user_str !== null) {
+      this.curentUser= JSON.parse(user_str);
+      this.token = this.curentUser.token;
+    } else {
+      this.token="";
+    }
+  }
 }

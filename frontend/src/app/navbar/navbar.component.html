@@ -18,13 +18,19 @@
               <a class="nav-link" routerLink="/challenges" routerLinkActive="active">Challenges</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" routerLink="/account" routerLinkActive="active">My Account</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
         </li>
       </ul>
       <ul class="navbar-nav">
             <span class="navbar-text d-lg-block d-md-block d-sm-none" *ngIf="user">
-                        Point count: {{ user.pointCount }} | {{ user.email }}
+              Point count: {{ user.pointCount }}
             </span>
+          <li class="nav-item" *ngIf="user">
+            <a class="nav-link" routerLink="/account" routerLinkActive="active">{{ user.email }}</a>
+          </li>
           <li class="nav-item" *ngIf="!user">
               <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
           </li>

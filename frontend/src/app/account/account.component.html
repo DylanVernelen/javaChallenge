@@ -1,3 +1,53 @@
-<p>
-  account works!
-</p>
+<div class="container mt-5">
+  <h4>Account</h4>
+  <h5 class="mt-3">Challenge history</h5>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Worth</th>
+        <th scope="col">Date requested</th>
+        <th scope="col">Description</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let challenge of challengeList; let i = index">
+        <th scope="row">{{ i + 1}}</th>
+        <td>{{ challenge.name}}</td>
+        <td>{{ challenge.challengeWorth}}</td>
+        <td>{{ challenge.dateAdded}}</td>
+        <td>{{ challenge.description}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <h5 class="mt-3">Reward History</h5>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Worth</th>
+        <th scope="col">Date</th>
+        <th scope="col">Picked up</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reward of rewardList; let i = index">
+        <th scope="row">{{ i + 1}}</th>
+        <td>{{ reward.name}}</td>
+        <td>{{ reward.description}}</td>
+        <td>{{ reward.worth}}</td>
+        <td>{{ reward.date}}</td>
+        <td>{{ reward.opgehaald ? "Yes" : "No"}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <pre>{{ account | json }}</pre>
+</div>
+<hr>

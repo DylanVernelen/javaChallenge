@@ -1,7 +1,7 @@
 export class Challenge {
-    _id :Number;
-    challengeName: String;
-    challengeOwner: String;
-    challengeWorth: Number;
+    _id : number;
+    challengeName: string;
+    challengeOwner: string;
+    challengeWorth: number;
 }
 export * from './Challenge';

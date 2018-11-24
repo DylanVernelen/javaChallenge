@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { Reward } from '../interfaces/reward';
 import { HttpClient } from '@angular/common/http';
 import {RewardCategory} from '../interfaces/reward-category';
+import {User} from "../interfaces/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RewardService {
+
+  curentUser: User;
+  token: string;
 
   constructor(private http: HttpClient) {}
 
@@ -44,5 +48,20 @@ export class RewardService {
 
   removeCategory(id: string) {
     // todo
+  }
+
+  getReward(id: string) {
+    this.getToken();
+    return this.http.get<Reward>('https://nodejs.tomvdr.com/node/api/reward/get/' + id + '?token=' + this.token, {responseType: 'json'});
+  }
+
+  getToken(){
+    const user_str = localStorage.getItem("currentUser");
+    if (user_str !== null) {
+      this.curentUser= JSON.parse(user_str);
+      this.token = this.curentUser.token;
+    } else {
+      this.token="";
+    }
   }
 }

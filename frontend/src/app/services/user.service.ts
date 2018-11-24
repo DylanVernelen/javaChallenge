@@ -5,9 +5,28 @@ import { User } from '../interfaces/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<User[]>(`${config.apiUrl}/users`);
+  curentUser: User;
+  token: string;
+
+  constructor(private http: HttpClient) { }
+
+  getAll() {
+      return this.http.get<User[]>(`${config.apiUrl}/users`);
+  }
+
+  getUser() {
+    this.getToken();
+    return this.http.get<User>('https://nodejs.tomvdr.com/node/api/user/get/' + this.curentUser._id + '?token=' + this.token, {responseType: 'json'});
+  }
+
+  getToken(){
+    const user_str = localStorage.getItem("currentUser");
+    if (user_str !== null) {
+      this.curentUser= JSON.parse(user_str);
+      this.token = this.curentUser.token;
+    } else {
+      this.token="";
     }
+  }
 }
