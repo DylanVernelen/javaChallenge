@@ -40,7 +40,8 @@ async function validateToken(req, res)
 			pointCount: user.pointCount,
 			email: user.email,
 			userLevel: user.userLevel,
-			history: (user.history || {})
+			history: (user.history || {}),
+			challenges: (user.challenges || {})
 
 		});
 	else
