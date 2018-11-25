@@ -4,6 +4,7 @@ import {ManageUsersService} from "../services/manage-users.service";
 import {forEach} from "@angular/router/src/utils/collection";
 import {Challenge} from "../interfaces/challenge";
 import {ManageChallengesService} from "../services/manage-challenges.service";
+import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-accept-challenges',
@@ -11,8 +12,9 @@ import {ManageChallengesService} from "../services/manage-challenges.service";
   styleUrls: ['./accept-challenges.component.scss']
 })
 export class AcceptChallengesComponent implements OnInit {
-
-  constructor(private manageUsersService: ManageUsersService, private  challengeService: ManageChallengesService) { }
+    activeModal: NgbActiveModal;
+  constructor(private manageUsersService: ManageUsersService, private  challengeService: ManageChallengesService,
+              private modal: NgbModal) { }
   userList: any[];
   number = 0;
   challenge: any;
@@ -83,6 +85,23 @@ this.getUsers();
         );
 
     }
+    declineChallenge(userid, challengeid,uniqueid) {
+        const completedChallenge = { userid: userid,
+            challengeid :  challengeid , uniqueid:uniqueid };
+        this.challengeService.acceptChallenge(completedChallenge) .subscribe(
+            (result: Challenge) => {
+                this.challenges.length=0;
+                this.getUsers();
+                console.log('success', result);
+
+
+            },
+            (error: any) => {
+                console.log('error', error);
+            }
+        );
+
+    }
     setSuccesMessage(text: string){
         let that = this;
         this.succesMessage = text;
@@ -99,6 +118,12 @@ this.getUsers();
         setTimeout(function(){
             that.errorMessage = "";
         }, 3000);
+    }
+    open(content) {
+        this.activeModal = this.modal.open(content);
+    }
+    close() {
+        this.activeModal.close();
     }
 
 }

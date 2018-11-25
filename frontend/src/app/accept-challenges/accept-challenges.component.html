@@ -20,10 +20,40 @@
         <td>{{item.description}}</td>
         <td>{{item.status}}</td>
         <td *ngIf="item.status==='pending'">
-           <button (click)="acceptChallenge(item.userid, item.challengeid, item.uniqueid)" class="btn btn-success">Accept</button>
+           <button (click)="open(accept)" class="btn btn-success">Accept</button>
+            <button (click)="open(reject)" class="btn btn-danger">Reject</button>
+
         </td>
+        <ng-template #reject let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-reject-title">Reject</h4>
+            </div>
+            <div class="modal-body">
+                <h5>Are you sure you want to reject {{item.challengeid}} of {{item.user}}?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>
+                <button type="button" class="btn btn-outline-dark" (click)="declineChallenge(item.userid, item.challengeid, item.uniqueid)">Yes</button>
+            </div>
+
+        </ng-template>
+        <ng-template #accept let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-accept-title">Accept</h4>
+            </div>
+            <div class="modal-body">
+                <h5>Are you sure you want to accept{{item.challengeid}} of {{item.user}}?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>
+                <button type="button" class="btn btn-outline-dark" (click)="acceptChallenge(item.userid, item.challengeid, item.uniqueid)">Yes</button>
+            </div>
+
+        </ng-template>
     </tr>
     </tbody>
+
+
 </table>
 
 
