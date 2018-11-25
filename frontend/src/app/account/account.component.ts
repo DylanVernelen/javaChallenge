@@ -92,7 +92,6 @@ export class AccountComponent implements OnInit {
       } else {
         item.dateCompleted = '/';
       }
-      //datum = new Date(parseInt(challenge.timestampAdded, 10) * 1000, 10);
 
 
       timestamp = parseInt(challenge.timestampAdded, 10);
