@@ -48,13 +48,11 @@ export class ManageChallengesService {
     return this.http.get<Array<Challenge>>(environment.apiPath + 'challenge/all?token=' + this.token, {responseType: 'json'});
   }
 
-<<<<<<< HEAD
-  createCompletedChallenge(challenge: CompletedChallenge) {
-    console.log(challenge);
-=======
+
+ 
   createCompletedChallenge(challenge: any) {
     this.getToken();
->>>>>>> b35f5c4708875ddd5f7580a58fafe9141b4685dc
+
     return this.http.post(environment.apiPath + 'challenge/request?token=' + this.token, challenge, {responseType: 'json'})
   }
 
