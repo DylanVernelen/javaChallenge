@@ -25,3 +25,21 @@ $brand-warning:     #ff8c00;
 .orderbyworth button {
     margin-top: 10px !important;
 }
+#storeHeader{
+  text-align: center;
+}
+#categoryfilter{
+  text-align: center;
+
+  div:first-child{
+    border:1px solid gray;
+    border-radius: 5px;
+    padding-bottom: 10%;
+    padding-top: 10%;
+  }
+
+  ul{
+    text-align: left;
+    margin-left: 15%;
+  }
+}

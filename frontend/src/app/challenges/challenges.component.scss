@@ -1,28 +1,33 @@
-.completechallenge{
+.completechallenge {
   margin-top: 50px !important;
   .challenge {
     margin-top: 30px !important;
   }
   p {
-padding: 0px !important;
+    padding: 0px !important;
     margin: 0px !important;
   }
-  h2{
+  h2 {
     text-align: left;
+  }
 
+  #challengeHeader {
+    text-align: center;
+    margin-bottom: 5%;
   }
-  label{
+  label {
     text-decoration: underline;
-    margin-bottom: 20px ;
+    margin-bottom: 20px;
   }
-  input{
+  input {
     margin-bottom: 50px;
   }
 }
 
-.history{
+.history {
   margin-top: 50px !important;
-  .btn{
+  .btn {
     height: 50px;
   }
 }
+
