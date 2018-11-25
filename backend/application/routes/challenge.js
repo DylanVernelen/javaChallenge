@@ -49,7 +49,14 @@ var routes =
         authentication: true,
         userLevels: ['admin'],
         function: createChallenge
-    }
+    },
+	{
+		url: '/challenge/rejected',
+		method: 'POST',
+		authentication: true,
+		userLevels: ['admin'],
+		function: onChallengeRejected
+	},
 ]
 
 exports.get = function()
@@ -202,6 +209,74 @@ async function requestChallengeById(req, res)
 	)
 
 }
+async function onChallengeRejected(req, res)
+{
+	var database  = res.locals.database;
+	var userid = req.body.userid || undefined;
+	var uniqueid = req.body.uniqueid || undefined;
+	var user = await database.findOne('User', {_id: userid});
+
+	if(!user)
+	{
+		return res.json({error: 'invalid-userid'});
+	}
+
+	var found = false;
+	 
+
+	user.challenges.forEach(function(challenge)
+	{
+		if(challenge.uniqueid = uniqueid)
+			found = challenge;
+	});
+
+	if(!found)
+	{
+		return res.json({error: 'invalid-uniqueid'});
+	}
+
+	if(found.pointsAwarded && found.pointsAwarded > 0)
+	{
+		return res.json({error: 'already-completed'})
+	}
+
+	if(found.challengeStatus == 'finished')
+	{
+		return res.json({error: 'already-completed'})
+	}
+	if(found.challengeStatus == 'rejected')
+	{
+		return res.json({error: 'already-rejected'})
+	}
+
+
+
+
+	found.challengeStatus = 'rejected';
+	var challenge = await database.findOne('Challenge', {_id: found.challengeid});
+
+	if(!challenge)
+	{
+		return res.json({error: 'invalid-challenge-id-does-not-exist'});
+	}
+
+	found.pointsAwarded = 0;
+
+	//found.pointsAwarded = challenge.challengeWorth;
+
+	//user.pointCount += found.pointsAwarded;
+
+
+
+	user.save(function(err)
+	{
+		if(err)
+			console.log(err);
+	})
+
+	res.json({succes: true, pointsAwarded: found.pointsAwarded, pointCount: user.pointCount});
+
+}
 
 async function onChallengeComplete(req, res)
 {
@@ -238,7 +313,10 @@ async function onChallengeComplete(req, res)
 	{
 		return res.json({error: 'already-completed'})
 	}
-
+	if(found.challengeStatus == 'rejected')
+	{
+		return res.json({error: 'already-rejected'})
+	}
 
 
 	found.challengeStatus = 'finished';

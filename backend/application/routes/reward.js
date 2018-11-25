@@ -295,10 +295,12 @@ async function uploadFile(req, res)
     	}
       	var oldpath = files.file.path;	
 		filename = req.params.reward_id + path.extname(files.file.name);
-		var newpath = './../' + filename;
+		var newpath = './../../' + filename;
 
 		console.log('rewardid', req.params.reward_id);
 		console.log('extension', path.extname(files.file.name));
+		console.log('oldpath', oldpath);
+		console.log('newpath', newpath);
 
 		fs.rename(oldpath, newpath, async function (err) {
 	        if (err) throw err;
