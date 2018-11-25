@@ -7,7 +7,7 @@ import {UserService} from "../services/user.service";
   imports: [
     CommonModule
   ],
-  declarations: [AccountComponent],
+  declarations: [],
   providers: [UserService]
 })
 export class AccountModule { }

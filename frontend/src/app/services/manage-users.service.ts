@@ -33,6 +33,7 @@ export class ManageUsersService {
   }
 
   deleteUser(id: string) {
+    this.getToken();
     return this.http.delete(environment.apiPath + 'user/delete/' + id + '?token=' + this.token, {responseType: 'json'});
   }
 

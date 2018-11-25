@@ -42,7 +42,14 @@ var routes =
 		authentication: true,
 		userLevels: ['admin'],
 		function: onChallengeComplete
-	}
+	},
+    {
+        url: '/challenge/create',
+        method: 'POST',
+        authentication: true,
+        userLevels: ['admin'],
+        function: createChallenge
+    }
 ]
 
 exports.get = function()
@@ -123,7 +130,7 @@ async function createChallenge(req, res)
 {
 	var database = res.locals.database;
 
-	var fields = {}
+	var fields = {};
 
 	
 	if(req.body.name)

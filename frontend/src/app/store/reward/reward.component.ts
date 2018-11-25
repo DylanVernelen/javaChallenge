@@ -24,10 +24,10 @@ export class RewardComponent implements OnInit {
 
   ngOnInit() {
     if (!this.item.imgUrl || this.item.imgUrl === '') {
-      this.item.imgUrl = 'no-image.png';
+      this.item.imgUrl = environment.imgPath + 'no-image.png';
     }
 
-    this.item.imgUrl = environment.imgPath + this.item.imgUrl;
+    // this.item.imgUrl = environment.imgPath + this.item.imgUrl;
   }
 
   open(content) {

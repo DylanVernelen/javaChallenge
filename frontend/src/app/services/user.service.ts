@@ -15,6 +15,7 @@ export class UserService {
   }
 
   getAll() {
+    this.getToken();
       return this.http.get<User[]>(environment.apiPath + '/user/all?token=' + this.token);
   }
 
