@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiPath: 'https://nodejs.tomvdr.com/node/api/'
+  apiPath: 'https://nodejs.tomvdr.com/node/api/',
+  imgPath: 'https://nodejs.tomvdr.com/'
 
 };
 

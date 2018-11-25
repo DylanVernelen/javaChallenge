@@ -4,6 +4,7 @@ import {NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {User} from '../../interfaces/user';
 import {RewardService} from '../../services/reward.service';
 import {RewardCategory} from '../../interfaces/reward-category';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-reward',
@@ -22,6 +23,11 @@ export class RewardComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.item.imgUrl || this.item.imgUrl === '') {
+      this.item.imgUrl = 'no-image.png';
+    }
+
+    this.item.imgUrl = environment.imgPath + this.item.imgUrl;
   }
 
   open(content) {
