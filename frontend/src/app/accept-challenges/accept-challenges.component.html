@@ -1,1 +1,32 @@
-<pre>{{ challenges | json }}</pre>
+<div class="container">
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th (click)="orderByUser()" scope="col">User</th>
+        <th scope="col">Challenge</th>
+        <th scope="col">Description</th>
+        <th (click)="orderByStatus()" scope="col">Status</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr
+            *ngFor="let item of challenges; let i = index ">
+        <td>{{i +1}}</td>
+        <td>{{item.user}}</td>
+        <td>{{item.challengeid}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.status}}</td>
+        <td *ngIf="item.status==='pending'">
+           <button (click)="acceptChallenge(item.userid, item.challengeid, item.uniqueid)" class="btn btn-success">Accept</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+<pre>{{ challenges| json }}</pre>
+</div>

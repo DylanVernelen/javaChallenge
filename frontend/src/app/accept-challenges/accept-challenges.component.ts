@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {User} from "../interfaces/user";
 import {ManageUsersService} from "../services/manage-users.service";
 import {forEach} from "@angular/router/src/utils/collection";
+import {Challenge} from "../interfaces/challenge";
+import {ManageChallengesService} from "../services/manage-challenges.service";
 
 @Component({
   selector: 'app-accept-challenges',
@@ -10,12 +12,16 @@ import {forEach} from "@angular/router/src/utils/collection";
 })
 export class AcceptChallengesComponent implements OnInit {
 
-  constructor(private manageUsersService: ManageUsersService) { }
+  constructor(private manageUsersService: ManageUsersService, private  challengeService: ManageChallengesService) { }
   userList: any[];
+  number = 0;
+  challenge: any;
+  completedchallenge: any;
+  challengeUserList= [];
     succesMessage: string;
     errorMessage: string;
   challenges = [];
-  challengesViewlist:any[];
+  challengesViewlist = [];
   ngOnInit() {
 this.getUsers();
 console.log(this.userList);
@@ -27,6 +33,7 @@ console.log(this.userList);
               (result: Array<User>) => {
                   console.log('success', result);
                   this.userList = result;
+                  console.log(this.userList);
                   this.getChallengesList();
               },
               (error: any) => {
@@ -37,13 +44,37 @@ console.log(this.userList);
   }
   getChallengesList() {
         for (let user of this.userList) {
-            console.log(user);
             if (user.challenges != null){
-                  this.challenges.push(user.challenges);
+                for (let challenge of user.challenges) {
+                    this.challenge = this.challengeService.getChallenge(challenge.challengeid.toString());
+                    console.log(this.challenge);
+                    const newChallenge = { userid: user._id, user: user.email, challenge:this.challenge.challengeName, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
+                    this.challenges.push(newChallenge);
+                }
             }
-
         }
-
+        this.orderByStatus();
+      console.log(this.challenges);
+    }
+    orderByStatus( ){
+        this.challenges.sort((a, b): number => {
+            if (a.status < b.status) { return 1; }
+            if (a.status > b.status) { return -1; }
+            return 0;
+    });
+    }
+    orderByUser( ){
+        this.challenges.sort((a, b): number => {
+            if (a.user < b.user) { return 1; }
+            if (a.user > b.user) { return -1; }
+            return 0;
+        });
+    }
+    acceptChallenge(userid, challengeid,uniqueid) {
+        const completedChallenge = { userid: userid,
+            challengeid :  challengeid , uniqueindex:uniqueid };
+        this.challengeService.acceptChallenge(completedChallenge);
+        this.getChallengesList();
     }
     setSuccesMessage(text: string){
         let that = this;
