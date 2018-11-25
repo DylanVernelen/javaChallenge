@@ -123,9 +123,10 @@ class Database
 	async createOne(type, createFields)
 	{
 		var model = this.getModelByType(type)
+		var result = new model();
+
 		try
 		{
-			var result = new model();
 
 
 			for(var field in createFields)
@@ -136,13 +137,16 @@ class Database
 					result[field] = value;
 			}
 
-			result.save(function(err)
+			result.save(async function(err)
 			{
 				if(err)
 					console.log("Error:",err);
 
 				return result;
 			})
+			return result;
+
+
 
 		} catch(err)
 		{

@@ -18,40 +18,33 @@ export class ManageChallengesService {
   }
 
   createChallenge(challenge: any) {
-    this.getToken();
     return this.http.post(environment.apiPath + 'challenge/create?token=' + this.token, challenge, {responseType: 'json'});
   }
 
   updateChallenge(challenge: Challenge) {
-    this.getToken();
     return this.http.patch(environment.apiPath + 'challenge/update?token=' + this.token, challenge, {responseType: 'json'});
   }
 
   deleteChallenge(id: String) {
-    this.getToken();
     return this.http.delete(environment.apiPath + 'challenge/delete/' + id + '?token=' + this.token, {responseType: 'json'});
   }
 
   getChallenges() {
-    this.getToken();
     return this.http.get<Array<Challenge>>(environment.apiPath + 'challenge/all?token=' + this.token, {responseType: 'json'});
   }
 
 
 
   createCompletedChallenge(challenge: any) {
-    this.getToken();
     return this.http.post(environment.apiPath + 'challenge/request?token=' + this.token, challenge, {responseType: 'json'})
   }
-acceptChallenge(challenge :any) {
+  acceptChallenge(challenge :any) {
     console.log(challenge);
-    this.getToken()
     return this.http.post(environment.apiPath + 'challenge/completed?token=' + this.token, challenge, {responseType: 'json'})
 
 }
     rejectChallenge(challenge :any) {
     console.log(challenge);
-        this.getToken()
         return this.http.post(environment.apiPath + 'challenge/rejected?token=' + this.token, challenge, {responseType: 'json'})
 
     }

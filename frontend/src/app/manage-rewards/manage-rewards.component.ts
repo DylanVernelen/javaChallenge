@@ -40,14 +40,12 @@ export class ManageRewardsComponent implements OnInit {
       };
       this.rewardService.createReward(reward)
         .subscribe(
-          (result: any) => {
+          (result: {success: boolean, id: string}) => {
             this.showMessage('success', 'Reward added successfully');
-            this.getRewards();
-            const newRewardId = this.rewardList[this.rewardList.length - 1]._id;
-            console.log(this.rewardList[this.rewardList.length - 1].imgUrl);
-            form.action = environment.apiPath + 'reward/fileupload/' + newRewardId + '?token=ABCDEF';
+            form.action = environment.apiPath + 'reward/fileupload/' + result.id + '?token=ABCDEF';
             form.submit();
             this.newItem = new Reward();
+            this.getRewards();
           },
           (error: any) => {
             console.log('error', error);

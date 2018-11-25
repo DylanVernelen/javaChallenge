@@ -268,8 +268,7 @@ async function createReward(req, res)
 
 
 	var result = await database.createOne('Reward', fields);
-
-    res.json({succes: true});
+    res.json({succes: true, id: result._id});
 
 }
 
@@ -323,7 +322,7 @@ async function uploadFile(req, res)
 
             		console.log("Saved to database", reward);
 
-					res.json({succes: true, imgUrl: "https://nodejs.tomvdr.com/" + filename});
+					// res.json({succes: true, imgUrl: "https://nodejs.tomvdr.com/" + filename});
             	});
 	        }
 	    });

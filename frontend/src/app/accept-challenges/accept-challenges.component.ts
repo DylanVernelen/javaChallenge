@@ -85,7 +85,7 @@ this.getUsers();
     acceptChallenge(userid, challengeid,uniqueid) {
         const completedChallenge = { userid: userid,
             challengeid :  challengeid , uniqueid:uniqueid };
-        this.challengeService.acceptChallenge(completedChallenge) .subscribe(
+        this.challengeService.acceptChallenge(completedChallenge).subscribe(
             (result: Challenge) => {
                 this.challenges.length=0;
                 this.getUsers();
