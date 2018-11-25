@@ -18,12 +18,7 @@ export class AcceptChallengesComponent implements OnInit {
   userList: any[];
   number = 0;
   challenge: any;
-  completedchallenge: any;
-  challengeUserList= [];
-    succesMessage: string;
-    errorMessage: string;
   challenges = [];
-  challengesViewlist = [];
   ngOnInit() {
 this.getUsers();
 
@@ -38,7 +33,6 @@ this.getUsers();
               },
               (error: any) => {
                   console.log('error', error);
-                  this.setErrorMessage("Couldn't load the Users. Please try again later.");
               }
           );
   }
@@ -76,48 +70,24 @@ this.getUsers();
                 this.challenges.length=0;
                 this.getUsers();
                 console.log('success', result);
-
-
             },
             (error: any) => {
                 console.log('error', error);
             }
         );
-
     }
-    declineChallenge(userid, challengeid,uniqueid) {
-        const completedChallenge = { userid: userid,
-            challengeid :  challengeid , uniqueid:uniqueid };
-        this.challengeService.acceptChallenge(completedChallenge) .subscribe(
+   rejectChallenge(userid,uniqueid) {
+        const completedChallenge = { userid: userid, uniqueid:uniqueid };
+        this.challengeService.rejectChallenge(completedChallenge) .subscribe(
             (result: Challenge) => {
                 this.challenges.length=0;
                 this.getUsers();
                 console.log('success', result);
-
-
             },
             (error: any) => {
                 console.log('error', error);
             }
         );
-
-    }
-    setSuccesMessage(text: string){
-        let that = this;
-        this.succesMessage = text;
-        this.errorMessage = "";
-        setTimeout(function(){
-            that.succesMessage = "";
-        }, 3000);
-    }
-
-    setErrorMessage(text: string){
-        let that = this;
-        this.errorMessage = text;
-        this.succesMessage = "";
-        setTimeout(function(){
-            that.errorMessage = "";
-        }, 3000);
     }
     open(content) {
         this.activeModal = this.modal.open(content);

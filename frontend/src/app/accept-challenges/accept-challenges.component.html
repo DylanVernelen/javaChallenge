@@ -1,4 +1,5 @@
 <div class="container">
+    <h2>Accept challenges</h2>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -24,6 +25,9 @@
             <button (click)="open(reject)" class="btn btn-danger">Reject</button>
 
         </td>
+        <td *ngIf="item.status!=='pending'">
+No actions
+        </td>
         <ng-template #reject let-modal>
             <div class="modal-header">
                 <h4 class="modal-title" id="modal-reject-title">Reject</h4>
@@ -33,7 +37,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>
-                <button type="button" class="btn btn-outline-dark" (click)="declineChallenge(item.userid, item.challengeid, item.uniqueid)">Yes</button>
+                <button type="button" class="btn btn-outline-dark" (click)="rejectChallenge(item.userid, item.uniqueid)">Yes</button>
             </div>
 
         </ng-template>
