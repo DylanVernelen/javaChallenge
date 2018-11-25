@@ -5,6 +5,7 @@ import {forEach} from "@angular/router/src/utils/collection";
 import {Challenge} from "../interfaces/challenge";
 import {ManageChallengesService} from "../services/manage-challenges.service";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {UserFull} from "../interfaces/user-full";
 
 @Component({
   selector: 'app-accept-challenges',
@@ -19,6 +20,7 @@ export class AcceptChallengesComponent implements OnInit {
   status: String;
   number = 0;
   challenge: any;
+  challengeName: String;
   challenges = [];
   ngOnInit() {
 this.getUsers();
@@ -41,19 +43,20 @@ this.getUsers();
         for (let user of this.userList) {
             if (user.challenges != null){
                 for (let challenge of user.challenges) {
-                   this.challengeService.getChallenge(challenge.challengeid.toString()).subscribe(
-                        (result: Challenge) => {
+                    this.challengeService.getChallenge(challenge.challengeid).subscribe(
+                        (result : Challenge) => {
+                            console.log(result);
                             this.challenge = result;
-                            console.log(this.challenge);
                         },
-                       (error: any) => {
-                           console.log('error', error);
-                       }
+                        (error: any) => {
+                            console.log('error', error);
+                        }
                     );
                     if (challenge.challengeStatus === 'rejected') {
                         challenge.challengeStatus = 'denied';
                     }
-                    const newChallenge = { userid: user._id, user: user.email, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
+                    console.log(this.challenge);
+                    const newChallenge = { userid: user._id, user: user.email, challengeName: this.challenge.challengeName, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
                     this.challenges.push(newChallenge);
                 }
             }
@@ -61,6 +64,7 @@ this.getUsers();
         this.orderByStatus();
     }
     orderByStatus( ){
+      console.log(this.challenges);
         this.challenges.sort((a, b): number => {
             if (a.status < b.status) { return 1; }
             if (a.status > b.status) { return -1; }
@@ -97,6 +101,7 @@ this.getUsers();
             }
         );
     }
+
    rejectChallenge(userid,uniqueid) {
         const completedChallenge = { userid: userid, uniqueid:uniqueid };
         this.challengeService.rejectChallenge(completedChallenge) .subscribe(

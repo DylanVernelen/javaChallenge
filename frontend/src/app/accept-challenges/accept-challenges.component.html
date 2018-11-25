@@ -17,7 +17,7 @@
             *ngFor="let item of challenges; let i = index ">
         <td>{{i +1}}</td>
         <td>{{item.user}}</td>
-        <td>{{item.challengeid}}</td>
+        <td>{{item.challengeName}}</td>
         <td>{{item.description}}</td>
         <td>{{item.status}}</td>
         <td *ngIf="item.status==='pending'">
@@ -33,7 +33,7 @@ No actions
                 <h4 class="modal-title" id="modal-reject-title">Reject</h4>
             </div>
             <div class="modal-body">
-                <h5>Are you sure you want to reject {{item.challengeid}} of {{item.user}}?</h5>
+                <h5>Are you sure you want to reject {{item.challengeName}} of {{item.user}}?</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>
@@ -46,7 +46,7 @@ No actions
                 <h4 class="modal-title" id="modal-accept-title">Accept</h4>
             </div>
             <div class="modal-body">
-                <h5>Are you sure you want to accept{{item.challengeid}} of {{item.user}}?</h5>
+                <h5>Are you sure you want to accept{{item.challengeName}} of {{item.user}}?</h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>
@@ -59,6 +59,6 @@ No actions
 
 
 </table>
-<span>{{challenge | json}}</span>
+<span>{{newChallenge | json}}</span>
 
 </div>
