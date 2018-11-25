@@ -71,6 +71,7 @@ export class ChallengesComponent implements OnInit {
                this.manageChallengeService.createCompletedChallenge(newCompletedChallenge)
                    .subscribe(
                        (result: Challenge) => {
+                         console.log(result);
                            this.errorMessage = '';
                            (async () => {
                                this.succesMessage = 'Request succesfully. If your request is accepted, you have earned '
