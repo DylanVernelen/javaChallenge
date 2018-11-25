@@ -24,7 +24,6 @@ export class AcceptChallengesComponent implements OnInit {
   challengesViewlist = [];
   ngOnInit() {
 this.getUsers();
-console.log(this.userList);
 
   }
   getUsers() {
@@ -47,7 +46,6 @@ console.log(this.userList);
             if (user.challenges != null){
                 for (let challenge of user.challenges) {
                     this.challenge = this.challengeService.getChallenge(challenge.challengeid.toString());
-                    console.log(this.challenge);
                     const newChallenge = { userid: user._id, user: user.email, challenge:this.challenge.challengeName, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
                     this.challenges.push(newChallenge);
                 }
@@ -72,9 +70,19 @@ console.log(this.userList);
     }
     acceptChallenge(userid, challengeid,uniqueid) {
         const completedChallenge = { userid: userid,
-            challengeid :  challengeid , uniqueindex:uniqueid };
-        this.challengeService.acceptChallenge(completedChallenge);
-        this.getChallengesList();
+            challengeid :  challengeid , uniqueid:uniqueid };
+        this.challengeService.acceptChallenge(completedChallenge) .subscribe(
+            (result: Challenge) => {
+
+                console.log('success', result);
+                this.challenges.length=0;
+                this.getChallengesList();
+            },
+            (error: any) => {
+                console.log('error', error);
+            }
+        );
+
     }
     setSuccesMessage(text: string){
         let that = this;
