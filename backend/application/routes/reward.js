@@ -308,7 +308,7 @@ async function uploadFile(req, res)
 
 
 
-	        var reward = await database.findOne({_id: req.params.reward_id});
+	        var reward = await database.findOne('Reward', {_id: req.params.reward_id});
 
 	        if(reward)
 	        {
