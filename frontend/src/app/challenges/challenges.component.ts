@@ -62,7 +62,7 @@ export class ChallengesComponent implements OnInit {
     this.errorMessage = '';
       console.log(challengeId);
             if (challengeId !== 0 && info !== '') {
-                const newCompletedChallenge = {userid: this.userid, challengeid: challengeId, info : info };
+                const newCompletedChallenge = {userid: this.userid, id: challengeId, description : info };
                 this.pointsinmessage = this.points.toString() + ' points.';
                 if (this.points === 1) {
                     this.pointsinmessage = this.points.toString() + ' point.';
