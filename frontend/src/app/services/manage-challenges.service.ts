@@ -3,6 +3,7 @@ import {Challenge} from '../interfaces/challenge';
 import {CompletedChallenge} from '../interfaces/completed-challenge';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../interfaces/user';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,12 @@ export class ManageChallengesService {
   token: string;
 
   constructor(private http: HttpClient) {
+    this.getToken();
   }
 
   createChallenge(challenge: Challenge) {
     console.log(challenge);
-    return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/create?token=ABCDEF', challenge, {responseType: 'json'})
+    return this.http.post(environment.apiPath + 'challenge/create?token=' + this.token, challenge, {responseType: 'json'})
       .subscribe(
         (result: Challenge) => {
           this.getChallenges();
@@ -32,37 +34,37 @@ export class ManageChallengesService {
 
   updateChallenge(challenge: Challenge) {
     console.log(challenge);
-    return this.http.patch('https://nodejs.tomvdr.com/node/api/challenge/update?token=ABCDEF', challenge, {responseType: 'json'});
+    return this.http.patch(environment.apiPath + 'challenge/update?token=' + this.token, challenge, {responseType: 'json'});
   }
 
   deleteChallenge(id: String) {
     console.log(id);
     console.log('gaat deleten');
-    return this.http.delete('https://nodejs.tomvdr.com/node/api/challenge/delete/' + id + '?token=ABCDEF', {responseType: 'json'});
+    return this.http.delete(environment.apiPath + 'challenge/delete/' + id + '?token=' + this.token, {responseType: 'json'});
 
   }
 
   getChallenges() {
-    return this.http.get<Array<Challenge>>('https://nodejs.tomvdr.com/node/api/challenge/all?token=ABCDEF', {responseType: 'json'});
+    return this.http.get<Array<Challenge>>(environment.apiPath + 'challenge/all?token=' + this.token, {responseType: 'json'});
   }
 
   createCompletedChallenge(challenge: CompletedChallenge) {
-    return this.http.post('https://nodejs.tomvdr.com/node/api/challenge/request?token=ABCDEF', challenge, {responseType: 'json'})
+    return this.http.post(environment.apiPath + 'challenge/request?token=' + this.token, challenge, {responseType: 'json'})
 
   }
 
-  getChallenge(id: string){
+  getChallenge(id: string) {
     this.getToken();
-    return this.http.get('https://nodejs.tomvdr.com/node/api/challenge/get/' + id + '?token=' + this.token, {responseType: 'json'});
+    return this.http.get(environment.apiPath + 'challenge/get/' + id + '?token=' + this.token, {responseType: 'json'});
   }
 
-  getToken(){
-    const user_str = localStorage.getItem("currentUser");
+  getToken() {
+    const user_str = localStorage.getItem('currentUser');
     if (user_str !== null) {
-      this.curentUser= JSON.parse(user_str);
+      this.curentUser = JSON.parse(user_str);
       this.token = this.curentUser.token;
     } else {
-      this.token="";
+      this.token = '';
     }
   }
 }
