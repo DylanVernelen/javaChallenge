@@ -45,18 +45,19 @@ export class StoreComponent implements OnInit {
       );
   }
   filterOnWorth(by) {
-      if (this)
+      if (this) {
     if (by.toString() == 'asc') {
-        this.rewardListShown.sort((a,b): number => {
-            if(a.worth>b.worth) return 1;
-            if(a.worth<b.worth) return -1;
+        this.rewardListShown.sort((a, b): number => {
+            if (a.worth > b.worth) { return 1; }
+            if (a.worth < b.worth) { return -1; }
             return 0;
         });
     }
+      }
       if (by.toString() == 'desc') {
-          this.rewardListShown.sort((a,b): number => {
-              if(a.worth<b.worth) return 1;
-              if(a.worth>b.worth) return -1;
+          this.rewardListShown.sort((a, b): number => {
+              if (a.worth < b.worth) { return 1; }
+              if (a.worth > b.worth) { return -1; }
               return 0;
           });
       }

@@ -1,4 +1,4 @@
 export class RewardCategory {
-  id: string;
+  _id: string;
   categoryName: string;
 }

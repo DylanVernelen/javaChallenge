@@ -24,7 +24,7 @@ export class RewardService {
   }
 
   createReward(reward: {}) {
-    return this.http.post(environment.apiPath + 'reward/create?token=' + this.token, reward, {responseType: 'json'});
+    return this.http.put(environment.apiPath + 'reward/create?token=' + this.token, reward, {responseType: 'json'});
   }
 
   deleteReward(id: string) {
@@ -36,7 +36,7 @@ export class RewardService {
   }
 
   updateReward(reward: Reward) {
-    return this.http.put(environment.apiPath + 'reward/update?token=' + this.token, reward, {responseType: 'json'});
+    return this.http.patch(environment.apiPath + 'reward/update?token=' + this.token, reward, {responseType: 'json'});
   }
 
   // Categories
@@ -45,12 +45,12 @@ export class RewardService {
     return this.http.get<RewardCategory[]>(environment.apiPath + 'rewardcategory/all?token=' + this.token, {responseType: 'json', withCredentials: false});
   }
 
-  createCategory(category: RewardCategory) {
-    // todo
+  createCategory(category: {}) {
+    return this.http.put(environment.apiPath + 'rewardcategory/create?token=' + this.token, category, {responseType: 'json'});
   }
 
   removeCategory(id: string) {
-    // todo
+    return this.http.delete(environment.apiPath + 'rewardcategory/delete/' + id + '?token=' + this.token);
   }
 
   getReward(id: string) {

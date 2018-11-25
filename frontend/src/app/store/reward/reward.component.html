@@ -2,7 +2,7 @@
   <p class="card-header">{{item.name}}</p>
   <div class="card-body">
     <img class="card-img" src="{{item.imgUrl}}" />
-    <p>{{item.description}}</p>
+    <p>{{item.shortDescription}}</p>
   </div>
   <div class="card-footer">
     <p>Cost: {{item.worth}}</p>
@@ -12,14 +12,17 @@
 
 <ng-template #confirmation let-modal>
   <div class="modal-header">
-    <div *ngIf="!(user.pointCount >= item.rewardWorth)">Niet genoeg credits</div>
     <h4 class="modal-title">Purchase reward</h4>
+    <span class="mt-2" style="color: red;" *ngIf="!(user.pointCount >= item.rewardWorth)">Not enough points</span>
+
   </div>
   <div class="modal-body">
     <h5>Are you sure you want to purchase {{item.name}} for {{item.worth}} points?</h5>
+    <h6 class="mb-0">Details:</h6>
+    <p>{{item.description}}</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="close()">No</button>
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Cancel</button>
     <button type="button" class="btn btn-outline-dark" (click)="request(item, info)" *ngIf="user.pointCount >= item.worth">Yes</button>
   </div>
 </ng-template>

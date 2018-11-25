@@ -26,10 +26,9 @@ export class ManageRewardsComponent implements OnInit {
     this.getRewards();
     this.getCategories();
     this.newItem = new Reward();
-    this.newItem.category = 'Consumables';
   }
 
-  addReward(form) {
+  addReward() {
     if (this.newItem.name === '' || !this.newItem.worth || this.newItem.category === '' || this.newItem.description === '') {
       this.showMessage('error', 'Please fill out "Name", "Worth", "Category" and "Description".');
     } else {
@@ -41,18 +40,19 @@ export class ManageRewardsComponent implements OnInit {
       };
       this.rewardService.createReward(reward)
         .subscribe(
-          (result: Reward) => {
+          (result: any) => {
             this.showMessage('success', 'Reward added successfully');
             this.getRewards();
-            const newRewardId = this.rewardList[this.rewardList.length - 1]._id;
-            console.log(this.rewardList[this.rewardList.length - 1].imgUrl);
-            form.action = environment.apiPath + 'reward/fileupload/' + newRewardId + '?token=ABCDEF';
-            form.submit();
+            console.log('Komop!');
+            // const newRewardId = this.rewardList[this.rewardList.length - 1]._id;
+            // console.log(this.rewardList[this.rewardList.length - 1].imgUrl);
+            // form.action = environment.apiPath + 'reward/fileupload/' + newRewardId + '?token=ABCDEF';
+            // form.submit();
             this.newItem = new Reward();
           },
           (error: any) => {
             console.log('error', error);
-            this.showMessage('error', 'Sorry, something went wrong' + error);
+            this.showMessage('error', 'Sorry, something went wrong: ' + error);
           }
         );
     }
@@ -63,6 +63,7 @@ export class ManageRewardsComponent implements OnInit {
       .subscribe(
         (result: Reward[]) => {
           this.rewardList = result;
+          console.log(result);
         },
         (error: any) => {
           console.log('error', error);
@@ -75,6 +76,7 @@ export class ManageRewardsComponent implements OnInit {
       .subscribe(
         (result: RewardCategory[]) => {
           this.rewardCategoryList = result;
+          this.newItem.category = this.rewardCategoryList[0].categoryName;
         },
         (error: any) => {
           console.log('error', error);
@@ -104,11 +106,11 @@ export class ManageRewardsComponent implements OnInit {
     switch (messageType) {
       case 'success':
         this.successMessage = message;
-        setTimeout(function() { that.successMessage = undefined; }, 3000);
+        setTimeout(function() { that.successMessage = undefined; }, 5000);
         break;
       case 'error':
         this.errorMessage = message;
-        setTimeout(function() { that.errorMessage = undefined; }, 3000);
+        setTimeout(function() { that.errorMessage = undefined; }, 5000);
         break;
     }
   }
@@ -122,30 +124,34 @@ export class ManageRewardsComponent implements OnInit {
   }
 
 
-/*  addCategory(categoryName: string) {
+  addCategory(categoryName: string) {
     const category = {name: categoryName};
     this.rewardService.createCategory(category)
       .subscribe(
       (result: any) => {
         this.getCategories();
+        this.close();
+        this.showMessage('success', 'Category added successfully');
       },
       (error: any) => {
-        console.log('error', error);
+        this.showMessage('error', 'Sorry, something went wrong: ' + error);
       }
     );
-  }*/
+  }
 
-/*  removeCategory(categoryId: string) {
+  removeCategory(categoryId: string) {
     this.rewardService.removeCategory(categoryId)
       .subscribe(
       (result: RewardCategory[]) => {
         this.getCategories();
+        this.close();
+        this.showMessage('success', 'Category removed successfully');
       },
       (error: any) => {
-        console.log('error', error);
+        this.showMessage('error', 'Sorry, something went wrong: ' + error);
       }
     );
-  }*/
+  }
 
 
 

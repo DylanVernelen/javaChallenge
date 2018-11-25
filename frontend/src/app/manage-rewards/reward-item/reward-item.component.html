@@ -1,8 +1,11 @@
-<th>{{ item.rewardName }}</th>
-<td>{{ item.rewardWorth }}</td>
-<td>{{ item.rewardCategory }}</td>
+<th>{{ item.name }}</th>
+<td>{{ item.worth }}</td>
+<td>{{ item.category }}</td>
 <td>{{ item.description }}</td>
-<td><img src="{{ 'https://nodejs.tomvdr.com/' + item.imgUrl }}" width="50px" height="50px" /></td>
+<td>
+  <img src="{{ 'https://nodejs.tomvdr.com/' + item.imgUrl }}" width="50px" height="50px" *ngIf="item.imgUrl" />
+  <p *ngIf="!item.imgUrl">No image</p>
+</td>
 <td>
   <i class="fas fa-pencil-alt"
      (click)="open(edit)"></i>
@@ -18,16 +21,16 @@
     <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
     <div class="form-group">
       <label for="rewardName">Reward name *:</label>
-      <input id="rewardName" class="form-control" type="text" value="{{item.rewardName}}" (change)="updateAttribute('name', name.value)" #name />
+      <input id="rewardName" class="form-control" type="text" value="{{item.name}}" (change)="updateAttribute('name', name.value)" #name />
     </div>
     <div class="form-group">
       <label for="rewardWorth">Reward worth *:</label>
-      <input id="rewardWorth" class="form-control" type="number" value="{{item.rewardWorth}}" (change)="updateAttribute('worth', worth.value)" #worth />
+      <input id="rewardWorth" class="form-control" type="number" value="{{item.worth}}" (change)="updateAttribute('worth', worth.value)" #worth />
     </div>
     <div class="form-group">
       <label for="rewardCategory">Reward category *:</label>
       <select id="rewardCategory" class="form-control" (change)="updateAttribute('category', category.value)" #category >
-        <option>{{item.rewardCategory}}</option>
+        <option>{{item.category}}</option>
         <option *ngFor="let rewardCategory of reduceRewardCategory(manageRewards.rewardCategoryList)">{{ rewardCategory.categoryName }}</option>
       </select>
     </div>

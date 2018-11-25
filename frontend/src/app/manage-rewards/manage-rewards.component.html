@@ -21,9 +21,9 @@
       </tr>
       </thead>
       <tbody>
-      <th scope="row"><input #name type="text" value="{{newItem.rewardName}}" (change)="updateAttribute('name', name.value)" #name /></th>
-      <td><input #worth type="number" value="{{newItem.rewardWorth}}" (change)="updateAttribute('worth', worth.value)" #worth /></td>
-      <td><select #category value="{{newItem.rewardCategory}}" (change)="updateAttribute('category', updateCategory.value)" #updateCategory >
+      <th scope="row"><input #name type="text" value="{{newItem.name}}" (change)="updateAttribute('name', name.value)" #name /></th>
+      <td><input #worth type="number" value="{{newItem.worth}}" (change)="updateAttribute('worth', worth.value)" #worth /></td>
+      <td><select #category value="{{newItem.category}}" (change)="updateAttribute('category', updateCategory.value)" #updateCategory >
         <option *ngFor="let rewardCategory of rewardCategoryList">{{ rewardCategory.categoryName }}</option>
       </select></td>
       <td><input #description type="text" value="{{newItem.description}}" (change)="updateAttribute('description', description.value)" #description /></td>
@@ -34,7 +34,7 @@
         </form>
       </td>
       <td>
-        <button (click)="addReward(imageForm)">Add New</button>
+        <button (click)="addReward()">Add New</button>
       </td>
       <tr app-reward-item
           *ngFor="let reward of rewardList; let i = index"
@@ -64,7 +64,7 @@
 
         <tr *ngFor="let category of rewardCategoryList">
           <td>{{category.categoryName}}</td>
-          <td><i class="far fa-trash-alt ml-3" (click)="removeCategory(category.id)"></i></td>
+          <td><i class="far fa-trash-alt ml-3" (click)="removeCategory(category._id)"></i></td>
         </tr>
         </tbody>
       </table>
