@@ -34,7 +34,7 @@ export class ManageChallengesComponent implements OnInit {
  addChallenge(challengeName: string, challengeOwner: string, challengeWorth: string ) {
    if (challengeName.trim() !== '' && challengeOwner.trim() !== '' && challengeWorth.trim() !== '') {
 
-       const newChallenge = { id: null, challengeName: challengeName.trim(),
+       const newChallenge = { _id: null, challengeName: challengeName.trim(),
          challengeOwner :  challengeOwner.trim() , challengeWorth : parseInt(challengeWorth, 10) };
        this.manageChallengeService.createChallenge(newChallenge);
        this.getAllChallenges();
@@ -64,7 +64,7 @@ export class ManageChallengesComponent implements OnInit {
   }
   updateChallenge(id, name , owner , worth) {
     if (name.trim() !== '' && worth.trim() !== '') {
-        const newChallenge = { id: id.toString(), challengeName: name, challengeOwner: owner, challengeWorth: worth}
+        const newChallenge = { _id: id.toString(), challengeName: name, challengeOwner: owner, challengeWorth: worth}
         this.manageChallengeService.updateChallenge(newChallenge)
           .subscribe(
             (result: Challenge) => {

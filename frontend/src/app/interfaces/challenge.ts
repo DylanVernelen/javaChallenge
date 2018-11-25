@@ -1,5 +1,5 @@
 export class Challenge {
-    id: string;
+    _id: string;
     challengeName: string;
     challengeOwner: string;
     challengeWorth: number;
