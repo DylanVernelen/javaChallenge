@@ -32,7 +32,6 @@ this.getUsers();
               (result: Array<User>) => {
                   console.log('success', result);
                   this.userList = result;
-                  console.log(this.userList);
                   this.getChallengesList();
               },
               (error: any) => {
@@ -52,7 +51,6 @@ this.getUsers();
             }
         }
         this.orderByStatus();
-      console.log(this.challenges);
     }
     orderByStatus( ){
         this.challenges.sort((a, b): number => {
@@ -73,10 +71,11 @@ this.getUsers();
             challengeid :  challengeid , uniqueid:uniqueid };
         this.challengeService.acceptChallenge(completedChallenge) .subscribe(
             (result: Challenge) => {
-
-                console.log('success', result);
                 this.challenges.length=0;
-                this.getChallengesList();
+                this.getUsers();
+                console.log('success', result);
+
+
             },
             (error: any) => {
                 console.log('error', error);

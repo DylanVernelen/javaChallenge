@@ -19,7 +19,6 @@ export class ManageChallengesService {
 
   createChallenge(challenge: any) {
     this.getToken();
-    console.log(challenge);
     return this.http.post(environment.apiPath + 'challenge/create?token=' + this.token, challenge, {responseType: 'json'});
   }
 
@@ -42,7 +41,6 @@ export class ManageChallengesService {
 
   createCompletedChallenge(challenge: any) {
     this.getToken();
-
     return this.http.post(environment.apiPath + 'challenge/request?token=' + this.token, challenge, {responseType: 'json'})
   }
 acceptChallenge(challenge :any) {

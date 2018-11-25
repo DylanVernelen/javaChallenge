@@ -55,14 +55,14 @@ export class ChallengesComponent implements OnInit {
                 }
             );
     }
-    completeChallenge( challengeId: number, description: String) {
+    completeChallenge( challengeId: Number, description: String) {
         this.succesMessage = '';
         this.errorMessage = '';
         console.log(challengeId);
         if (challengeId !== 0 && description !== '') {
-            const newCompletedChallenge = {userid: this.userid, challengeid: challengeId, description: description};
+            const newCompletedChallenge = {userid: this.userid, id: challengeId, description: description};
             if (challengeId !== 0 && description !== '') {
-                const newCompletedChallenge = {userid: this.userid, challengeid: challengeId, description: description};
+                const newCompletedChallenge = {userid: this.userid, id: challengeId, description: description};
 
                 this.pointsinmessage = this.points.toString() + ' points.';
                 if (this.points === 1) {
