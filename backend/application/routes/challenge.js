@@ -222,7 +222,7 @@ async function onChallengeRejected(req, res)
 	}
 
 	var found = false;
-	
+	 
 
 	user.challenges.forEach(function(challenge)
 	{
@@ -235,7 +235,7 @@ async function onChallengeRejected(req, res)
 		return res.json({error: 'invalid-uniqueid'});
 	}
 
-	if(found.pointsAwarded || found.pointsAwarded > 0)
+	if(found.pointsAwarded && found.pointsAwarded > 0)
 	{
 		return res.json({error: 'already-completed'})
 	}
@@ -304,7 +304,7 @@ async function onChallengeComplete(req, res)
 		return res.json({error: 'invalid-uniqueid'});
 	}
 
-	if(found.pointsAwarded || found.pointsAwarded > 0)
+	if(found.pointsAwarded && found.pointsAwarded > 0)
 	{
 		return res.json({error: 'already-completed'})
 	}
