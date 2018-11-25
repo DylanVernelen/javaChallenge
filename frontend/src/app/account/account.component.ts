@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../services/user.service';
-import {ChallengeList, HistoryList, UserFull} from '../interfaces/user-full';
+import {ChallengeList, History, HistoryList, UserFull} from '../interfaces/user-full';
 import {ManageChallengesService} from '../services/manage-challenges.service';
 import {Challenge} from '../interfaces/challenge';
 import {RewardService} from '../services/reward.service';
@@ -19,14 +19,24 @@ export class AccountComponent implements OnInit {
     {name: 'test',
       challengeWorth: 20,
       challengeStatus: 'test',
-      dateAdded: 'test',
+      timestampAdded: 'test',
       dateCompleted: 'test',
       pointsAwarded: 0,
       description: 'test'}
       ];
 
-  rewardList: [HistoryList] = [{name: 'test', description: 'test',
-    worth: 10, date: 'test', opgehaald: false, }];
+  rewardList: [History] = [{
+    _id: '',
+    rewardid: '',
+    pointsSpent: 0,
+    timestamp: 0,
+    uniqueid: '',
+    opgehaald: 0,
+    name: '',
+    worth: 0,
+    date: '',
+    description: ''
+  }];
 
   firstChallenge = true;
   firstReward = true;
@@ -57,17 +67,46 @@ export class AccountComponent implements OnInit {
     for (const challenge of this.account.challenges) {
       const item: ChallengeList = new ChallengeList();
       let datum: Date;
+
       item.description = challenge.description;
       item.challengeStatus = challenge.challengeStatus;
-      datum = new Date(parseInt(challenge.timeStampAdded) * 1000);
-      item.dateAdded = datum.getDate() + '/' + (datum.getMonth() + 1) + '/' + datum.getFullYear() + ' ' + datum.getHours() + ':' + datum.getMinutes() + ':' + datum.getSeconds();
-      datum = new Date(parseInt(challenge.timeStampCompleted) * 1000);
-      item.dateCompleted = datum.getDate() + '/' + (datum.getMonth() + 1) + '/' + datum.getFullYear() + ' ' + datum.getHours() + ':' + datum.getMinutes() + ':' + datum.getSeconds();
+
+
+      if (parseInt(challenge.timestampAdded, 10)) {
+        datum = new Date(parseInt(challenge.timestampAdded) * 1000, 10);
+        item.timestampAdded = datum.toDateString();
+      } else {
+        item.timestampAdded = '/';
+      }
+
+
+
+      if (parseInt(challenge.timestampCompleted, 10)) {
+        datum = new Date(parseInt(challenge.timestampCompleted) * 1000, 10);
+        item.dateCompleted = datum.toDateString();
+      } else {
+        item.dateCompleted = '/';
+      }
+      datum = new Date(parseInt(challenge.timestampAdded) * 1000, 10);
+
+
+
+
       item.pointsAwarded = challenge.pointsAwarded;
+
+      item.name = challenge.name;
+      item.challengeWorth = challenge.worth;
+      if (this.firstChallenge) {
+        this.challengeList.fill(item);
+        this.firstChallenge = false;
+      } else {
+        this.challengeList.push(item);
+      }
+      /*
       this.challengeService.getChallenge(challenge.challengeid)
         .subscribe(
           (result: Challenge) => {
-            console.log('success', result);
+
             item.name = result.challengeName;
             item.challengeWorth = result.challengeWorth;
             if (this.firstChallenge) {
@@ -81,36 +120,59 @@ export class AccountComponent implements OnInit {
             console.log('error', error);
             // this.setErrorMessage("Couldn't load the Users. Please try again later.");
           }
-        );
+        );*/
     }
   }
 
   getHistory() {
     for (const reward of this.account.history) {
-      const item: HistoryList = new HistoryList();
+
+      const item: History = new History();
       let datum: Date;
-      item.opgehaald = reward.opgehaald;
-      datum = new Date(parseInt(reward.timeStamp) * 1000);
+
+
+
+      item.opgehaald = (reward.opgehaald ? 1 : 0);
+
+
+      datum = new Date(reward.timestamp);
+
+
+
       item.date = datum.getDate() + '/' + (datum.getMonth() + 1) + '/' + datum.getFullYear() + ' ' + datum.getHours() + ':' + datum.getMinutes() + ':' + datum.getSeconds();
-      this.rewardService.getReward(reward.rewardId)
-        .subscribe(
-          (result: Reward) => {
-            console.log('success', result);
-            item.name = result.name;
-            item.description = result.description;
-            item.worth = result.worth;
-            if (this.firstReward) {
-              this.rewardList.fill(item);
-              this.firstReward = false;
-            } else {
-              this.rewardList.push(item);
-            }
-          },
-          (error: any) => {
-            console.log('error', error);
-            // this.setErrorMessage("Couldn't load the Users. Please try again later.");
-          }
-        );
+
+      item.name = reward.name;
+      item.description = reward.description;
+
+      if (this.firstReward) {
+        this.rewardList.fill(item);
+        this.firstReward = false;
+      } else {
+        this.rewardList.push(item);
+      }
+      console.log(item);
+
+
+
+      /* this.rewardService.getReward(reward.rewardId)
+         .subscribe(
+           (result: Reward) => {
+             console.log('success', result);
+             item.name = result.name;
+             item.description = result.description;
+             item.worth = result.worth;
+             if (this.firstReward) {
+               this.rewardList.fill(item);
+               this.firstReward = false;
+             } else {
+               this.rewardList.push(item);
+             }
+           },
+           (error: any) => {
+             console.log('error', error);
+             // this.setErrorMessage("Couldn't load the Users. Please try again later.");
+           }
+         );*/
     }
   }
 }
