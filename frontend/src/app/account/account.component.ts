@@ -51,7 +51,6 @@ export class AccountComponent implements OnInit {
     this.userService.getUser()
       .subscribe(
         (result: UserFull) => {
-          console.log('success', result);
           this.account = result;
           this.getChallenges();
           this.getHistory();
@@ -73,22 +72,36 @@ export class AccountComponent implements OnInit {
 
 
       if (parseInt(challenge.timestampAdded, 10)) {
-        datum = new Date(parseInt(challenge.timestampAdded) * 1000, 10);
+        datum = new Date(parseInt(challenge.timestampAdded, 10) * 1000, 10);
         item.timestampAdded = datum.toDateString();
       } else {
         item.timestampAdded = '/';
       }
 
 
+      let timestamp = parseInt(challenge.timestampCompleted, 10);
 
-      if (parseInt(challenge.timestampCompleted, 10)) {
-        datum = new Date(parseInt(challenge.timestampCompleted) * 1000, 10);
+
+
+
+
+
+      if (timestamp) {
+        datum = new Date(timestamp * 1000);
         item.dateCompleted = datum.toDateString();
       } else {
         item.dateCompleted = '/';
       }
-      datum = new Date(parseInt(challenge.timestampAdded) * 1000, 10);
+      //datum = new Date(parseInt(challenge.timestampAdded, 10) * 1000, 10);
 
+
+      timestamp = parseInt(challenge.timestampAdded, 10);
+      if (timestamp) {
+        datum = new Date(timestamp * 1000);
+        item.timestampAdded = datum.toDateString();
+      } else {
+        item.timestampAdded = '/';
+      }
 
 
 
@@ -136,28 +149,12 @@ export class AccountComponent implements OnInit {
 
 
       datum = new Date(reward.timestamp);
-
-
-
       item.date = datum.getDate() + '/' + (datum.getMonth() + 1) + '/' + datum.getFullYear() + ' ' + datum.getHours() + ':' + datum.getMinutes() + ':' + datum.getSeconds();
 
-      item.name = reward.name;
-      item.description = reward.description;
 
-      if (this.firstReward) {
-        this.rewardList.fill(item);
-        this.firstReward = false;
-      } else {
-        this.rewardList.push(item);
-      }
-      console.log(item);
-
-
-
-      /* this.rewardService.getReward(reward.rewardId)
+      this.rewardService.getReward(reward.rewardid)
          .subscribe(
            (result: Reward) => {
-             console.log('success', result);
              item.name = result.name;
              item.description = result.description;
              item.worth = result.worth;
@@ -172,7 +169,7 @@ export class AccountComponent implements OnInit {
              console.log('error', error);
              // this.setErrorMessage("Couldn't load the Users. Please try again later.");
            }
-         );*/
+         );
     }
   }
 }
