@@ -64,13 +64,13 @@ export class ManageChallengesComponent implements OnInit {
 
 
   }
-  updateChallenge(id, name , owner , worth) {
+  updateChallenge(id, name , worth, owner) {
     if (name.trim() !== '' && worth.trim() !== '') {
         const newChallenge = { _id: id.toString(), challengeName: name, challengeOwner: owner, challengeWorth: worth}
+        console.log("Sending: ", newChallenge);
         this.manageChallengeService.updateChallenge(newChallenge)
           .subscribe(
             (result: Challenge) => {
-              console.log('success', result);
                 this.getAllChallenges();
               this.close();
             },

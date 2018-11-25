@@ -33,7 +33,6 @@ export class ManageChallengesService {
   }
 
   updateChallenge(challenge: Challenge) {
-    console.log(challenge);
     return this.http.patch(environment.apiPath + 'challenge/update?token=' + this.token, challenge, {responseType: 'json'});
   }
 
