@@ -24,7 +24,6 @@ export class AccountComponent implements OnInit {
       pointsAwarded: 0,
       description: 'test'}
       ];
-
   rewardList: [History] = [{
     _id: '',
     rewardid: '',
@@ -38,9 +37,6 @@ export class AccountComponent implements OnInit {
     description: ''
   }];
 
-  firstChallenge = true;
-  firstReward = true;
-
   constructor(private userService: UserService, private challengeService: ManageChallengesService, private rewardService: RewardService) { }
 
   ngOnInit() {
@@ -53,11 +49,12 @@ export class AccountComponent implements OnInit {
         (result: UserFull) => {
           this.account = result;
           this.getChallenges();
+          this.challengeList.shift();
           this.getHistory();
+          this.rewardList.shift();
         },
         (error: any) => {
           console.log('error', error);
-          // this.setErrorMessage("Couldn't load the Users. Please try again later.");
         }
       );
   }
@@ -70,7 +67,6 @@ export class AccountComponent implements OnInit {
       item.description = challenge.description;
       item.challengeStatus = challenge.challengeStatus;
 
-
       if (parseInt(challenge.timestampAdded, 10)) {
         datum = new Date(parseInt(challenge.timestampAdded, 10) * 1000, 10);
         item.timestampAdded = datum.toDateString();
@@ -78,13 +74,7 @@ export class AccountComponent implements OnInit {
         item.timestampAdded = '/';
       }
 
-
       let timestamp = parseInt(challenge.timestampCompleted, 10);
-
-
-
-
-
 
       if (timestamp) {
         datum = new Date(timestamp * 1000);
@@ -92,7 +82,6 @@ export class AccountComponent implements OnInit {
       } else {
         item.dateCompleted = '/';
       }
-
 
       timestamp = parseInt(challenge.timestampAdded, 10);
       if (timestamp) {
@@ -102,37 +91,20 @@ export class AccountComponent implements OnInit {
         item.timestampAdded = '/';
       }
 
-
-
       item.pointsAwarded = challenge.pointsAwarded;
 
-      item.name = challenge.name;
-      item.challengeWorth = challenge.worth;
-      if (this.firstChallenge) {
-        this.challengeList.fill(item);
-        this.firstChallenge = false;
-      } else {
-        this.challengeList.push(item);
-      }
-      /*
       this.challengeService.getChallenge(challenge.challengeid)
         .subscribe(
           (result: Challenge) => {
 
             item.name = result.challengeName;
             item.challengeWorth = result.challengeWorth;
-            if (this.firstChallenge) {
-              this.challengeList.fill(item);
-              this.firstChallenge = false;
-            } else {
-              this.challengeList.push(item);
-            }
+            this.challengeList.push(item);
           },
           (error: any) => {
             console.log('error', error);
-            // this.setErrorMessage("Couldn't load the Users. Please try again later.");
           }
-        );*/
+        );
     }
   }
 
@@ -147,8 +119,12 @@ export class AccountComponent implements OnInit {
       item.opgehaald = (reward.opgehaald ? 1 : 0);
 
 
-      datum = new Date(reward.timestamp);
-      item.date = datum.getDate() + '/' + (datum.getMonth() + 1) + '/' + datum.getFullYear() + ' ' + datum.getHours() + ':' + datum.getMinutes() + ':' + datum.getSeconds();
+      if (reward.timestamp) {
+        datum = new Date(reward.timestamp * 1000);
+        item.date = datum.toDateString();
+      } else {
+        item.date = '/';
+      }
 
 
       this.rewardService.getReward(reward.rewardid)
@@ -157,12 +133,7 @@ export class AccountComponent implements OnInit {
              item.name = result.name;
              item.description = result.description;
              item.worth = result.worth;
-             if (this.firstReward) {
-               this.rewardList.fill(item);
-               this.firstReward = false;
-             } else {
-               this.rewardList.push(item);
-             }
+             this.rewardList.push(item);
            },
            (error: any) => {
              console.log('error', error);
