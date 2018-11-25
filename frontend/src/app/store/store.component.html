@@ -1,19 +1,28 @@
-<div class="container">
+<div class="container mb-5">
+  <div id="storeHeader" class="mt-2 mb-5">
+    <h1>Reward Store</h1>
+    <h4>Here you can spend your hard earned points on awesome prices and products. Enjoy!</h4>
+  </div>
   <div class="row">
     <div id="categoryfilter" class="col-md-3">
-      <h5>Filter by category</h5>
-      <ul style="list-style-type: none;">
-        <li *ngFor="let category of rewardCategoryList">
-          <input type="checkbox" value="{{category.categoryName}}" (change)="filter(category.categoryName)" />
-          <label class="ml-2">{{category.categoryName}}</label>
-        </li>
-      </ul>
-      <div class="orderbyworth">
-      <h5>Sort by worth</h5>
-      <div class="col-lg-12">
-      <button class="col-lg-6 btn btn-primary" (click)="filterOnWorth('desc')">Descending</button></div>
-      <div class="col-lg-12">
-      <button class="col-lg-6 btn btn-primary" (click)="filterOnWorth('asc')">Ascending</button></div>
+      <div>
+        <h5>Filter by category</h5>
+        <ul style="list-style-type: none;">
+          <li *ngFor="let category of rewardCategoryList">
+            <input type="checkbox" value="{{category.categoryName}}" (change)="filter(category.categoryName)" />
+            <label class="ml-2">{{category.categoryName}}</label>
+          </li>
+        </ul>
+        <hr width="80%">
+        <div class="orderbyworth">
+        <h5>Sort by worth</h5>
+          <div class="col-lg-12">
+            <button class="col-lg-6 btn btn-primary" (click)="filterOnWorth('desc')">Descending</button>
+          </div>
+          <div class="col-lg-12">
+            <button class="col-lg-6 btn btn-primary" (click)="filterOnWorth('asc')">Ascending</button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-9">

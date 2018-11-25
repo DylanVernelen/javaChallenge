@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94ea769b-89e0-4410-97fe-44ce787fdaf0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/routes/reward.js" beforeDir="false" afterPath="$PROJECT_DIR$/application/routes/reward.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/manage-rewards.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/manage-rewards.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/reward-item/reward-item.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/manage-rewards/reward-item/reward-item.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/store/reward/reward.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/store/reward/reward.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/store/reward/reward.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/store/reward/reward.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/store/reward/reward.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/store/reward/reward.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/app/store/store.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/store/store.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/app/services/authentication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/app/services/authentication.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -60,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/application/routes/reward.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="460">
-              <caret line="325" column="23" selection-start-line="325" selection-start-column="23" selection-end-line="325" selection-end-column="23" />
+              <caret line="324" column="23" selection-start-line="324" selection-start-column="23" selection-end-line="324" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -213,12 +206,12 @@
       <workItem from="1542812752274" duration="1139000" />
       <workItem from="1542814924025" duration="1586000" />
       <workItem from="1542891617128" duration="700000" />
-      <workItem from="1543151344158" duration="6223000" />
+      <workItem from="1543151344158" duration="6823000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17401000" />
+    <option name="totallyTimeSpent" value="18001000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -309,7 +302,7 @@
     <entry file="file://$PROJECT_DIR$/application/routes/reward.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
-          <caret line="325" column="23" selection-start-line="325" selection-start-column="23" selection-end-line="325" selection-end-column="23" />
+          <caret line="324" column="23" selection-start-line="324" selection-start-column="23" selection-end-line="324" selection-end-column="23" />
         </state>
       </provider>
     </entry>
