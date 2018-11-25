@@ -69,7 +69,7 @@ export class StoreComponent implements OnInit {
 
   shortenDescriptions() {
     for (const reward of this.rewardList) {
-      if (reward.description.length >= 30) {
+      if (reward.description && reward.description.length >= 30) {
         reward['shortDescription'] = reward.description.substr(0, 30) + ' ...';
       } else {
         reward['shortDescription'] = reward.description;
