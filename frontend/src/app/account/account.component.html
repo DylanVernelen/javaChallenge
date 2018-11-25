@@ -7,18 +7,28 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
-        <th scope="col">Worth</th>
+        <th scope="col">Points awarded</th>
         <th scope="col">Date requested</th>
+        <th scope="col">Date accepted</th>
         <th scope="col">Description</th>
+        <th scope="col">Status</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let challenge of challengeList; let i = index">
+      <tr *ngFor="let challenge of challengeList; let i = index"
+          [class.table-success]="challenge.challengeStatus === 'finished'"
+          [class.table-warning]="challenge.challengeStatus === 'pending'"
+          [class.table-danger]  ="challenge.challengeStatus === 'rejected'"
+
+      >
         <th scope="row">{{ i + 1}}</th>
-        <td>{{ challenge.name}}</td>
-        <td>{{ challenge.challengeWorth}}</td>
-        <td>{{ challenge.dateAdded}}</td>
-        <td>{{ challenge.description}}</td>
+        <td>{{challenge.name}}</td>
+        <td>{{challenge.pointsAwarded || 0}} / {{ challenge.challengeWorth}}</td>
+        <td>{{challenge.timestampAdded}}</td>
+        <td>{{challenge.dateCompleted}}</td>
+        <td>{{challenge.description}}</td>
+        <td>{{challenge.challengeStatus}}</td>
+        <td></td>
       </tr>
       </tbody>
     </table>
@@ -37,7 +47,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let reward of rewardList; let i = index">
+      <tr *ngFor="let reward of rewardList; let i = index"
+          [class.table-success]="reward.opgehaald"
+          [class.table-danger]="!reward.opgehaald"
+      >
         <th scope="row">{{ i + 1}}</th>
         <td>{{ reward.name}}</td>
         <td>{{ reward.description}}</td>

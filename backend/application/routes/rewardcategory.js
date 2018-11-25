@@ -73,7 +73,7 @@ async function deleteRewardCategoryById(req, res)
 async function updateRewardCategoryById(req, res)
 {
 	var database = res.locals.database;
-	var rewardcategoryid = req.body.id;
+	var rewardcategoryid = req.body.id || req.body._id;
 
 	var fields = {};
 

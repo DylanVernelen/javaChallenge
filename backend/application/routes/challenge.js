@@ -53,7 +53,7 @@ exports.get = function()
 async function getChallengeById(req, res)
 {
 	var database = res.locals.database;
-	var challengeid = req.params.id;
+	var challengeid = req.params.id ;
 
 	var challenge = await database.findOne('Challenge', {_id: challengeid})
 
@@ -79,7 +79,7 @@ async function deleteChallengeById(req, res)
 async function updateChallengeById(req, res)
 {
 	var database = res.locals.database;
-	var challengeid = req.body.id;
+	var challengeid = req.body.id || req.body._id;
 
 	var fields = {};
 
@@ -149,7 +149,7 @@ async function requestChallengeById(req, res)
 {
 	var database = res.locals.database;
 
-	var challenge = await database.findOne('Challenge', {_id: (req.body.id || undefined)});
+	var challenge = await database.findOne('Challenge', {_id: (req.body.id || req.body._id || undefined)});
 
 	var description = undefined;
 	if(req.body.description)

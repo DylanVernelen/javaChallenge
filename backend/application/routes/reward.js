@@ -99,7 +99,7 @@ async function deleteRewardById(req, res)
 async function updateRewardById(req, res)
 {
 	var database = res.locals.database;
-	var rewardid = req.body.id;
+	var rewardid = req.body.id || req.body._id;
 
 	var fields = {};
 
@@ -144,7 +144,7 @@ async function getAllRewards(req, res)
 async function buyRewardById(req, res)
 {
 	var database = res.locals.database;
-	var rewardid = req.body.id || undefined;
+	var rewardid = req.body.id || req.body._id || undefined;
 
 	var user = res.locals.user;
 

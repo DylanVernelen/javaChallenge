@@ -71,7 +71,7 @@ async function deleteUserById(req, res)
 async function updateUserById(req, res)
 {
 	var database = res.locals.database;
-	var userid = req.body._id;
+	var userid = req.body._id || req.body.id;
 
 	var fields = {};
 

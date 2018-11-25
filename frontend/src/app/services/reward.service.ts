@@ -54,7 +54,6 @@ export class RewardService {
   }
 
   getReward(id: string) {
-    this.getToken();
     return this.http.get(environment.apiPath + 'reward/get/' + id + '?token=' + this.token, {responseType: 'json'});
   }
 
