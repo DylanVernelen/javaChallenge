@@ -10,6 +10,6 @@ import { NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
     CommonModule, NgbDropdownModule,FormsModule, ReactiveFormsModule
 
   ],
-  declarations: [ChallengesComponent]
+  declarations: []
 })
 export class ChallengesModule { }

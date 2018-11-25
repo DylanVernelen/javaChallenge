@@ -10,7 +10,7 @@ import {FormsModule} from '@angular/forms';
     CommonModule,
     FormsModule
   ],
-  declarations: [ManageChallengesComponent, ChallengeItemComponent],
+  declarations: [ChallengeItemComponent],
     providers: [ManageChallengesService]
 })
 export class ManageChallengesModule { }

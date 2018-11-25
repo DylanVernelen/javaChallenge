@@ -115,7 +115,7 @@ async function createRewardCategory(req, res)
 
 	var result = await database.createOne('RewardCategory', fields);
 
-
+	res.json({succes: true});
 }
 
 

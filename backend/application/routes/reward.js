@@ -269,6 +269,7 @@ async function createReward(req, res)
 
 	var result = await database.createOne('Reward', fields);
 
+    res.json({succes: true});
 
 }
 
