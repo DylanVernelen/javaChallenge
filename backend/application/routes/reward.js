@@ -322,7 +322,7 @@ async function uploadFile(req, res)
 
             		console.log("Saved to database", reward);
 
-					res.json({succes: true, imgUrl: "https://nodejs.tomvdr.com/" + filename});
+					// res.json({succes: true, imgUrl: "https://nodejs.tomvdr.com/" + filename});
             	});
 	        }
 	    });

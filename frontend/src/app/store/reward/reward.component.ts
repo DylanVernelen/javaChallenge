@@ -26,8 +26,6 @@ export class RewardComponent implements OnInit {
     if (!this.item.imgUrl || this.item.imgUrl === '') {
       this.item.imgUrl = environment.imgPath + 'no-image.png';
     }
-
-    // this.item.imgUrl = environment.imgPath + this.item.imgUrl;
   }
 
   open(content) {

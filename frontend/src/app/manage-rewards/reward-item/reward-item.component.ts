@@ -90,7 +90,7 @@ export class RewardItemComponent implements OnInit {
           (error: any) => {
             console.log('error', error);
             this.manageRewards.errorMessage = 'Sorry, something went wrong' + error;
-            setTimeout(function() { that.manageRewards.errorMessage = undefined; }, 3000);
+            setTimeout(function() { that.manageRewards.errorMessage = undefined; }, 5000);
           }
         );
     }
