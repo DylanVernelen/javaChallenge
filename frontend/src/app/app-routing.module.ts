@@ -9,10 +9,12 @@ import { ChallengesComponent} from './challenges/challenges.component';
 import { AccountComponent} from './account/account.component';
 import { HomeComponent } from 'src/app/home/home.component';
 import {AdminComponent} from "./admin/admin.component";
+import {AcceptChallengesComponent} from "./accept-challenges/accept-challenges.component";
 
 const routes: Routes = [
   {path: 'store', component: StoreComponent},
   {path: 'managechallenge', component: ManageChallengesComponent},
+    {path: 'acceptchallenges', component: AcceptChallengesComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'login', component: LoginComponent},
   {path: 'manageusers', component: ManageUsersComponent},

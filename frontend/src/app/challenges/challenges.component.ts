@@ -29,9 +29,8 @@ export class ChallengesComponent implements OnInit {
     activeModal: NgbActiveModal;
   ngOnInit() {
       this.getAllChallenges();
-      console.log(this.challengeList);
       this.challenges = this.user.challenges;
-        this.challenges.sort((a,b): number => {
+      this.challenges.sort((a,b): number => {
       if(a.timeStampAdded<b.timeStampAdded) return 1;
       if(a.timeStampAdded>b.timeStampAdded) return -1;
       return 0;
@@ -48,7 +47,6 @@ export class ChallengesComponent implements OnInit {
         this.manageChallengeService.getChallenges()
             .subscribe(
                 (result: Array<Challenge>) => {
-
                     console.log('success', result);
                     this.challengeList = result;
                 },
@@ -57,12 +55,12 @@ export class ChallengesComponent implements OnInit {
                 }
             );
     }
-    completeChallenge( challengeId: number, info: String) {
+    completeChallenge( challengeId: number, description: String) {
     this.succesMessage = '';
     this.errorMessage = '';
       console.log(challengeId);
-            if (challengeId !== 0 && info !== '') {
-                const newCompletedChallenge = {userid: this.userid, challengeid: challengeId, info : info };
+            if (challengeId !== 0 && description !== '') {
+                const newCompletedChallenge = {userid: this.userid, challengeid: challengeId, description : description };
                 this.pointsinmessage = this.points.toString() + ' points.';
                 if (this.points === 1) {
                     this.pointsinmessage = this.points.toString() + ' point.';
@@ -99,12 +97,9 @@ export class ChallengesComponent implements OnInit {
               })();
             }
     }
-
   onDropdownListChange(args) {
     const challenge = this.challengeList.filter(c => c._id === args.target.value);
     this.points = challenge[0].challengeWorth;
-    console.log(challenge[0]);
-
  }
      delay(ms: number) {
         return new Promise( resolve => setTimeout(resolve, ms) );

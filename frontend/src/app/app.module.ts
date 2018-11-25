@@ -21,6 +21,7 @@ import { ChallengesComponent } from 'src/app/challenges/challenges.component';
 import { AdminComponent } from './admin/admin.component';
 import {ManageUsersModule} from "./manage-users/manage-users.module";
 import {AccountModule} from "./account/account.module";
+import {AcceptChallengesModule} from "./accept-challenges/accept-challenges.module";
 
 @NgModule({
   declarations: [
@@ -42,13 +43,15 @@ import {AccountModule} from "./account/account.module";
     ReactiveFormsModule,
     ManageRewardsModule,
     ManageUsersModule,
-    AccountModule
+    AccountModule,
+      AcceptChallengesModule,
   ],
   providers: [
     StoreModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     StoreModule,
