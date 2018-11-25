@@ -46,8 +46,17 @@ async function validateToken(req, res)
 
 		}
 
+	if(user.history)
+		for(let i = 0; i < user.history.length; i++)
+		{	
+
+			var reward = await database.findOne('Reward', {_id: user.history[i].rewardid});
+			console.log(reward);
+			user.history[i].name = reward.name;
+			user.history[i].worth = reward.worth;
+
+		}
 	
-	console.log(user.challenges);
 
 	if(bcrypt.compareSync(password, user.password))
 		res.json({

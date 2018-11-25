@@ -21,10 +21,12 @@ var ChallengeSchema = new Schema(
 
 var HistorySchema = new Schema(
 {
+	name: String,
+	worth: Number,
 	rewardid: String,
 	pointsSpent: Number,
 	timestamp: Number,
-	opgehaald: Boolean,
+	opgehaald: Number,
 	uniqueid: String
 });
 
