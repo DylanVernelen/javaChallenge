@@ -16,6 +16,7 @@ export class AcceptChallengesComponent implements OnInit {
   constructor(private manageUsersService: ManageUsersService, private  challengeService: ManageChallengesService,
               private modal: NgbModal) { }
   userList: any[];
+  status: String;
   number = 0;
   challenge: any;
   challenges = [];
@@ -41,6 +42,9 @@ this.getUsers();
             if (user.challenges != null){
                 for (let challenge of user.challenges) {
                     this.challenge = this.challengeService.getChallenge(challenge.challengeid.toString());
+                    if (challenge.challengeStatus === 'rejected') {
+                        challenge.challengeStatus = 'denied';
+                    }
                     const newChallenge = { userid: user._id, user: user.email, challenge:this.challenge.challengeName, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
                     this.challenges.push(newChallenge);
                 }
@@ -62,6 +66,14 @@ this.getUsers();
             return 0;
         });
     }
+    orderByChallenge( ){
+        this.challenges.sort((a, b): number => {
+            if (a.challenge < b.challenge) { return 1; }
+            if (a.challenge > b.challenge) { return -1; }
+            return 0;
+        });
+    }
+
     acceptChallenge(userid, challengeid,uniqueid) {
         const completedChallenge = { userid: userid,
             challengeid :  challengeid , uniqueid:uniqueid };
@@ -69,6 +81,7 @@ this.getUsers();
             (result: Challenge) => {
                 this.challenges.length=0;
                 this.getUsers();
+                this.close();
                 console.log('success', result);
             },
             (error: any) => {
@@ -82,6 +95,7 @@ this.getUsers();
             (result: Challenge) => {
                 this.challenges.length=0;
                 this.getUsers();
+                this.close();
                 console.log('success', result);
             },
             (error: any) => {
