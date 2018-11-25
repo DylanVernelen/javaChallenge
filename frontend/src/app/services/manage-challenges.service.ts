@@ -17,20 +17,10 @@ export class ManageChallengesService {
     this.getToken();
   }
 
-  createChallenge(challenge: Challenge) {
+  createChallenge(challenge: any) {
     this.getToken();
     console.log(challenge);
-    return this.http.post(environment.apiPath + 'challenge/create?token=' + this.token, challenge, {responseType: 'json'})
-      .subscribe(
-        (result: Challenge) => {
-          this.getChallenges();
-          console.log('success', result);
-
-        },
-        (error: any) => {
-          console.log('error', error);
-        }
-      );
+    return this.http.post(environment.apiPath + 'challenge/create?token=' + this.token, challenge, {responseType: 'json'});
   }
 
   updateChallenge(challenge: Challenge) {

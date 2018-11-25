@@ -34,10 +34,19 @@ export class ManageChallengesComponent implements OnInit {
  addChallenge(challengeName: string, challengeOwner: string, challengeWorth: string ) {
    if (challengeName.trim() !== '' && challengeOwner.trim() !== '' && challengeWorth.trim() !== '') {
 
-       const newChallenge = { _id: null, challengeName: challengeName.trim(),
-         challengeOwner :  challengeOwner.trim() , challengeWorth : parseInt(challengeWorth, 10) };
-       this.manageChallengeService.createChallenge(newChallenge);
-       this.getAllChallenges();
+       const newChallenge = { _id: null, name: challengeName.trim(),
+         owner :  challengeOwner.trim() , worth : parseInt(challengeWorth, 10) };
+       this.manageChallengeService.createChallenge(newChallenge)
+         .subscribe(
+         (result: Challenge) => {
+           this.getAllChallenges();
+           console.log('success', result);
+
+         },
+         (error: any) => {
+           console.log('error', error);
+         }
+       );
     }
      this.ngOnInit();
   }

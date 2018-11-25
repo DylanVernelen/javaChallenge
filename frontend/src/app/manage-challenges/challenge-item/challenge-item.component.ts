@@ -14,4 +14,6 @@ export class ChallengeItemComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteChallenge() {}
+
 }
