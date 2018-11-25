@@ -53,6 +53,7 @@ export class ManageChallengesComponent implements OnInit {
           .subscribe(
               (result) => {
                   console.log('success', result);
+                  this.getAllChallenges();
                   this.close();
               },
               (error: any) => {
@@ -60,7 +61,8 @@ export class ManageChallengesComponent implements OnInit {
                   this.close();
               }
           );
-      this.ngOnInit();
+
+
   }
   updateChallenge(id, name , owner , worth) {
     if (name.trim() !== '' && worth.trim() !== '') {
@@ -69,6 +71,7 @@ export class ManageChallengesComponent implements OnInit {
           .subscribe(
             (result: Challenge) => {
               console.log('success', result);
+                this.getAllChallenges();
               this.close();
             },
             (error: any) => {
