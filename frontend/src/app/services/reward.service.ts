@@ -20,40 +20,49 @@ export class RewardService {
   // Rewards
 
   getAllRewards() {
+    this.getToken();
     return this.http.get<Reward[]>(environment.apiPath + 'reward/all?token=' + this.token, {responseType: 'json', withCredentials: false});
   }
 
   createReward(reward: {}) {
+    this.getToken();
     return this.http.put(environment.apiPath + 'reward/create?token=' + this.token, reward, {responseType: 'json'});
   }
 
   deleteReward(id: string) {
+    this.getToken();
     return this.http.delete(environment.apiPath + 'reward/delete/' + id + '?token=' + this.token);
   }
 
   buyReward(data: {}) {
+    this.getToken();
     return this.http.post(environment.apiPath + 'reward/buy?token=' + this.token, data, {responseType: 'json'});
   }
 
   updateReward(reward: Reward) {
+    this.getToken();
     return this.http.patch(environment.apiPath + 'reward/update?token=' + this.token, reward, {responseType: 'json'});
   }
 
   // Categories
 
   getAllRewardCategories() {
+    this.getToken();
     return this.http.get<RewardCategory[]>(environment.apiPath + 'rewardcategory/all?token=' + this.token, {responseType: 'json', withCredentials: false});
   }
 
   createCategory(category: {}) {
+    this.getToken();
     return this.http.put(environment.apiPath + 'rewardcategory/create?token=' + this.token, category, {responseType: 'json'});
   }
 
   removeCategory(id: string) {
+    this.getToken();
     return this.http.delete(environment.apiPath + 'rewardcategory/delete/' + id + '?token=' + this.token);
   }
 
   getReward(id: string) {
+    this.getToken();
     return this.http.get(environment.apiPath + 'reward/get/' + id + '?token=' + this.token, {responseType: 'json'});
   }
 

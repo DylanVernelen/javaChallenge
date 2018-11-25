@@ -18,6 +18,7 @@ export class ManageChallengesService {
   }
 
   createChallenge(challenge: Challenge) {
+    this.getToken();
     console.log(challenge);
     return this.http.post(environment.apiPath + 'challenge/create?token=' + this.token, challenge, {responseType: 'json'})
       .subscribe(
@@ -33,18 +34,22 @@ export class ManageChallengesService {
   }
 
   updateChallenge(challenge: Challenge) {
+    this.getToken();
     return this.http.patch(environment.apiPath + 'challenge/update?token=' + this.token, challenge, {responseType: 'json'});
   }
 
   deleteChallenge(id: String) {
+    this.getToken();
     return this.http.delete(environment.apiPath + 'challenge/delete/' + id + '?token=' + this.token, {responseType: 'json'});
   }
 
   getChallenges() {
+    this.getToken();
     return this.http.get<Array<Challenge>>(environment.apiPath + 'challenge/all?token=' + this.token, {responseType: 'json'});
   }
 
   createCompletedChallenge(challenge: any) {
+    this.getToken();
     return this.http.post(environment.apiPath + 'challenge/request?token=' + this.token, challenge, {responseType: 'json'})
 
   }
