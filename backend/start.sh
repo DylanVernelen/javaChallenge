@@ -4,7 +4,7 @@ git pull;
 pm2 stop all;
 
 
-pm2 start backend/app.js
+pm2 start backend/main.js
 
 
 
