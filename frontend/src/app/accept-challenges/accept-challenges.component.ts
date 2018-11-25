@@ -6,6 +6,8 @@ import {Challenge} from "../interfaces/challenge";
 import {ManageChallengesService} from "../services/manage-challenges.service";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {UserFull} from "../interfaces/user-full";
+import {resolve} from "q";
+import {RewardCategory} from "../interfaces/reward-category";
 
 @Component({
   selector: 'app-accept-challenges',
@@ -20,6 +22,7 @@ export class AcceptChallengesComponent implements OnInit {
   status: String;
   number = 0;
   challenge: any;
+  challenges2= [];
   challengeName: String;
   challenges = [];
   ngOnInit() {
@@ -43,25 +46,26 @@ this.getUsers();
         for (let user of this.userList) {
             if (user.challenges != null){
                 for (let challenge of user.challenges) {
-                    this.challengeService.getChallenge(challenge.challengeid).subscribe(
-                        (result : Challenge) => {
-                            console.log(result);
+               this.challengeService.getChallenge(challenge.challengeid).subscribe(
+                        (result) => {
                             this.challenge = result;
+                            if (challenge.challengeStatus === 'rejected') {
+                                challenge.challengeStatus = 'denied';
+                            }
+                            const newChallenge = { userid: user._id, challengeName:this.challenge.challengeName, user: user.email, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
+                            this.challenges.push(newChallenge);
+                            this.orderByStatus();
                         },
                         (error: any) => {
                             console.log('error', error);
                         }
                     );
-                    if (challenge.challengeStatus === 'rejected') {
-                        challenge.challengeStatus = 'denied';
-                    }
-                    console.log(this.challenge);
-                    const newChallenge = { userid: user._id, user: user.email, challengeName: this.challenge.challengeName, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
-                    this.challenges.push(newChallenge);
+
+
                 }
             }
         }
-        this.orderByStatus();
+     
     }
     orderByStatus( ){
       console.log(this.challenges);
@@ -70,6 +74,13 @@ this.getUsers();
             if (a.status > b.status) { return -1; }
             return 0;
     });
+    }
+    orderByDescription() {
+        this.challenges.sort((a, b): number => {
+            if (a.description < b.description) { return 1; }
+            if (a.description > b.description) { return -1; }
+            return 0;
+        });
     }
     orderByUser( ){
         this.challenges.sort((a, b): number => {
@@ -80,8 +91,8 @@ this.getUsers();
     }
     orderByChallenge( ){
         this.challenges.sort((a, b): number => {
-            if (a.challenge < b.challenge) { return 1; }
-            if (a.challenge > b.challenge) { return -1; }
+            if (a.challengeName < b.challengeName) { return 1; }
+            if (a.challengeName > b.challengeName) { return -1; }
             return 0;
         });
     }
