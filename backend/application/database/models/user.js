@@ -23,6 +23,7 @@ var HistorySchema = new Schema(
 {
 	name: String,
 	worth: Number,
+	description: String,
 	rewardid: String,
 	pointsSpent: Number,
 	timestamp: Number,

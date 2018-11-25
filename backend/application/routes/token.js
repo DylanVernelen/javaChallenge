@@ -67,13 +67,16 @@ async function validateToken(req, res)
 
 			let name = 'not found';
 			let worth = 0;
+			let description = '';
 
 			if(reward && reward.name && reward.worth)
 			{
 				name = reward.name;
 				worth = reward.worth;
+				description = reward.description;
 			} 
 
+			user.history[i].description = description;
 			user.history[i].name = name;
 			user.history[i].worth = worth
 
