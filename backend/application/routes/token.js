@@ -46,7 +46,7 @@ async function validateToken(req, res)
 			let name = 'not found';
 			let worth = 0;
 
-			if(challenge)
+			if(challenge && challenge.challengeName && challenge.challengeWorth)
 			{
 				name = challenge.challengeName;
 				worth = challenge.challengeWorth;
@@ -68,7 +68,7 @@ async function validateToken(req, res)
 			let name = 'not found';
 			let worth = 0;
 
-			if(reward)
+			if(reward && reward.name && reward.worth)
 			{
 				name = reward.name;
 				worth = reward.worth;
