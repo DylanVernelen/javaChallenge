@@ -41,12 +41,23 @@ this.getUsers();
         for (let user of this.userList) {
             if (user.challenges != null){
                 for (let challenge of user.challenges) {
-                    this.challenge = this.challengeService.getChallenge(challenge.challengeid.toString());
-                    if (challenge.challengeStatus === 'rejected') {
-                        challenge.challengeStatus = 'denied';
-                    }
-                    const newChallenge = { userid: user._id, user: user.email, challenge:this.challenge.challengeName, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
-                    this.challenges.push(newChallenge);
+
+                    this.challengeService.getChallenge(challenge.challengeid.toString()).subscribe(
+                      (result: Challenge) => {
+
+
+                        result.challengeName
+                        console.log('success', Challenge);
+                        console.log(this.challenge);
+                        if (result.challengeStatus === 'rejected') {
+                          result.challengeStatus = 'denied';
+                        }
+                       // const newChallenge = { userid: user._id, user: user.email, challenge:this.challenge.challengeName, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
+                        //this.challenges.push(newChallenge);
+                      };
+
+
+
                 }
             }
         }
@@ -77,7 +88,7 @@ this.getUsers();
     acceptChallenge(userid, challengeid,uniqueid) {
         const completedChallenge = { userid: userid,
             challengeid :  challengeid , uniqueid:uniqueid };
-        this.challengeService.acceptChallenge(completedChallenge) .subscribe(
+        this.challengeService.acceptChallenge(completedChallenge).subscribe(
             (result: Challenge) => {
                 this.challenges.length=0;
                 this.getUsers();
