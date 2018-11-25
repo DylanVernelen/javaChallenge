@@ -10,18 +10,20 @@ import { AccountComponent} from './account/account.component';
 import { HomeComponent } from 'src/app/home/home.component';
 import {AdminComponent} from "./admin/admin.component";
 import {AcceptChallengesComponent} from "./accept-challenges/accept-challenges.component";
+import {AuthGuard} from './guards/auth.guard';
+import {RoleGuardService} from './guards/role-guard.service';
 
 const routes: Routes = [
-  {path: 'store', component: StoreComponent},
-  {path: 'managechallenge', component: ManageChallengesComponent},
-    {path: 'acceptchallenges', component: AcceptChallengesComponent},
-  {path: 'admin', component: AdminComponent},
+  {path: 'store', component: StoreComponent, canActivate: [AuthGuard]},
+  {path: 'managechallenge', component: ManageChallengesComponent, canActivate: [RoleGuardService]},
+  {path: 'acceptchallenges', component: AcceptChallengesComponent, canActivate: [RoleGuardService]},
+  {path: 'admin', component: AdminComponent, canActivate: [RoleGuardService]},
   {path: 'login', component: LoginComponent},
-  {path: 'manageusers', component: ManageUsersComponent},
-  {path: 'managerewards', component: ManageRewardsComponent},
-  {path: 'challenges', component: ChallengesComponent},
-  {path: 'account', component: AccountComponent},
-  {path: 'store', component: StoreComponent},
+  {path: 'manageusers', component: ManageUsersComponent, canActivate: [RoleGuardService]},
+  {path: 'managerewards', component: ManageRewardsComponent, canActivate: [RoleGuardService]},
+  {path: 'challenges', component: ChallengesComponent, canActivate: [AuthGuard]},
+  {path: 'account', component: AccountComponent, canActivate: [AuthGuard]},
+  {path: 'store', component: StoreComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '*', redirectTo: 'home'}

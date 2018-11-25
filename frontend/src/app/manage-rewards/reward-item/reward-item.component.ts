@@ -72,7 +72,6 @@ export class RewardItemComponent implements OnInit {
   }
 
   updateReward() {
-    console.log(this.item);
     if (this.item.name === '' || this.item.worth.toString() === '' || this.item.category === '' || this.item.description === '') {
       this.errorMessage = 'Please fill out all the fields labeled with an *';
     } else {

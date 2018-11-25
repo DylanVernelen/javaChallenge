@@ -43,7 +43,6 @@ export class ManageRewardsComponent implements OnInit {
           (result: any) => {
             this.showMessage('success', 'Reward added successfully');
             this.getRewards();
-            console.log('Komop!');
             // const newRewardId = this.rewardList[this.rewardList.length - 1]._id;
             // console.log(this.rewardList[this.rewardList.length - 1].imgUrl);
             // form.action = environment.apiPath + 'reward/fileupload/' + newRewardId + '?token=ABCDEF';
@@ -63,7 +62,6 @@ export class ManageRewardsComponent implements OnInit {
       .subscribe(
         (result: Reward[]) => {
           this.rewardList = result;
-          console.log(result);
         },
         (error: any) => {
           console.log('error', error);
