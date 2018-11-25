@@ -321,7 +321,7 @@ async function uploadFile(req, res)
                 		return;
             		}	
 
-            		console.log("OKOKOK");
+            		console.log("Saved to database", reward);
 
 					res.json({succes: true, imgUrl: "https://nodejs.tomvdr.com/" + filename});
             	});
