@@ -13,7 +13,7 @@
 <ng-template #confirmation let-modal>
   <div class="modal-header">
     <h4 class="modal-title">Purchase reward</h4>
-    <span class="mt-2" style="color: red;" *ngIf="!(user.pointCount >= item.rewardWorth)">Not enough points</span>
+    <span class="mt-2" style="color: red;" *ngIf="user.pointCount < item.worth">Not enough points</span>
 
   </div>
   <div class="modal-body">

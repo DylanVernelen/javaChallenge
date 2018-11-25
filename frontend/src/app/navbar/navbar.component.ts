@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interfaces/user';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-navbar',
@@ -18,16 +19,17 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit() {
-    if(this.user && this.user.email){
+    if (this.user && this.user.email) {
       this.authenticationService.login(this.user.email, this.user.password)
       .subscribe(
           data => {
-            this.user = data
+            this.user = data;
           },
           error => {
           });
     }
     this.authenticationService.userData$.subscribe(data => this.user = data);
+
   }
 
 }
