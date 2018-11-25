@@ -28,7 +28,7 @@ export class ManageRewardsComponent implements OnInit {
     this.newItem = new Reward();
   }
 
-  addReward() {
+  addReward(form) {
     if (this.newItem.name === '' || !this.newItem.worth || this.newItem.category === '' || this.newItem.description === '') {
       this.showMessage('error', 'Please fill out "Name", "Worth", "Category" and "Description".');
     } else {
@@ -43,10 +43,10 @@ export class ManageRewardsComponent implements OnInit {
           (result: any) => {
             this.showMessage('success', 'Reward added successfully');
             this.getRewards();
-            // const newRewardId = this.rewardList[this.rewardList.length - 1]._id;
-            // console.log(this.rewardList[this.rewardList.length - 1].imgUrl);
-            // form.action = environment.apiPath + 'reward/fileupload/' + newRewardId + '?token=ABCDEF';
-            // form.submit();
+            const newRewardId = this.rewardList[this.rewardList.length - 1]._id;
+            console.log(this.rewardList[this.rewardList.length - 1].imgUrl);
+            form.action = environment.apiPath + 'reward/fileupload/' + newRewardId + '?token=ABCDEF';
+            form.submit();
             this.newItem = new Reward();
           },
           (error: any) => {

@@ -34,7 +34,7 @@
         </form>
       </td>
       <td>
-        <button (click)="addReward()">Add New</button>
+        <button (click)="addReward(imageForm)">Add New</button>
       </td>
       <tr app-reward-item
           *ngFor="let reward of rewardList; let i = index"
