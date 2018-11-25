@@ -93,7 +93,7 @@ async function updateUserById(req, res)
 		fields.userLevel = req.body.userLevel;
 	}
 
-	if(req.pointCount)
+	if(req.body.pointCount)
 	{
 		fields.pointCount = req.body.pointCount;
 	}
