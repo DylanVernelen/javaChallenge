@@ -85,13 +85,13 @@ async function updateChallengeById(req, res)
 
 
 	if(req.body.name)
-		fields.challengeName = req.body.name;
+		fields.challengeName = req.body.name || req.body.challengeName;
 
 	if(req.body.worth)
-		fields.challengeWorth = req.body.worth;
+		fields.challengeWorth = req.body.worth || req.body.challengeWorth;;
 
 	if(req.body.owner)
-		fields.challengeOwner = req.body.owner;
+		fields.challengeOwner = req.body.owner || req.body.challengeOwner;;
 
 
 	if(!challengeid)
