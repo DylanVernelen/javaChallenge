@@ -57,7 +57,7 @@ export class StoreComponent implements OnInit {
     for (const reward of this.rewardList) {
       if (this.rewardCategoryListFiltered.length !== 0) {
         for (const category of this.rewardCategoryListFiltered) {
-          if (reward.rewardCategory === category) {
+          if (reward.category === category) {
             this.rewardListShown.push(reward);
           }
         }

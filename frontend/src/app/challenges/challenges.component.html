@@ -6,7 +6,7 @@
 
     <label for="category">Choose challenge categorie</label>
     <select #j  class="form-control dropdown col-lg-12" (change)="onDropdownListChange($event)" [(ngModel)]="challenge" id="category">
-      <option value="" disabled selected>>select an option</option>
+      <option value="" disabled selected hidden></option>
       <option  class="dropdown-item"  *ngFor="let option of challengeList" [value]="option._id">{{option.challengeName}}</option>
     </select>
 

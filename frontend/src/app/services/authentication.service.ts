@@ -4,14 +4,16 @@ import { map } from 'rxjs/operators';
 import { Observable, of, BehaviorSubject } from 'rxjs';
 import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
+import {UserFull} from '../interfaces/user-full';
+import {environment} from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    userData$: BehaviorSubject<User> = new BehaviorSubject(null);
+    userData$: BehaviorSubject<UserFull> = new BehaviorSubject(null);
     constructor(private http: HttpClient, private router: Router) { }
 
     login(email: string, password: string) {
-        return this.http.post<any>(`https://nodejs.tomvdr.com/node/api/token/validate`, { email, password })
+        return this.http.post<any>(environment.apiPath + 'token/validate', { email, password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 console.log(user)
@@ -25,7 +27,9 @@ export class AuthenticationService {
                         password: user.password,
                         pointCount: user.pointCount,
                         token: user.token,
-                        userLevel: user.userLevel
+                        userLevel: user.userLevel,
+                        challenges: user.challenges,
+                        history: user.history
                     });
                 }
                 return user;

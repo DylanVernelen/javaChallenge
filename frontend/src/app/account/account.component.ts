@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../services/user.service";
-import {ChallengeList, HistoryList, UserFull} from "../interfaces/user-full";
-import {ManageChallengesService} from "../services/manage-challenges.service";
-import {Challenge} from "../interfaces/challenge";
-import {RewardService} from "../services/reward.service";
-import {Reward} from "../interfaces/reward";
-import {first} from "rxjs/operators";
+import {UserService} from '../services/user.service';
+import {ChallengeList, HistoryList, UserFull} from '../interfaces/user-full';
+import {ManageChallengesService} from '../services/manage-challenges.service';
+import {Challenge} from '../interfaces/challenge';
+import {RewardService} from '../services/reward.service';
+import {Reward} from '../interfaces/reward';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-account',
@@ -15,12 +15,21 @@ import {first} from "rxjs/operators";
 export class AccountComponent implements OnInit {
 
   account: UserFull;
-  challengeList: [ChallengeList] = [{name: "test", challengeWorth: 20, challengeStatus: "test",
-    dateAdded: "test", dateCompleted: "test", pointsAwarded: 0, description: "test"}];
-  rewardList: [HistoryList] = [{name: "test", description: "test",
-    worth: 10, date: "test", opgehaald: false,}];
-  firstChallenge: boolean = true;
-  firstReward: boolean = true;
+  challengeList: [ChallengeList] = [
+    {name: 'test',
+      challengeWorth: 20,
+      challengeStatus: 'test',
+      dateAdded: 'test',
+      dateCompleted: 'test',
+      pointsAwarded: 0,
+      description: 'test'}
+      ];
+
+  rewardList: [HistoryList] = [{name: 'test', description: 'test',
+    worth: 10, date: 'test', opgehaald: false, }];
+
+  firstChallenge = true;
+  firstReward = true;
 
   constructor(private userService: UserService, private challengeService: ManageChallengesService, private rewardService: RewardService) { }
 
@@ -39,21 +48,21 @@ export class AccountComponent implements OnInit {
         },
         (error: any) => {
           console.log('error', error);
-          //this.setErrorMessage("Couldn't load the Users. Please try again later.");
+          // this.setErrorMessage("Couldn't load the Users. Please try again later.");
         }
       );
   }
 
-  getChallenges(){
-    for(let challenge of this.account.challenges){
-      let item: ChallengeList = new ChallengeList();
+  getChallenges() {
+    for (const challenge of this.account.challenges) {
+      const item: ChallengeList = new ChallengeList();
       let datum: Date;
       item.description = challenge.description;
       item.challengeStatus = challenge.challengeStatus;
-      datum = new Date(parseInt(challenge.timeStampAdded)*1000);
-      item.dateAdded = datum.getDate() + "/" + (datum.getMonth()+1) + "/" + datum.getFullYear() + " " + datum.getHours() + ":" + datum.getMinutes() + ":" + datum.getSeconds();
-      datum = new Date(parseInt(challenge.timeStampCompleted)*1000);
-      item.dateCompleted = datum.getDate() + "/" + (datum.getMonth()+1) + "/" + datum.getFullYear() + " " + datum.getHours() + ":" + datum.getMinutes() + ":" + datum.getSeconds();
+      datum = new Date(parseInt(challenge.timeStampAdded) * 1000);
+      item.dateAdded = datum.getDate() + '/' + (datum.getMonth() + 1) + '/' + datum.getFullYear() + ' ' + datum.getHours() + ':' + datum.getMinutes() + ':' + datum.getSeconds();
+      datum = new Date(parseInt(challenge.timeStampCompleted) * 1000);
+      item.dateCompleted = datum.getDate() + '/' + (datum.getMonth() + 1) + '/' + datum.getFullYear() + ' ' + datum.getHours() + ':' + datum.getMinutes() + ':' + datum.getSeconds();
       item.pointsAwarded = challenge.pointsAwarded;
       this.challengeService.getChallenge(challenge.challengeid)
         .subscribe(
@@ -61,7 +70,7 @@ export class AccountComponent implements OnInit {
             console.log('success', result);
             item.name = result.challengeName;
             item.challengeWorth = result.challengeWorth;
-            if(this.firstChallenge){
+            if (this.firstChallenge) {
               this.challengeList.fill(item);
               this.firstChallenge = false;
             } else {
@@ -70,27 +79,27 @@ export class AccountComponent implements OnInit {
           },
           (error: any) => {
             console.log('error', error);
-            //this.setErrorMessage("Couldn't load the Users. Please try again later.");
+            // this.setErrorMessage("Couldn't load the Users. Please try again later.");
           }
         );
     }
   }
 
-  getHistory(){
-    for(let reward of this.account.history){
-      let item: HistoryList = new HistoryList();
+  getHistory() {
+    for (const reward of this.account.history) {
+      const item: HistoryList = new HistoryList();
       let datum: Date;
       item.opgehaald = reward.opgehaald;
-      datum = new Date(parseInt(reward.timeStamp)*1000);
-      item.date = datum.getDate() + "/" + (datum.getMonth()+1) + "/" + datum.getFullYear() + " " + datum.getHours() + ":" + datum.getMinutes() + ":" + datum.getSeconds();
+      datum = new Date(parseInt(reward.timeStamp) * 1000);
+      item.date = datum.getDate() + '/' + (datum.getMonth() + 1) + '/' + datum.getFullYear() + ' ' + datum.getHours() + ':' + datum.getMinutes() + ':' + datum.getSeconds();
       this.rewardService.getReward(reward.rewardId)
         .subscribe(
           (result: Reward) => {
             console.log('success', result);
-            item.name = result.rewardName;
+            item.name = result.name;
             item.description = result.description;
-            item.worth = result.rewardWorth;
-            if(this.firstReward){
+            item.worth = result.worth;
+            if (this.firstReward) {
               this.rewardList.fill(item);
               this.firstReward = false;
             } else {
@@ -99,7 +108,7 @@ export class AccountComponent implements OnInit {
           },
           (error: any) => {
             console.log('error', error);
-            //this.setErrorMessage("Couldn't load the Users. Please try again later.");
+            // this.setErrorMessage("Couldn't load the Users. Please try again later.");
           }
         );
     }

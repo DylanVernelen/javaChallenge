@@ -47,7 +47,7 @@ export class RewardItemComponent implements OnInit {
   reduceRewardCategory(categories: [RewardCategory]) {
     const reducedCategories = categories.slice();
     for (const category of categories) {
-      if (category.categoryName === this.item.rewardCategory) {
+      if (category.categoryName === this.item.category) {
         reducedCategories.splice(categories.indexOf(category), 1);
       }
     }
@@ -57,13 +57,13 @@ export class RewardItemComponent implements OnInit {
   updateAttribute(attribute: string, attributeValue) {
     switch (attribute) {
       case 'name':
-        this.item.rewardName = attributeValue;
+        this.item.name = attributeValue;
         break;
       case 'worth':
-        this.item.rewardWorth = attributeValue;
+        this.item.worth = attributeValue;
         break;
       case 'category':
-        this.item.rewardCategory = attributeValue;
+        this.item.category = attributeValue;
         break;
       case 'description':
         this.item.description = attributeValue;
@@ -73,13 +73,13 @@ export class RewardItemComponent implements OnInit {
 
   updateReward() {
     console.log(this.item);
-    if (this.item.rewardName === '' || this.item.rewardWorth.toString() === '' || this.item.rewardCategory === '' || this.item.description === '') {
+    if (this.item.name === '' || this.item.worth.toString() === '' || this.item.category === '' || this.item.description === '') {
       this.errorMessage = 'Please fill out all the fields labeled with an *';
     } else {
       this.item['id'] = this.item._id;
-      this.item['name'] = this.item.rewardName;
-      this.item['worth'] = this.item.rewardWorth;
-      this.item['category'] = this.item.rewardCategory;
+      this.item['name'] = this.item.name;
+      this.item['worth'] = this.item.worth;
+      this.item['category'] = this.item.category;
       const that = this;
       this.rewardService.updateReward(this.item)
         .subscribe(

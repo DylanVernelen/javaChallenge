@@ -4,6 +4,7 @@ import {Reward} from '../interfaces/reward';
 import {RewardCategory} from '../interfaces/reward-category';
 import {User} from '../interfaces/user';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-manage-rewards',
@@ -25,17 +26,17 @@ export class ManageRewardsComponent implements OnInit {
     this.getRewards();
     this.getCategories();
     this.newItem = new Reward();
-    this.newItem.rewardCategory = 'Consumables';
+    this.newItem.category = 'Consumables';
   }
 
   addReward(form) {
-    if (this.newItem.rewardName === '' || !this.newItem.rewardWorth || this.newItem.rewardCategory === '' || this.newItem.description === '') {
+    if (this.newItem.name === '' || !this.newItem.worth || this.newItem.category === '' || this.newItem.description === '') {
       this.showMessage('error', 'Please fill out "Name", "Worth", "Category" and "Description".');
     } else {
       const reward = {
-        name: this.newItem.rewardName,
-        worth: this.newItem.rewardWorth,
-        category: this.newItem.rewardCategory,
+        name: this.newItem.name,
+        worth: this.newItem.worth,
+        category: this.newItem.category,
         description: this.newItem.description
       };
       this.rewardService.createReward(reward)
@@ -45,7 +46,7 @@ export class ManageRewardsComponent implements OnInit {
             this.getRewards();
             const newRewardId = this.rewardList[this.rewardList.length - 1]._id;
             console.log(this.rewardList[this.rewardList.length - 1].imgUrl);
-            form.action = 'https://nodejs.tomvdr.com/node/api/reward/fileupload/' + newRewardId + '?token=ABCDEF';
+            form.action = environment.apiPath + 'reward/fileupload/' + newRewardId + '?token=ABCDEF';
             form.submit();
             this.newItem = new Reward();
           },
@@ -84,13 +85,13 @@ export class ManageRewardsComponent implements OnInit {
   updateAttribute(attribute: string, attributeValue) {
     switch (attribute) {
       case 'name':
-        this.newItem.rewardName = attributeValue;
+        this.newItem.name = attributeValue;
         break;
       case 'worth':
-        this.newItem.rewardWorth = attributeValue;
+        this.newItem.worth = attributeValue;
         break;
       case 'category':
-        this.newItem.rewardCategory = attributeValue;
+        this.newItem.category = attributeValue;
         break;
       case 'description':
         this.newItem.description = attributeValue;

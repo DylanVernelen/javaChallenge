@@ -48,7 +48,7 @@ export class ManageChallengesService {
     return this.http.get<Array<Challenge>>(environment.apiPath + 'challenge/all?token=' + this.token, {responseType: 'json'});
   }
 
-  createCompletedChallenge(challenge: CompletedChallenge) {
+  createCompletedChallenge(challenge: any) {
     return this.http.post(environment.apiPath + 'challenge/request?token=' + this.token, challenge, {responseType: 'json'})
 
   }

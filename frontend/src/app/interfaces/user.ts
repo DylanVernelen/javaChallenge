@@ -5,4 +5,5 @@ export class User {
   password: string;
   pointCount: number;
   token: string;
+
 }

@@ -39,7 +39,7 @@ export class RewardComponent implements OnInit {
   }
 
   request(reward: Reward, info) {
-    const data = {id: this.user._id, rewardid: reward._id};
+    const data = {id: reward._id};
     this.rewardService.buyReward(data).subscribe(
       (result: number) => {
         console.log('succes', result);

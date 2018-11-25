@@ -11,6 +11,8 @@ var ChallengeSchema = new Schema(
 	timestampCompleted: Number,
 	challengeCompleted: Boolean,
 	challengeStatus: String,
+	challengeName: String,
+	challengeWorth: Number,
 	pointsAwarded: Number,
 	description: String,
 	uniqueid: String
