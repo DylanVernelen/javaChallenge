@@ -38,10 +38,7 @@ export class ManageChallengesService {
   }
 
   deleteChallenge(id: String) {
-    console.log(id);
-    console.log('gaat deleten');
     return this.http.delete(environment.apiPath + 'challenge/delete/' + id + '?token=' + this.token, {responseType: 'json'});
-
   }
 
   getChallenges() {

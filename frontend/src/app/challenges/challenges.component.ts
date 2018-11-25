@@ -23,16 +23,20 @@ export class ChallengesComponent implements OnInit {
     points: Number ;
     user = JSON.parse(localStorage.getItem('currentUser'));
     userid = this.user.id;
-    challenges: Reward[];
+    challenges: any;
     succesMessage: string;
     errorMessage: string;
     activeModal: NgbActiveModal;
   ngOnInit() {
       this.getAllChallenges();
       console.log(this.challengeList);
-      console.log(this.user.history);
-      this.challenges = this.user.history;
+      this.challenges = this.user.challenges;
+        this.challenges.sort((a,b): number => {
+      if(a.timeStampAdded<b.timeStampAdded) return 1;
+      if(a.timeStampAdded>b.timeStampAdded) return -1;
+      return 0;
 
+      });
   }
     open(content) {
         this.activeModal = this.modal.open(content);

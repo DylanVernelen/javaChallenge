@@ -49,10 +49,10 @@
     <tbody>
     <tr *ngFor="let c of challenges; let i = index ">
       <td>{{i+1}}</td>
-      <td>{{c.pointsSpent.toString()}}</td>
-      <td>{{c.pointsSpent.toString()}}</td>
-      <td>{{c.pointsSpent.toString()}}</td>
-      <td>{{c.pointsSpent.toString()}}</td>
+      <td>{{c.challengeName}}</td>
+      <td>{{c.challengeOwner}}</td>
+      <td>{{c.challengeWorth}}</td>
+      <td>{{c.challengeStatus}}</td>
     </tr>
     </tbody>
   </table>

@@ -13,10 +13,10 @@ import {User} from "../interfaces/user";
 export class ManageChallengesComponent implements OnInit {
     activeModal: NgbActiveModal;
   constructor(private manageChallengeService: ManageChallengesService, private modal: NgbModal ) { }
-errorMessage: String;
-  succeedMessage: String;
-  challengeList: Challenge[];
-  ngOnInit() {
+    errorMessage: String;
+    succeedMessage: String;
+    challengeList: Challenge[];
+    ngOnInit() {
     this.getAllChallenges();
   }
   getAllChallenges() {
@@ -76,10 +76,8 @@ errorMessage: String;
               this.close();
             }
           );
-
     } else {
       this.errorMessage = 'Failed to add the user. Make sure email and user level are filled in.';
     }
-
 }
 }
