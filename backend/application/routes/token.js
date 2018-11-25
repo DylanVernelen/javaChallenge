@@ -41,8 +41,21 @@ async function validateToken(req, res)
 		{	
 
 			var challenge = await database.findOne('Challenge', {_id: user.challenges[i].challengeid});
-			user.challenges[i].challengeName = challenge.challengeName;
-			user.challenges[i].challengeWorth = challenge.challengeWorth;
+
+
+			let name = 'not found';
+			let worth = 0;
+
+			if(challenge)
+			{
+				name = challenge.challengeName;
+				worth = challenge.challengeWorth;
+			} 
+
+
+
+			user.challenges[i].challengeName = name;
+			user.challenges[i].challengeWorth = worth;
 
 		}
 
