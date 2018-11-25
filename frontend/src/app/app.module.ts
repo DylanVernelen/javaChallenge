@@ -21,6 +21,7 @@ import { ChallengesComponent } from 'src/app/challenges/challenges.component';
 import { AdminComponent } from './admin/admin.component';
 import {ManageUsersModule} from "./manage-users/manage-users.module";
 import {AccountModule} from "./account/account.module";
+import {AccountComponent} from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {AccountModule} from "./account/account.module";
     ManageChallengesComponent,
     HomeComponent,
     ChallengesComponent,
-    AdminComponent
+    AdminComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
@@ -50,11 +52,7 @@ import {AccountModule} from "./account/account.module";
     FormsModule,
     ReactiveFormsModule,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    StoreModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -13,13 +13,13 @@ export class NavbarComponent implements OnInit {
 
   user: User;
 
-  constructor(public AuthenticationService: AuthenticationService) {
+  constructor(public authenticationService: AuthenticationService) {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
    }
 
   ngOnInit() {
     if(this.user && this.user.email){
-      this.AuthenticationService.login(this.user.email, this.user.password)
+      this.authenticationService.login(this.user.email, this.user.password)
       .subscribe(
           data => {
             this.user = data
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
           error => {
           });
     }
-    this.AuthenticationService.userData$.subscribe(data => this.user = data);
+    this.authenticationService.userData$.subscribe(data => this.user = data);
   }
 
 }
