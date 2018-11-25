@@ -11,7 +11,7 @@ import {RewardCategory} from '../interfaces/reward-category';
   styles: []
 })
 export class StoreComponent implements OnInit {
-
+  sortedOnWorth: true ;
   rewardList: Reward[];
   rewardListShown: Reward[];
   rewardCategoryList: RewardCategory[];
@@ -43,6 +43,25 @@ export class StoreComponent implements OnInit {
           console.log('error', error);
         }
       );
+  }
+  filterOnWorth(by) {
+      if (this)
+    if (by.toString() == 'asc') {
+        this.rewardListShown.sort((a,b): number => {
+            if(a.worth>b.worth) return 1;
+            if(a.worth<b.worth) return -1;
+            return 0;
+        });
+    }
+      if (by.toString() == 'desc') {
+          this.rewardListShown.sort((a,b): number => {
+              if(a.worth<b.worth) return 1;
+              if(a.worth>b.worth) return -1;
+              return 0;
+          });
+      }
+
+
   }
 
   filter(filterCategory) {
