@@ -55,7 +55,8 @@ acceptChallenge(challenge :any) {
         return this.http.post(environment.apiPath + 'challenge/rejected?token=' + this.token, challenge, {responseType: 'json'})
 
     }
-  getChallenge(id: string) {
+  getChallenge(id: String) {
+    console.log(id);
     this.getToken();
     return this.http.get(environment.apiPath + 'challenge/get/' + id + '?token=' + this.token, {responseType: 'json'});
   }

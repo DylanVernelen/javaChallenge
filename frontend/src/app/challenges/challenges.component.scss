@@ -1,8 +1,15 @@
 .completechallenge{
   margin-top: 50px !important;
+  .challenge {
+    margin-top: 30px !important;
+  }
+  p {
+padding: 0px !important;
+    margin: 0px !important;
+  }
   h2{
     text-align: left;
-    margin-bottom: 50px !important;
+
   }
   label{
     text-decoration: underline;
@@ -12,10 +19,7 @@
     margin-bottom: 50px;
   }
 }
-table {
-  margin-top: 20px;
-  margin-bottom: 50px;
-}
+
 .history{
   margin-top: 50px !important;
   .btn{

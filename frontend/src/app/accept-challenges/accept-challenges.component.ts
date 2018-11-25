@@ -41,11 +41,19 @@ this.getUsers();
         for (let user of this.userList) {
             if (user.challenges != null){
                 for (let challenge of user.challenges) {
-                    this.challenge = this.challengeService.getChallenge(challenge.challengeid.toString());
+                   this.challengeService.getChallenge(challenge.challengeid.toString()).subscribe(
+                        (result: Challenge) => {
+                            this.challenge = result;
+                            console.log(this.challenge);
+                        },
+                       (error: any) => {
+                           console.log('error', error);
+                       }
+                    );
                     if (challenge.challengeStatus === 'rejected') {
                         challenge.challengeStatus = 'denied';
                     }
-                    const newChallenge = { userid: user._id, user: user.email, challenge:this.challenge.challengeName, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
+                    const newChallenge = { userid: user._id, user: user.email, challengeid: challenge.challengeid , uniqueid: challenge.uniqueid, description: challenge.description, status: challenge.challengeStatus  };
                     this.challenges.push(newChallenge);
                 }
             }

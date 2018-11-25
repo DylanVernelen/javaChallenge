@@ -39,6 +39,7 @@ export class ManageChallengesComponent implements OnInit {
        this.manageChallengeService.createChallenge(newChallenge)
          .subscribe(
          (result: Challenge) => {
+             this.challengeList.length=0;
            this.getAllChallenges();
            console.log('success', result);
 
@@ -48,7 +49,8 @@ export class ManageChallengesComponent implements OnInit {
          }
        );
     }
-     this.ngOnInit();
+     this.getAllChallenges();
+
   }
     open(content) {
         this.activeModal = this.modal.open(content);
