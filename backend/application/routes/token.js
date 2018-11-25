@@ -50,10 +50,19 @@ async function validateToken(req, res)
 		for(let i = 0; i < user.history.length; i++)
 		{	
 
-			var reward = await database.findOne('Reward', {_id: user.history[i].rewardid});
-			console.log(reward);
-			user.history[i].name = reward.name;
-			user.history[i].worth = reward.worth;
+			let reward = await database.findOne('Reward', {_id: user.history[i].rewardid});
+
+			let name = 'not found';
+			let worth = 0;
+
+			if(reward)
+			{
+				name = reward.name;
+				worth = reward.worth;
+			} 
+
+			user.history[i].name = name;
+			user.history[i].worth = worth
 
 		}
 	
